@@ -1,0 +1,21 @@
+model_name,stage_target,severity,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,drop_vs_clean,scope_label
+gemini-2.5-pro,S1 Tool Selection,clean,16.0,0.875,0.875,0.875,0.875,0.0,0.0,0.875,0.875,16,0.875,0.0,0.0,single_step
+gemini-2.5-pro,S1 Tool Selection,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S1 Tool Selection,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S1 Tool Selection,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S2 Interface Grounding,clean,16.0,0.875,0.875,0.875,0.875,0.0,0.0,0.875,0.875,16,0.875,0.0,0.0,single_step
+gemini-2.5-pro,S2 Interface Grounding,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S2 Interface Grounding,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S2 Interface Grounding,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S3 Parameter Binding,clean,16.0,0.875,0.875,0.875,0.875,0.0,0.0,0.875,0.875,16,0.875,0.0,0.0,single_step
+gemini-2.5-pro,S3 Parameter Binding,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S3 Parameter Binding,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S3 Parameter Binding,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S4 Observation / Execution Handling,clean,16.0,0.875,0.875,0.875,0.875,0.0,0.0,0.875,0.875,16,0.875,0.0,0.0,single_step
+gemini-2.5-pro,S4 Observation / Execution Handling,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S4 Observation / Execution Handling,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S4 Observation / Execution Handling,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S5 End-to-End Task Success,clean,16.0,0.9375,0.9375,0.9375,0.9375,0.0,0.0625,0.875,0.875,0,0.875,0.0,0.0,single_step
+gemini-2.5-pro,S5 End-to-End Task Success,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-pro,S5 End-to-End Task Success,medium,80.0,0.8875,0.85,0.85,0.8875,0.0,0.5,0.475,0.3125,80,0.875,0.6125,0.5625,single_step
+gemini-2.5-pro,S5 End-to-End Task Success,heavy,80.0,0.7875,0.6,0.6,0.7875,0.0,0.475,0.325,0.15,80,0.875,0.75,0.725,single_step

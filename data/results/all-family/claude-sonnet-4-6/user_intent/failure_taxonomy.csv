@@ -1,0 +1,6 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+claude-sonnet-4-6,light,wrong-parameter,wrong-tool,True,parameter_value_mismatch,1,192,0.005208333333333333
+claude-sonnet-4-6,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,1,192,0.005208333333333333
+claude-sonnet-4-6,light,wrong-tool,wrong-tool,False,wrong_canonical_tool,4,192,0.020833333333333332
+claude-sonnet-4-6,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,25,192,0.13020833333333334
+claude-sonnet-4-6,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,93,192,0.484375

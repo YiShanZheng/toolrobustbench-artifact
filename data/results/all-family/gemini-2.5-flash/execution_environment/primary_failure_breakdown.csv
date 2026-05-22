@@ -1,0 +1,5 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gemini-2.5-flash,clean,clean,S3 Parameter Binding,wrong-parameter,2,2,1.0
+gemini-2.5-flash,execution_environment,light,S4 Observation / Execution Handling,execution-fail,6,6,1.0
+gemini-2.5-flash,execution_environment,medium,S4 Observation / Execution Handling,execution-fail,82,82,1.0
+gemini-2.5-flash,execution_environment,heavy,S4 Observation / Execution Handling,execution-fail,64,64,1.0

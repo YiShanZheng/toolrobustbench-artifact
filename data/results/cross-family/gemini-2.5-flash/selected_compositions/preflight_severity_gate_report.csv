@@ -1,0 +1,43 @@
+family,subtype,severity,template_name,primary_operator,amplifier_operator,exposure_axis,static_strength_score,monotonic_pass,subtype_purity_pass,light_nonzero_pass,note
+execution_environment,D1 Availability Failure,light,d1_light_cached_availability_fallback,cached_availability_fallback,,availability,13.0,True,True,True,static strengths are strictly increasing
+execution_environment,D1 Availability Failure,medium,d1_medium_service_unavailable_with_stale_cache,service_unavailable_with_stale_cache,,availability,26.0,True,True,True,static strengths are strictly increasing
+execution_environment,D1 Availability Failure,heavy,d1_heavy_service_unavailable_plus_timeout_partial,service_unavailable_with_stale_cache,timeout_after_partial_stream,availability,68.0,True,True,True,static strengths are strictly increasing
+execution_environment,D2 Runtime Variability,light,d2_light_jittered_metadata,jittered_metadata,,runtime_variability,13.0,True,True,True,static strengths are strictly increasing
+execution_environment,D2 Runtime Variability,medium,d2_medium_conflicting_attempts_plus_flaky_shape,delayed_fresh_partial_with_stale_full,flaky_shape_conflicting_attempts,runtime_variability,46.0,True,True,True,static strengths are strictly increasing
+execution_environment,D2 Runtime Variability,heavy,d2_heavy_contaminated_rotating_attempts,delayed_fresh_partial_with_stale_full,contaminated_flaky_attempts,runtime_variability,60.0,True,True,True,static strengths are strictly increasing
+execution_environment,D3 Failure Feedback Quality,light,d3_light_vague_retry_hint,vague_retry_hint,,failure_feedback,13.0,True,True,True,static strengths are strictly increasing
+execution_environment,D3 Failure Feedback Quality,medium,d3_medium_hidden_partial_wrong_label,hidden_partial_wrong_label,,failure_feedback,40.0,True,True,True,static strengths are strictly increasing
+execution_environment,D3 Failure Feedback Quality,heavy,d3_heavy_hidden_partial_with_conflicting_diagnostics,hidden_partial_wrong_label,conflicting_diagnostic_decoy,failure_feedback,62.0,True,True,True,static strengths are strictly increasing
+interface_exposure,A1 Name Surface Shift,light,a1_light_transparent_alias,transparent_alias,,name,19.8858,True,True,True,static strengths are strictly increasing
+interface_exposure,A1 Name Surface Shift,medium,a1_medium_name_surface_shift,semi_opaque_name,,name,55.2805,True,True,True,static strengths are strictly increasing
+interface_exposure,A1 Name Surface Shift,heavy,a1_heavy_semi_opaque_opaque_internal_name,semi_opaque_name,opaque_internal_name,name,83.3585,True,True,True,static strengths are strictly increasing
+interface_exposure,A2 Description Abstraction,light,a2_light_description_rewrite,light_description_rewrite,,description,28.9765,True,True,True,static strengths are strictly increasing
+interface_exposure,A2 Description Abstraction,medium,a2_medium_description_abstraction,description_abstraction,,description,59.073,True,True,True,static strengths are strictly increasing
+interface_exposure,A2 Description Abstraction,heavy,a2_heavy_description_abstraction_family_collision,description_abstraction,family_collision_name,description,99.073,True,True,True,static strengths are strictly increasing
+interface_exposure,A3 Family Similarity Pressure,light,a3_light_sibling_similarity_hint,sibling_similarity_hint,,family_similarity,22.1633,True,True,True,static strengths are strictly increasing
+interface_exposure,A3 Family Similarity Pressure,medium,a3_medium_family_collision_name,family_collision_name,,family_similarity,49.6797,True,True,True,static strengths are strictly increasing
+interface_exposure,A3 Family Similarity Pressure,heavy,a3_heavy_family_collision_cross_blend,family_collision_name,cross_tool_description_blend,family_similarity,71.7251,True,True,True,static strengths are strictly increasing
+observation,C1 Return Structure Noise,light,c1_light_key_rename_soft_plus_reorder,key_rename_soft,field_reorder,structure,22.0,True,True,True,static strengths are strictly increasing
+observation,C1 Return Structure Noise,medium,c1_medium_nesting_plus_key_rename_soft,nesting_shift,key_rename_soft,structure,58.0,True,True,True,static strengths are strictly increasing
+observation,C1 Return Structure Noise,heavy,c1_heavy_wrapper_plus_key_rename,wrapper_insertion,key_rename,structure,70.0,True,True,True,static strengths are strictly increasing
+observation,C2 Return Evidence Loss,light,c2_light_dropped_metadata,dropped_metadata,,evidence_loss,18.0,True,True,True,static strengths are strictly increasing
+observation,C2 Return Evidence Loss,medium,c2_medium_sparse_result,sparse_result,,evidence_loss,22.0,True,True,True,static strengths are strictly increasing
+observation,C2 Return Evidence Loss,heavy,c2_heavy_missing_field_plus_partial,missing_field,partial_truncation,evidence_loss,86.0,True,True,True,static strengths are strictly increasing
+observation,C3 Return Evidence Corruption,light,c3_light_stale_value,stale_value,,evidence_corruption,20.0,True,True,True,static strengths are strictly increasing
+observation,C3 Return Evidence Corruption,medium,c3_medium_stale_value_supporting_conflict,stale_value,supporting_conflict,evidence_corruption,50.0,True,True,True,static strengths are strictly increasing
+observation,C3 Return Evidence Corruption,heavy,c3_heavy_stale_supporting_unit_mismatch,stale_value,supporting_conflict + unit_mismatch,evidence_corruption,100.0,True,True,True,static strengths are strictly increasing
+observation,C4 Return Evidence Competition,light,c4_light_low_utility_redundancy_soft,low_utility_redundancy_soft,,evidence_competition,13.0,True,True,True,static strengths are strictly increasing
+observation,C4 Return Evidence Competition,medium,c4_medium_distractor_candidate_soft,distractor_candidate_soft,,evidence_competition,28.0,True,True,True,static strengths are strictly increasing
+observation,C4 Return Evidence Competition,heavy,c4_heavy_distractor_candidate,distractor_candidate,,evidence_competition,50.0,True,True,True,static strengths are strictly increasing
+user_intent,B1 Indirectness,light,b1_light_constraint_reposition,constraint_reposition,,indirectness,18.0,True,True,True,static strengths are strictly increasing
+user_intent,B1 Indirectness,medium,b1_medium_style_transfer_reposition,style_transfer,constraint_reposition,indirectness,52.0,True,True,True,static strengths are strictly increasing
+user_intent,B1 Indirectness,heavy,b1_heavy_style_scatter_implication,style_transfer,cross_sentence_scatter + implication_rewrite,indirectness,94.0,True,True,True,static strengths are strictly increasing
+user_intent,B2 Underspecification,light,b2_light_vague_quantity,vague_quantity,,underspecification,14.0,True,True,True,static strengths are strictly increasing
+user_intent,B2 Underspecification,medium,b2_medium_slot_implicitization,slot_implicitization,,underspecification,36.0,True,True,True,static strengths are strictly increasing
+user_intent,B2 Underspecification,heavy,b2_heavy_slot_plus_constraint_drop,slot_implicitization,partial_constraint_drop,underspecification,82.0,True,True,True,static strengths are strictly increasing
+user_intent,B3 Distraction,light,b3_light_redundant_context,redundant_context,,distraction,13.0,True,True,True,static strengths are strictly increasing
+user_intent,B3 Distraction,medium,b3_medium_semantic_distractor_plus_side_goal,near_semantic_distractor,side_goal_insertion,distraction,56.0,True,True,True,static strengths are strictly increasing
+user_intent,B3 Distraction,heavy,b3_heavy_semantic_side_goal_topic_drift,near_semantic_distractor,side_goal_insertion + soft_topic_drift,distraction,76.0,True,True,True,static strengths are strictly increasing
+user_intent,B4 Conflict,light,b4_light_ambiguity_probe,ambiguity_probe,,conflict,13.0,True,True,True,static strengths are strictly increasing
+user_intent,B4 Conflict,medium,b4_medium_contradictory_constraint,contradictory_constraint,,conflict,36.0,True,True,True,static strengths are strictly increasing
+user_intent,B4 Conflict,heavy,b4_heavy_contradiction_revision_intra_conflict,contradictory_constraint,late_revision + intra_prompt_conflict,conflict,86.0,True,True,True,static strengths are strictly increasing

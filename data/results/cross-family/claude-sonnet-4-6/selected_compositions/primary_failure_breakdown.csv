@@ -1,0 +1,7 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+claude-sonnet-4-6,cross_family,medium,S2 Interface Grounding,wrong-tool,14,33,0.42424242424242425
+claude-sonnet-4-6,cross_family,heavy,S2 Interface Grounding,wrong-tool,33,59,0.559322033898305
+claude-sonnet-4-6,cross_family,medium,S4 Observation / Execution Handling,execution-fail,15,33,0.45454545454545453
+claude-sonnet-4-6,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,17,59,0.288135593220339
+claude-sonnet-4-6,cross_family,medium,S4 Observation / Execution Handling,invalid-format,4,33,0.12121212121212122
+claude-sonnet-4-6,cross_family,heavy,S4 Observation / Execution Handling,invalid-format,9,59,0.15254237288135594

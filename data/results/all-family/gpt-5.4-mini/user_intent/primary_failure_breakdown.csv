@@ -1,0 +1,7 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gpt-5.4-mini,clean,clean,S3 Parameter Binding,missing-parameter,1,1,1.0
+gpt-5.4-mini,user_intent,medium,S1 Tool Selection,wrong-tool,10,24,0.4166666666666667
+gpt-5.4-mini,user_intent,heavy,S1 Tool Selection,wrong-tool,57,96,0.59375
+gpt-5.4-mini,user_intent,light,S2 Interface Grounding,wrong-tool,6,6,1.0
+gpt-5.4-mini,user_intent,medium,S2 Interface Grounding,wrong-tool,14,24,0.5833333333333334
+gpt-5.4-mini,user_intent,heavy,S2 Interface Grounding,wrong-tool,39,96,0.40625

@@ -1,0 +1,13 @@
+family,subtype,severity,template_name,primary_operator,amplifier_operator,exposure_axis,static_strength_score,monotonic_pass,subtype_purity_pass,light_nonzero_pass,note
+user_intent,B1 Indirectness,light,b1_light_constraint_reposition,constraint_reposition,,indirectness,18.0,True,True,True,static strengths are strictly increasing
+user_intent,B1 Indirectness,medium,b1_medium_style_transfer_reposition,style_transfer,constraint_reposition,indirectness,52.0,True,True,True,static strengths are strictly increasing
+user_intent,B1 Indirectness,heavy,b1_heavy_style_scatter_implication,style_transfer,cross_sentence_scatter + implication_rewrite,indirectness,94.0,True,True,True,static strengths are strictly increasing
+user_intent,B2 Underspecification,light,b2_light_vague_quantity,vague_quantity,,underspecification,14.0,True,True,True,static strengths are strictly increasing
+user_intent,B2 Underspecification,medium,b2_medium_slot_implicitization,slot_implicitization,,underspecification,36.0,True,True,True,static strengths are strictly increasing
+user_intent,B2 Underspecification,heavy,b2_heavy_slot_plus_constraint_drop,slot_implicitization,partial_constraint_drop,underspecification,82.0,True,True,True,static strengths are strictly increasing
+user_intent,B3 Distraction,light,b3_light_redundant_context,redundant_context,,distraction,13.0,True,True,True,static strengths are strictly increasing
+user_intent,B3 Distraction,medium,b3_medium_semantic_distractor_plus_side_goal,near_semantic_distractor,side_goal_insertion,distraction,56.0,True,True,True,static strengths are strictly increasing
+user_intent,B3 Distraction,heavy,b3_heavy_semantic_side_goal_topic_drift,near_semantic_distractor,side_goal_insertion + soft_topic_drift,distraction,76.0,True,True,True,static strengths are strictly increasing
+user_intent,B4 Conflict,light,b4_light_ambiguity_probe,ambiguity_probe,,conflict,13.0,True,True,True,static strengths are strictly increasing
+user_intent,B4 Conflict,medium,b4_medium_contradictory_constraint,contradictory_constraint,,conflict,36.0,True,True,True,static strengths are strictly increasing
+user_intent,B4 Conflict,heavy,b4_heavy_contradiction_revision_intra_conflict,contradictory_constraint,late_revision + intra_prompt_conflict,conflict,86.0,True,True,True,static strengths are strictly increasing

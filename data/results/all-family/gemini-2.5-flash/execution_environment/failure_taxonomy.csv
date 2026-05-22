@@ -1,0 +1,8 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+gemini-2.5-flash,light,execution-fail,execution-fail,False,runtime_execution_error,1,144,0.006944444444444444
+gemini-2.5-flash,medium,execution-fail,execution-fail,False,runtime_execution_error,21,144,0.14583333333333334
+gemini-2.5-flash,heavy,execution-fail,execution-fail,False,runtime_execution_error,9,144,0.0625
+gemini-2.5-flash,light,wrong-parameter,execution-fail,True,parameter_value_mismatch,5,144,0.034722222222222224
+gemini-2.5-flash,medium,wrong-parameter,execution-fail,True,parameter_value_mismatch,61,144,0.4236111111111111
+gemini-2.5-flash,heavy,wrong-parameter,execution-fail,True,parameter_value_mismatch,55,144,0.3819444444444444
+gemini-2.5-flash,clean,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,2,48,0.041666666666666664

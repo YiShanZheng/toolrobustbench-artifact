@@ -1,0 +1,17 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gemini-2.5-pro,clean,clean,S3 Parameter Binding,wrong-parameter,1,2,0.5
+gemini-2.5-pro,clean,clean,clean,no-call,1,2,0.5
+gemini-2.5-pro,cross_family,medium,S1 Tool Selection,no-call,4,55,0.07272727272727272
+gemini-2.5-pro,cross_family,heavy,S1 Tool Selection,no-call,3,68,0.04411764705882353
+gemini-2.5-pro,cross_family,medium,S1 Tool Selection,wrong-tool,8,55,0.14545454545454545
+gemini-2.5-pro,cross_family,heavy,S1 Tool Selection,wrong-tool,5,68,0.07352941176470588
+gemini-2.5-pro,cross_family,medium,S2 Interface Grounding,wrong-tool,12,55,0.21818181818181817
+gemini-2.5-pro,cross_family,heavy,S2 Interface Grounding,wrong-tool,24,68,0.35294117647058826
+gemini-2.5-pro,cross_family,medium,S4 Observation / Execution Handling,execution-fail,26,55,0.4727272727272727
+gemini-2.5-pro,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,22,68,0.3235294117647059
+gemini-2.5-pro,cross_family,medium,S4 Observation / Execution Handling,invalid-format,2,55,0.03636363636363636
+gemini-2.5-pro,cross_family,heavy,S4 Observation / Execution Handling,invalid-format,7,68,0.10294117647058823
+gemini-2.5-pro,cross_family,medium,S4 Observation / Execution Handling,no-call,2,55,0.03636363636363636
+gemini-2.5-pro,cross_family,heavy,S4 Observation / Execution Handling,no-call,3,68,0.04411764705882353
+gemini-2.5-pro,cross_family,medium,S5 End-to-End Task Success,no-call,1,55,0.01818181818181818
+gemini-2.5-pro,cross_family,heavy,S5 End-to-End Task Success,no-call,4,68,0.058823529411764705

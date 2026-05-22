@@ -1,0 +1,4 @@
+model_name,family,severity,observed_failure_tag,count,total,ratio
+qwen-plus,observation,light,wrong-parameter,91,192,0.4739583333333333
+qwen-plus,observation,medium,wrong-parameter,112,192,0.5833333333333334
+qwen-plus,observation,heavy,wrong-parameter,154,192,0.8020833333333334

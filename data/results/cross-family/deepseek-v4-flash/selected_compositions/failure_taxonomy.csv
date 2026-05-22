@@ -1,0 +1,9 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+deepseek-v4-flash,medium,execution-fail,execution-fail,False,runtime_execution_error,2,80,0.025
+deepseek-v4-flash,heavy,execution-fail,execution-fail,False,runtime_execution_error,4,80,0.05
+deepseek-v4-flash,medium,wrong-parameter,execution-fail,True,parameter_value_mismatch,17,80,0.2125
+deepseek-v4-flash,heavy,wrong-parameter,execution-fail,True,parameter_value_mismatch,23,80,0.2875
+deepseek-v4-flash,medium,wrong-parameter,wrong-tool,True,parameter_value_mismatch,23,80,0.2875
+deepseek-v4-flash,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,17,80,0.2125
+deepseek-v4-flash,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,13,80,0.1625
+deepseek-v4-flash,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,16,80,0.2

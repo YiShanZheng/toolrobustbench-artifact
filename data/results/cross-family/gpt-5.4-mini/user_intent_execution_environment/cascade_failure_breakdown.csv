@@ -1,0 +1,5 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+gpt-5.4-mini,cross_family,medium,S4 Observation / Execution Handling,execution-fail,missing-parameter,5,9,0.5555555555555556
+gpt-5.4-mini,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,missing-parameter,2,42,0.047619047619047616
+gpt-5.4-mini,cross_family,medium,S4 Observation / Execution Handling,execution-fail,wrong-parameter,4,9,0.4444444444444444
+gpt-5.4-mini,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,wrong-parameter,40,42,0.9523809523809523

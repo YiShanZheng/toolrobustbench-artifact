@@ -1,0 +1,11 @@
+model_name,composition_id,severity,families_applied,composition_success_rate,weakest_component_success_rate,mean_component_success_rate,interaction_delta_vs_weakest,interaction_delta_vs_mean,component_baseline_status
+qwen-plus,a+b:a2_description_abstraction__b3_distraction,medium,"[""interface_exposure"", ""user_intent""]",0.9375,,,,,missing_component_baseline
+qwen-plus,a+b:a2_description_abstraction__b3_distraction,heavy,"[""interface_exposure"", ""user_intent""]",0.5625,,,,,missing_component_baseline
+qwen-plus,a+c:a3_family_similarity_pressure__c4_return_evidence_competition,medium,"[""interface_exposure"", ""observation""]",0.1875,,,,,missing_component_baseline
+qwen-plus,a+c:a3_family_similarity_pressure__c4_return_evidence_competition,heavy,"[""interface_exposure"", ""observation""]",0.0,,,,,missing_component_baseline
+qwen-plus,a+d:a1_name_surface_shift__d1_availability_failure,medium,"[""interface_exposure"", ""execution_environment""]",0.25,,,,,missing_component_baseline
+qwen-plus,a+d:a1_name_surface_shift__d1_availability_failure,heavy,"[""interface_exposure"", ""execution_environment""]",0.4375,,,,,missing_component_baseline
+qwen-plus,b+c:b4_conflict__c4_return_evidence_competition,medium,"[""user_intent"", ""observation""]",0.4375,,,,,missing_component_baseline
+qwen-plus,b+c:b4_conflict__c4_return_evidence_competition,heavy,"[""user_intent"", ""observation""]",0.0,,,,,missing_component_baseline
+qwen-plus,b+d:b2_underspecification__d2_runtime_variability,medium,"[""user_intent"", ""execution_environment""]",0.8125,,,,,missing_component_baseline
+qwen-plus,b+d:b2_underspecification__d2_runtime_variability,heavy,"[""user_intent"", ""execution_environment""]",0.0625,,,,,missing_component_baseline

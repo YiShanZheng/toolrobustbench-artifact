@@ -1,0 +1,5 @@
+model_name,family,severity,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,drop_vs_clean,scope_label
+gemini-2.5-flash,execution_environment,clean,48.0,0.9583333333333334,0.9583333333333334,0.9583333333333334,0.9583333333333334,0.0,0.0,0.9583333333333334,0.9583333333333334,48,0.9583333333333334,0.0,0.0,single_step
+gemini-2.5-flash,execution_environment,light,144.0,1.0,1.0,1.0,1.0,0.0,0.034722222222222224,0.9583333333333334,0.9583333333333334,144,0.9583333333333334,0.034722222222222224,0.0,single_step
+gemini-2.5-flash,execution_environment,medium,144.0,1.0,1.0,1.0,1.0,0.0,0.4236111111111111,0.4305555555555556,0.4305555555555556,144,0.9583333333333334,0.5347222222222222,0.5277777777777778,single_step
+gemini-2.5-flash,execution_environment,heavy,144.0,1.0,1.0,1.0,1.0,0.0,0.3819444444444444,0.5555555555555556,0.5555555555555556,144,0.9583333333333334,0.4236111111111111,0.4027777777777778,single_step

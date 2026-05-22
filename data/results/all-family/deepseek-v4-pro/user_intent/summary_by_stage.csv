@@ -1,0 +1,21 @@
+model_name,stage_target,severity,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,drop_vs_clean,scope_label
+deepseek-v4-pro,S1 Tool Selection,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,S1 Tool Selection,light,96.0,1.0,1.0,1.0,1.0,0.0,0.010416666666666666,0.9895833333333334,0.9895833333333334,96,1.0,0.010416666666666666,0.01041666666666663,single_step
+deepseek-v4-pro,S1 Tool Selection,medium,96.0,1.0,0.90625,0.90625,1.0,0.0,0.0,0.90625,0.90625,96,1.0,0.09375,0.09375,single_step
+deepseek-v4-pro,S1 Tool Selection,heavy,96.0,1.0,0.46875,0.46875,1.0,0.0,0.010416666666666666,0.4583333333333333,0.4583333333333333,96,1.0,0.5416666666666666,0.5416666666666667,single_step
+deepseek-v4-pro,S2 Interface Grounding,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,S2 Interface Grounding,light,48.0,1.0,0.9791666666666666,0.9791666666666666,1.0,0.0,0.0,0.9791666666666666,0.9791666666666666,48,1.0,0.020833333333333332,0.02083333333333337,single_step
+deepseek-v4-pro,S2 Interface Grounding,medium,48.0,1.0,0.75,0.75,1.0,0.0,0.0,0.75,0.75,48,1.0,0.25,0.25,single_step
+deepseek-v4-pro,S2 Interface Grounding,heavy,48.0,1.0,0.75,0.75,1.0,0.0,0.0,0.75,0.75,48,1.0,0.25,0.25,single_step
+deepseek-v4-pro,S3 Parameter Binding,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,S3 Parameter Binding,light,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,S3 Parameter Binding,medium,48.0,1.0,0.9791666666666666,0.9791666666666666,1.0,0.0,0.0,0.9791666666666666,0.9791666666666666,48,1.0,0.020833333333333332,0.02083333333333337,single_step
+deepseek-v4-pro,S3 Parameter Binding,heavy,48.0,1.0,0.5416666666666666,0.5416666666666666,1.0,0.0,0.0,0.5416666666666666,0.5416666666666666,48,1.0,0.4583333333333333,0.45833333333333337,single_step
+deepseek-v4-pro,S4 Observation / Execution Handling,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,S4 Observation / Execution Handling,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+deepseek-v4-pro,S4 Observation / Execution Handling,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+deepseek-v4-pro,S4 Observation / Execution Handling,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+deepseek-v4-pro,S5 End-to-End Task Success,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,0,1.0,0.0,0.0,single_step
+deepseek-v4-pro,S5 End-to-End Task Success,light,192.0,1.0,0.9947916666666666,0.9947916666666666,1.0,0.0,0.005208333333333333,0.9895833333333334,0.9895833333333334,192,1.0,0.010416666666666666,0.01041666666666663,single_step
+deepseek-v4-pro,S5 End-to-End Task Success,medium,192.0,1.0,0.8854166666666666,0.8854166666666666,1.0,0.0,0.0,0.8854166666666666,0.8854166666666666,192,1.0,0.11458333333333333,0.11458333333333337,single_step
+deepseek-v4-pro,S5 End-to-End Task Success,heavy,192.0,1.0,0.5572916666666666,0.5572916666666666,1.0,0.0,0.005208333333333333,0.5520833333333334,0.5520833333333334,192,1.0,0.4479166666666667,0.44791666666666663,single_step

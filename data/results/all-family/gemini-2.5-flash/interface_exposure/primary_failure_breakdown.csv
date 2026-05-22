@@ -1,0 +1,11 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gemini-2.5-flash,clean,clean,S3 Parameter Binding,wrong-parameter,2,2,1.0
+gemini-2.5-flash,interface_exposure,medium,S1 Tool Selection,no-call,1,18,0.05555555555555555
+gemini-2.5-flash,interface_exposure,heavy,S1 Tool Selection,no-call,1,28,0.03571428571428571
+gemini-2.5-flash,interface_exposure,medium,S1 Tool Selection,wrong-tool,7,18,0.3888888888888889
+gemini-2.5-flash,interface_exposure,heavy,S1 Tool Selection,wrong-tool,7,28,0.25
+gemini-2.5-flash,interface_exposure,medium,S2 Interface Grounding,no-call,1,18,0.05555555555555555
+gemini-2.5-flash,interface_exposure,heavy,S2 Interface Grounding,no-call,4,28,0.14285714285714285
+gemini-2.5-flash,interface_exposure,light,S2 Interface Grounding,wrong-tool,2,2,1.0
+gemini-2.5-flash,interface_exposure,medium,S2 Interface Grounding,wrong-tool,9,18,0.5
+gemini-2.5-flash,interface_exposure,heavy,S2 Interface Grounding,wrong-tool,16,28,0.5714285714285714

@@ -1,0 +1,13 @@
+family,subtype,severity,template_name,primary_operator,amplifier_operator,exposure_axis,static_strength_score,monotonic_pass,subtype_purity_pass,light_nonzero_pass,note
+observation,C1 Return Structure Noise,light,c1_light_key_rename_soft_plus_reorder,key_rename_soft,field_reorder,structure,22.0,True,True,True,static strengths are strictly increasing
+observation,C1 Return Structure Noise,medium,c1_medium_nesting_plus_key_rename_soft,nesting_shift,key_rename_soft,structure,58.0,True,True,True,static strengths are strictly increasing
+observation,C1 Return Structure Noise,heavy,c1_heavy_wrapper_plus_key_rename,wrapper_insertion,key_rename,structure,70.0,True,True,True,static strengths are strictly increasing
+observation,C2 Return Evidence Loss,light,c2_light_dropped_metadata,dropped_metadata,,evidence_loss,18.0,True,True,True,static strengths are strictly increasing
+observation,C2 Return Evidence Loss,medium,c2_medium_sparse_result,sparse_result,,evidence_loss,22.0,True,True,True,static strengths are strictly increasing
+observation,C2 Return Evidence Loss,heavy,c2_heavy_missing_field_plus_partial,missing_field,partial_truncation,evidence_loss,86.0,True,True,True,static strengths are strictly increasing
+observation,C3 Return Evidence Corruption,light,c3_light_stale_value,stale_value,,evidence_corruption,20.0,True,True,True,static strengths are strictly increasing
+observation,C3 Return Evidence Corruption,medium,c3_medium_stale_value_supporting_conflict,stale_value,supporting_conflict,evidence_corruption,50.0,True,True,True,static strengths are strictly increasing
+observation,C3 Return Evidence Corruption,heavy,c3_heavy_stale_supporting_unit_mismatch,stale_value,supporting_conflict + unit_mismatch,evidence_corruption,100.0,True,True,True,static strengths are strictly increasing
+observation,C4 Return Evidence Competition,light,c4_light_low_utility_redundancy_soft,low_utility_redundancy_soft,,evidence_competition,13.0,True,True,True,static strengths are strictly increasing
+observation,C4 Return Evidence Competition,medium,c4_medium_distractor_candidate_soft,distractor_candidate_soft,,evidence_competition,28.0,True,True,True,static strengths are strictly increasing
+observation,C4 Return Evidence Competition,heavy,c4_heavy_distractor_candidate,distractor_candidate,,evidence_competition,50.0,True,True,True,static strengths are strictly increasing

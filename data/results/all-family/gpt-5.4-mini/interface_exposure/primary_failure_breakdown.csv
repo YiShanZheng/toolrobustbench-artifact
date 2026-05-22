@@ -1,0 +1,5 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gpt-5.4-mini,interface_exposure,medium,S1 Tool Selection,wrong-tool,11,23,0.4782608695652174
+gpt-5.4-mini,interface_exposure,heavy,S1 Tool Selection,wrong-tool,9,39,0.23076923076923078
+gpt-5.4-mini,interface_exposure,medium,S2 Interface Grounding,wrong-tool,12,23,0.5217391304347826
+gpt-5.4-mini,interface_exposure,heavy,S2 Interface Grounding,wrong-tool,30,39,0.7692307692307693

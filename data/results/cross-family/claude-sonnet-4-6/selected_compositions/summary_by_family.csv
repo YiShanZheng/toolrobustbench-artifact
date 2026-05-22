@@ -1,0 +1,17 @@
+model_name,family,severity,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,drop_vs_clean,scope_label
+claude-sonnet-4-6,execution_environment,clean,16.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,16,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,execution_environment,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,execution_environment,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,execution_environment,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,interface_exposure,clean,16.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,16,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,interface_exposure,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,interface_exposure,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,interface_exposure,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,observation,clean,16.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,16,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,observation,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,observation,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,observation,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,clean,16.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,16,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,single_step

@@ -1,0 +1,5 @@
+model_name,family,severity,observed_failure_tag,count,total,ratio
+deepseek-v4-pro,execution_environment,medium,execution-fail,18,144,0.125
+deepseek-v4-pro,execution_environment,heavy,execution-fail,31,144,0.2152777777777778
+deepseek-v4-pro,execution_environment,medium,wrong-parameter,21,144,0.14583333333333334
+deepseek-v4-pro,execution_environment,heavy,wrong-parameter,39,144,0.2708333333333333

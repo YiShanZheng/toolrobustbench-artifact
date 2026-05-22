@@ -1,0 +1,5 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gemini-2.5-flash,clean,clean,S3 Parameter Binding,wrong-parameter,1,1,1.0
+gemini-2.5-flash,observation,light,S3 Parameter Binding,wrong-parameter,70,70,1.0
+gemini-2.5-flash,observation,medium,S3 Parameter Binding,wrong-parameter,97,97,1.0
+gemini-2.5-flash,observation,heavy,S3 Parameter Binding,wrong-parameter,167,167,1.0

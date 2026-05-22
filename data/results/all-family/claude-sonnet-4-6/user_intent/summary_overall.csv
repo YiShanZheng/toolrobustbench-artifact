@@ -1,0 +1,5 @@
+model_name,condition,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,clean_overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,robustness_drop_vs_clean,scope_label
+claude-sonnet-4-6,clean,48,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,light,192,1.0,0.9791666666666666,0.9791666666666666,1.0,0.0,0.005208333333333333,0.9739583333333334,0.9739583333333334,1.0,192,1.0,0.026041666666666668,0.02604166666666663,single_step
+claude-sonnet-4-6,medium,192,1.0,0.8697916666666666,0.8697916666666666,1.0,0.0,0.0,0.8697916666666666,0.8697916666666666,1.0,192,1.0,0.13020833333333334,0.13020833333333337,single_step
+claude-sonnet-4-6,heavy,192,1.0,0.515625,0.515625,1.0,0.0,0.005208333333333333,0.5104166666666666,0.5104166666666666,1.0,192,1.0,0.4895833333333333,0.48958333333333337,single_step

@@ -1,0 +1,5 @@
+model_name,condition,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,clean_overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,robustness_drop_vs_clean,scope_label
+qwen-plus,clean,48,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+qwen-plus,light,192,1.0,0.9895833333333334,0.9895833333333334,1.0,0.0,0.005208333333333333,0.984375,0.984375,1.0,192,1.0,0.015625,0.015625,single_step
+qwen-plus,medium,192,1.0,0.8958333333333334,0.8958333333333334,1.0,0.0,0.0,0.8958333333333334,0.8958333333333334,1.0,192,1.0,0.10416666666666667,0.10416666666666663,single_step
+qwen-plus,heavy,192,1.0,0.53125,0.53125,1.0,0.0,0.005208333333333333,0.5260416666666666,0.5260416666666666,1.0,192,1.0,0.4739583333333333,0.47395833333333337,single_step

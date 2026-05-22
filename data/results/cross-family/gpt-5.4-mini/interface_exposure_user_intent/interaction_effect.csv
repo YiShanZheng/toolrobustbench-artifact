@@ -1,0 +1,25 @@
+model_name,composition_id,severity,families_applied,composition_success_rate,weakest_component_success_rate,mean_component_success_rate,interaction_delta_vs_weakest,interaction_delta_vs_mean,component_baseline_status
+gpt-5.4-mini,a+b:a1_name_surface_shift__b1_indirectness,medium,"[""interface_exposure"", ""user_intent""]",0.625,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a1_name_surface_shift__b1_indirectness,heavy,"[""interface_exposure"", ""user_intent""]",0.9375,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a1_name_surface_shift__b2_underspecification,medium,"[""interface_exposure"", ""user_intent""]",0.875,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a1_name_surface_shift__b2_underspecification,heavy,"[""interface_exposure"", ""user_intent""]",0.75,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a1_name_surface_shift__b3_distraction,medium,"[""interface_exposure"", ""user_intent""]",0.875,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a1_name_surface_shift__b3_distraction,heavy,"[""interface_exposure"", ""user_intent""]",0.375,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a1_name_surface_shift__b4_conflict,medium,"[""interface_exposure"", ""user_intent""]",0.6875,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a1_name_surface_shift__b4_conflict,heavy,"[""interface_exposure"", ""user_intent""]",0.75,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a2_description_abstraction__b1_indirectness,medium,"[""interface_exposure"", ""user_intent""]",1.0,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a2_description_abstraction__b1_indirectness,heavy,"[""interface_exposure"", ""user_intent""]",0.9375,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a2_description_abstraction__b2_underspecification,medium,"[""interface_exposure"", ""user_intent""]",0.875,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a2_description_abstraction__b2_underspecification,heavy,"[""interface_exposure"", ""user_intent""]",0.8125,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a2_description_abstraction__b3_distraction,medium,"[""interface_exposure"", ""user_intent""]",0.625,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a2_description_abstraction__b3_distraction,heavy,"[""interface_exposure"", ""user_intent""]",0.125,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a2_description_abstraction__b4_conflict,medium,"[""interface_exposure"", ""user_intent""]",0.875,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a2_description_abstraction__b4_conflict,heavy,"[""interface_exposure"", ""user_intent""]",0.75,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a3_family_similarity_pressure__b1_indirectness,medium,"[""interface_exposure"", ""user_intent""]",0.6875,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a3_family_similarity_pressure__b1_indirectness,heavy,"[""interface_exposure"", ""user_intent""]",0.6875,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a3_family_similarity_pressure__b2_underspecification,medium,"[""interface_exposure"", ""user_intent""]",0.9375,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a3_family_similarity_pressure__b2_underspecification,heavy,"[""interface_exposure"", ""user_intent""]",0.8125,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a3_family_similarity_pressure__b3_distraction,medium,"[""interface_exposure"", ""user_intent""]",0.75,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a3_family_similarity_pressure__b3_distraction,heavy,"[""interface_exposure"", ""user_intent""]",0.4375,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a3_family_similarity_pressure__b4_conflict,medium,"[""interface_exposure"", ""user_intent""]",0.625,,,,,missing_component_baseline
+gpt-5.4-mini,a+b:a3_family_similarity_pressure__b4_conflict,heavy,"[""interface_exposure"", ""user_intent""]",0.75,,,,,missing_component_baseline

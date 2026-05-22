@@ -1,0 +1,5 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+gpt-5.4-mini,cross_family,medium,S1 Tool Selection,wrong-tool,wrong-parameter,15,21,0.7142857142857143
+gpt-5.4-mini,cross_family,heavy,S1 Tool Selection,wrong-tool,wrong-parameter,9,11,0.8181818181818182
+gpt-5.4-mini,cross_family,medium,S2 Interface Grounding,wrong-tool,wrong-parameter,6,21,0.2857142857142857
+gpt-5.4-mini,cross_family,heavy,S2 Interface Grounding,wrong-tool,wrong-parameter,2,11,0.18181818181818182

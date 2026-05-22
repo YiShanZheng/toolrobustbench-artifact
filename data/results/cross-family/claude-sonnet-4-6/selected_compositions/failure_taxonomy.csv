@@ -1,0 +1,11 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+claude-sonnet-4-6,medium,execution-fail,execution-fail,False,runtime_execution_error,9,80,0.1125
+claude-sonnet-4-6,heavy,execution-fail,execution-fail,False,runtime_execution_error,3,80,0.0375
+claude-sonnet-4-6,medium,invalid-format,invalid-format,False,invalid_json_arguments,4,80,0.05
+claude-sonnet-4-6,heavy,invalid-format,invalid-format,False,invalid_json_arguments,9,80,0.1125
+claude-sonnet-4-6,medium,wrong-parameter,execution-fail,True,parameter_value_mismatch,6,80,0.075
+claude-sonnet-4-6,heavy,wrong-parameter,execution-fail,True,parameter_value_mismatch,14,80,0.175
+claude-sonnet-4-6,medium,wrong-parameter,wrong-tool,True,parameter_value_mismatch,9,80,0.1125
+claude-sonnet-4-6,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,13,80,0.1625
+claude-sonnet-4-6,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,5,80,0.0625
+claude-sonnet-4-6,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,20,80,0.25

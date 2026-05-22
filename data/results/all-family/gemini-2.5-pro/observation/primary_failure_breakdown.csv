@@ -1,0 +1,11 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gemini-2.5-pro,clean,clean,S3 Parameter Binding,wrong-parameter,1,1,1.0
+gemini-2.5-pro,observation,light,S2 Interface Grounding,wrong-tool,2,59,0.03389830508474576
+gemini-2.5-pro,observation,medium,S2 Interface Grounding,wrong-tool,2,84,0.023809523809523808
+gemini-2.5-pro,observation,heavy,S2 Interface Grounding,wrong-tool,1,156,0.00641025641025641
+gemini-2.5-pro,observation,light,S3 Parameter Binding,wrong-parameter,54,59,0.9152542372881356
+gemini-2.5-pro,observation,medium,S3 Parameter Binding,wrong-parameter,81,84,0.9642857142857143
+gemini-2.5-pro,observation,heavy,S3 Parameter Binding,wrong-parameter,152,156,0.9743589743589743
+gemini-2.5-pro,observation,light,S4 Observation / Execution Handling,invalid-format,3,59,0.05084745762711865
+gemini-2.5-pro,observation,medium,S4 Observation / Execution Handling,invalid-format,1,84,0.011904761904761904
+gemini-2.5-pro,observation,heavy,S4 Observation / Execution Handling,invalid-format,3,156,0.019230769230769232

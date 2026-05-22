@@ -1,0 +1,9 @@
+model_name,family,severity,observed_failure_tag,count,total,ratio
+claude-sonnet-4-6,execution_environment,light,execution-fail,2,144,0.013888888888888888
+claude-sonnet-4-6,execution_environment,medium,execution-fail,25,144,0.1736111111111111
+claude-sonnet-4-6,execution_environment,heavy,execution-fail,20,144,0.1388888888888889
+claude-sonnet-4-6,execution_environment,medium,invalid-format,8,144,0.05555555555555555
+claude-sonnet-4-6,execution_environment,heavy,invalid-format,9,144,0.0625
+claude-sonnet-4-6,execution_environment,light,wrong-parameter,2,144,0.013888888888888888
+claude-sonnet-4-6,execution_environment,medium,wrong-parameter,9,144,0.0625
+claude-sonnet-4-6,execution_environment,heavy,wrong-parameter,35,144,0.24305555555555555

@@ -1,0 +1,4 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+deepseek-v4-pro,observation,light,S3 Parameter Binding,wrong-parameter,54,54,1.0
+deepseek-v4-pro,observation,medium,S3 Parameter Binding,wrong-parameter,79,79,1.0
+deepseek-v4-pro,observation,heavy,S3 Parameter Binding,wrong-parameter,148,148,1.0

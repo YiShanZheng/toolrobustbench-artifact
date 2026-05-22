@@ -1,0 +1,4 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+gemini-2.5-pro,execution_environment,light,S4 Observation / Execution Handling,execution-fail,wrong-parameter,2,2,1.0
+gemini-2.5-pro,execution_environment,medium,S4 Observation / Execution Handling,execution-fail,wrong-parameter,55,55,1.0
+gemini-2.5-pro,execution_environment,heavy,S4 Observation / Execution Handling,execution-fail,wrong-parameter,58,58,1.0

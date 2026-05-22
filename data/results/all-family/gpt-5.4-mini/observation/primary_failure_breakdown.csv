@@ -1,0 +1,9 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gpt-5.4-mini,clean,clean,S3 Parameter Binding,wrong-parameter,1,1,1.0
+gpt-5.4-mini,observation,medium,S2 Interface Grounding,wrong-tool,1,69,0.014492753623188406
+gpt-5.4-mini,observation,light,S3 Parameter Binding,missing-parameter,6,57,0.10526315789473684
+gpt-5.4-mini,observation,medium,S3 Parameter Binding,missing-parameter,4,69,0.057971014492753624
+gpt-5.4-mini,observation,heavy,S3 Parameter Binding,missing-parameter,4,160,0.025
+gpt-5.4-mini,observation,light,S3 Parameter Binding,wrong-parameter,51,57,0.8947368421052632
+gpt-5.4-mini,observation,medium,S3 Parameter Binding,wrong-parameter,64,69,0.927536231884058
+gpt-5.4-mini,observation,heavy,S3 Parameter Binding,wrong-parameter,156,160,0.975

@@ -1,0 +1,6 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+claude-sonnet-4-6,user_intent,medium,S1 Tool Selection,wrong-tool,15,25,0.6
+claude-sonnet-4-6,user_intent,heavy,S1 Tool Selection,wrong-tool,59,94,0.6276595744680851
+claude-sonnet-4-6,user_intent,light,S2 Interface Grounding,wrong-tool,5,5,1.0
+claude-sonnet-4-6,user_intent,medium,S2 Interface Grounding,wrong-tool,10,25,0.4
+claude-sonnet-4-6,user_intent,heavy,S2 Interface Grounding,wrong-tool,35,94,0.3723404255319149

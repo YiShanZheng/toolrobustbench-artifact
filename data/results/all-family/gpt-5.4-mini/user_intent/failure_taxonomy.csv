@@ -1,0 +1,11 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+gpt-5.4-mini,clean,missing-parameter,missing-parameter,False,missing_required_parameter,1,48,0.020833333333333332
+gpt-5.4-mini,light,missing-parameter,wrong-tool,True,missing_required_parameter,1,192,0.005208333333333333
+gpt-5.4-mini,medium,missing-parameter,wrong-tool,True,missing_required_parameter,1,192,0.005208333333333333
+gpt-5.4-mini,heavy,missing-parameter,wrong-tool,True,missing_required_parameter,3,192,0.015625
+gpt-5.4-mini,light,wrong-parameter,wrong-tool,True,parameter_value_mismatch,2,192,0.010416666666666666
+gpt-5.4-mini,medium,wrong-parameter,wrong-tool,True,parameter_value_mismatch,2,192,0.010416666666666666
+gpt-5.4-mini,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,3,192,0.015625
+gpt-5.4-mini,light,wrong-tool,wrong-tool,False,wrong_canonical_tool,3,192,0.015625
+gpt-5.4-mini,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,21,192,0.109375
+gpt-5.4-mini,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,90,192,0.46875

@@ -1,0 +1,65 @@
+benchmark_version: v3
+
+experiment:
+  name: "cross_pairwise_v1"
+  description: "pairwise cross-family perturbation test"
+
+models:
+  include:
+    - gpt-5.4-mini
+
+dataset:
+  source: local_tools
+  task_scope: single_step
+  max_clean_per_tool: 2
+  sample_tool_count: 3
+  seed: 42
+
+noise:
+  enabled_families:
+    - interface_exposure
+    - user_intent
+    - observation
+    - execution_environment
+  enabled_subtypes: all
+  disabled_operators: []
+  severities:
+    - clean
+    - light
+    - medium
+    - heavy
+  severity_policy: standard
+  allow_cross_family_heavy: false
+  max_operators_per_sample: 3
+  samples_per_bucket: 2
+
+cross_family:
+  enabled: true
+  strategy: pairwise
+  family_sets:
+    - [interface_exposure, user_intent]
+    - [interface_exposure, observation]
+    - [interface_exposure, execution_environment]
+    - [user_intent, observation]
+    - [user_intent, execution_environment]
+  severities:
+    - medium
+    - heavy
+  samples_per_combo_bucket: 1
+  max_families_per_sample: 2
+  include_single_family_baseline: false
+
+execution:
+  timeout_sec: 120
+  retry_times: 2
+
+output:
+  profile: lite
+  clean_output: true
+  generate_plots: true
+  keep_missing_buckets: true
+  severity_order:
+    - clean
+    - light
+    - medium
+    - heavy

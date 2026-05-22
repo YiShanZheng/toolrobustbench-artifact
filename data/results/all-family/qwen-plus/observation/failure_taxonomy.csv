@@ -1,0 +1,4 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+qwen-plus,light,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,91,192,0.4739583333333333
+qwen-plus,medium,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,112,192,0.5833333333333334
+qwen-plus,heavy,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,154,192,0.8020833333333334

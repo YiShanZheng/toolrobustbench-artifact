@@ -1,0 +1,4 @@
+model_name,family,severity,observed_failure_tag,count,total,ratio
+gemini-2.5-flash,observation,light,wrong-parameter,70,192,0.3645833333333333
+gemini-2.5-flash,observation,medium,wrong-parameter,97,192,0.5052083333333334
+gemini-2.5-flash,observation,heavy,wrong-parameter,167,192,0.8697916666666666

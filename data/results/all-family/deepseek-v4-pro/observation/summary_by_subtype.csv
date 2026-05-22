@@ -1,0 +1,17 @@
+model_name,family,subtype,stage_target,severity,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,drop_vs_clean,scope_label
+deepseek-v4-pro,observation,C1 Return Structure Noise,S4 Observation / Execution Handling,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,observation,C1 Return Structure Noise,S4 Observation / Execution Handling,light,48.0,1.0,1.0,1.0,1.0,0.0,0.3333333333333333,1.0,0.6666666666666666,48,1.0,0.3333333333333333,0.33333333333333337,single_step
+deepseek-v4-pro,observation,C1 Return Structure Noise,S4 Observation / Execution Handling,medium,48.0,1.0,1.0,1.0,1.0,0.0,0.3541666666666667,1.0,0.6458333333333334,48,1.0,0.3541666666666667,0.35416666666666663,single_step
+deepseek-v4-pro,observation,C1 Return Structure Noise,S4 Observation / Execution Handling,heavy,48.0,1.0,1.0,1.0,1.0,0.0,0.8541666666666666,1.0,0.14583333333333334,48,1.0,0.8541666666666666,0.8541666666666666,single_step
+deepseek-v4-pro,observation,C2 Return Evidence Loss,S4 Observation / Execution Handling,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,observation,C2 Return Evidence Loss,S4 Observation / Execution Handling,light,48.0,1.0,1.0,1.0,1.0,0.0,0.75,1.0,0.25,48,1.0,0.75,0.75,single_step
+deepseek-v4-pro,observation,C2 Return Evidence Loss,S4 Observation / Execution Handling,medium,48.0,1.0,1.0,1.0,1.0,0.0,0.8125,1.0,0.1875,48,1.0,0.8125,0.8125,single_step
+deepseek-v4-pro,observation,C2 Return Evidence Loss,S4 Observation / Execution Handling,heavy,48.0,1.0,1.0,1.0,1.0,0.0,1.0,1.0,0.0,48,1.0,1.0,1.0,single_step
+deepseek-v4-pro,observation,C3 Return Evidence Corruption,S4 Observation / Execution Handling,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,observation,C3 Return Evidence Corruption,S4 Observation / Execution Handling,light,48.0,1.0,1.0,1.0,1.0,0.0,0.020833333333333332,1.0,0.9791666666666666,48,1.0,0.020833333333333332,0.02083333333333337,single_step
+deepseek-v4-pro,observation,C3 Return Evidence Corruption,S4 Observation / Execution Handling,medium,48.0,1.0,1.0,1.0,1.0,0.0,0.08333333333333333,1.0,0.9166666666666666,48,1.0,0.08333333333333333,0.08333333333333337,single_step
+deepseek-v4-pro,observation,C3 Return Evidence Corruption,S4 Observation / Execution Handling,heavy,48.0,1.0,1.0,1.0,1.0,0.0,0.5,1.0,0.5,48,1.0,0.5,0.5,single_step
+deepseek-v4-pro,observation,C4 Return Evidence Competition,S4 Observation / Execution Handling,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-pro,observation,C4 Return Evidence Competition,S4 Observation / Execution Handling,light,48.0,1.0,1.0,1.0,1.0,0.0,0.020833333333333332,1.0,0.9791666666666666,48,1.0,0.020833333333333332,0.02083333333333337,single_step
+deepseek-v4-pro,observation,C4 Return Evidence Competition,S4 Observation / Execution Handling,medium,48.0,1.0,1.0,1.0,1.0,0.0,0.3958333333333333,1.0,0.6041666666666666,48,1.0,0.3958333333333333,0.39583333333333337,single_step
+deepseek-v4-pro,observation,C4 Return Evidence Competition,S4 Observation / Execution Handling,heavy,48.0,1.0,1.0,1.0,1.0,0.0,0.7291666666666666,1.0,0.2708333333333333,48,1.0,0.7291666666666666,0.7291666666666667,single_step

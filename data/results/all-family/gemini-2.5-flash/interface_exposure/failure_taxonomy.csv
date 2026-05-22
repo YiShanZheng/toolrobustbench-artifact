@@ -1,0 +1,9 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+gemini-2.5-flash,medium,no-call,no-call,False,no_tool_call,2,144,0.013888888888888888
+gemini-2.5-flash,heavy,no-call,no-call,False,no_tool_call,5,144,0.034722222222222224
+gemini-2.5-flash,clean,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,2,48,0.041666666666666664
+gemini-2.5-flash,light,wrong-parameter,wrong-tool,True,parameter_value_mismatch,2,144,0.013888888888888888
+gemini-2.5-flash,medium,wrong-parameter,wrong-tool,True,parameter_value_mismatch,13,144,0.09027777777777778
+gemini-2.5-flash,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,16,144,0.1111111111111111
+gemini-2.5-flash,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,3,144,0.020833333333333332
+gemini-2.5-flash,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,7,144,0.04861111111111111

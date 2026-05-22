@@ -1,0 +1,10 @@
+model_name,family,severity,observed_failure_tag,count,total,ratio
+gemini-2.5-pro,user_intent,light,no-call,5,192,0.026041666666666668
+gemini-2.5-pro,user_intent,medium,no-call,4,192,0.020833333333333332
+gemini-2.5-pro,user_intent,heavy,no-call,32,192,0.16666666666666666
+gemini-2.5-pro,user_intent,light,wrong-parameter,7,192,0.036458333333333336
+gemini-2.5-pro,user_intent,medium,wrong-parameter,5,192,0.026041666666666668
+gemini-2.5-pro,user_intent,heavy,wrong-parameter,15,192,0.078125
+gemini-2.5-pro,user_intent,light,wrong-tool,1,192,0.005208333333333333
+gemini-2.5-pro,user_intent,medium,wrong-tool,15,192,0.078125
+gemini-2.5-pro,user_intent,heavy,wrong-tool,61,192,0.3177083333333333

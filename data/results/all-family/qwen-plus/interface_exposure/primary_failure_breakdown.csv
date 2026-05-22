@@ -1,0 +1,5 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+qwen-plus,interface_exposure,medium,S1 Tool Selection,wrong-tool,4,8,0.5
+qwen-plus,interface_exposure,heavy,S1 Tool Selection,wrong-tool,3,22,0.13636363636363635
+qwen-plus,interface_exposure,medium,S2 Interface Grounding,wrong-tool,4,8,0.5
+qwen-plus,interface_exposure,heavy,S2 Interface Grounding,wrong-tool,19,22,0.8636363636363636

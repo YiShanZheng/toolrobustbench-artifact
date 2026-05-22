@@ -1,0 +1,4 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+gemini-2.5-pro,user_intent,light,S2 Interface Grounding,wrong-tool,wrong-parameter,7,7,1.0
+gemini-2.5-pro,user_intent,medium,S2 Interface Grounding,wrong-tool,wrong-parameter,5,5,1.0
+gemini-2.5-pro,user_intent,heavy,S2 Interface Grounding,wrong-tool,wrong-parameter,15,15,1.0

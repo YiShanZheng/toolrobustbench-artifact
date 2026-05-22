@@ -1,0 +1,21 @@
+model_name,stage_target,severity,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,drop_vs_clean,scope_label
+gemini-2.5-flash,S1 Tool Selection,clean,48.0,0.9791666666666666,0.9791666666666666,0.9791666666666666,0.9791666666666666,0.0,0.0,0.9791666666666666,0.9791666666666666,48,0.9791666666666666,0.0,0.0,single_step
+gemini-2.5-flash,S1 Tool Selection,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S1 Tool Selection,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S1 Tool Selection,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S2 Interface Grounding,clean,48.0,0.9791666666666666,0.9791666666666666,0.9791666666666666,0.9791666666666666,0.0,0.0,0.9791666666666666,0.9791666666666666,48,0.9791666666666666,0.0,0.0,single_step
+gemini-2.5-flash,S2 Interface Grounding,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S2 Interface Grounding,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S2 Interface Grounding,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S3 Parameter Binding,clean,48.0,0.9791666666666666,0.9791666666666666,0.9791666666666666,0.9791666666666666,0.0,0.0,0.9791666666666666,0.9791666666666666,48,0.9791666666666666,0.0,0.0,single_step
+gemini-2.5-flash,S3 Parameter Binding,light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S3 Parameter Binding,medium,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S3 Parameter Binding,heavy,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,N/A,single_step
+gemini-2.5-flash,S4 Observation / Execution Handling,clean,48.0,0.9791666666666666,0.9791666666666666,0.9791666666666666,0.9791666666666666,0.0,0.0,0.9791666666666666,0.9791666666666666,48,0.9791666666666666,0.0,0.0,single_step
+gemini-2.5-flash,S4 Observation / Execution Handling,light,192.0,1.0,1.0,1.0,1.0,0.0,0.3645833333333333,0.96875,0.6354166666666666,192,0.9791666666666666,0.34375,0.34375,single_step
+gemini-2.5-flash,S4 Observation / Execution Handling,medium,192.0,1.0,1.0,1.0,1.0,0.0,0.5052083333333334,0.9583333333333334,0.4947916666666667,192,0.9791666666666666,0.484375,0.48437499999999994,single_step
+gemini-2.5-flash,S4 Observation / Execution Handling,heavy,192.0,1.0,1.0,1.0,1.0,0.0,0.8697916666666666,0.9739583333333334,0.13020833333333334,192,0.9791666666666666,0.8489583333333334,0.8489583333333333,single_step
+gemini-2.5-flash,S5 End-to-End Task Success,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.020833333333333332,0.9791666666666666,0.9791666666666666,0,0.9791666666666666,0.0,0.0,single_step
+gemini-2.5-flash,S5 End-to-End Task Success,light,192.0,1.0,1.0,1.0,1.0,0.0,0.3645833333333333,0.96875,0.6354166666666666,192,0.9791666666666666,0.34375,0.34375,single_step
+gemini-2.5-flash,S5 End-to-End Task Success,medium,192.0,1.0,1.0,1.0,1.0,0.0,0.5052083333333334,0.9583333333333334,0.4947916666666667,192,0.9791666666666666,0.484375,0.48437499999999994,single_step
+gemini-2.5-flash,S5 End-to-End Task Success,heavy,192.0,1.0,1.0,1.0,1.0,0.0,0.8697916666666666,0.9739583333333334,0.13020833333333334,192,0.9791666666666666,0.8489583333333334,0.8489583333333333,single_step

@@ -1,0 +1,4 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+qwen-plus,execution_environment,light,S4 Observation / Execution Handling,execution-fail,21,21,1.0
+qwen-plus,execution_environment,medium,S4 Observation / Execution Handling,execution-fail,39,39,1.0
+qwen-plus,execution_environment,heavy,S4 Observation / Execution Handling,execution-fail,64,64,1.0

@@ -1,0 +1,13 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gemini-2.5-pro,user_intent,light,S1 Tool Selection,no-call,5,13,0.38461538461538464
+gemini-2.5-pro,user_intent,medium,S1 Tool Selection,no-call,2,24,0.08333333333333333
+gemini-2.5-pro,user_intent,heavy,S1 Tool Selection,no-call,20,108,0.18518518518518517
+gemini-2.5-pro,user_intent,light,S1 Tool Selection,wrong-tool,1,13,0.07692307692307693
+gemini-2.5-pro,user_intent,medium,S1 Tool Selection,wrong-tool,5,24,0.20833333333333334
+gemini-2.5-pro,user_intent,heavy,S1 Tool Selection,wrong-tool,39,108,0.3611111111111111
+gemini-2.5-pro,user_intent,medium,S2 Interface Grounding,no-call,2,24,0.08333333333333333
+gemini-2.5-pro,user_intent,heavy,S2 Interface Grounding,no-call,4,108,0.037037037037037035
+gemini-2.5-pro,user_intent,light,S2 Interface Grounding,wrong-tool,7,13,0.5384615384615384
+gemini-2.5-pro,user_intent,medium,S2 Interface Grounding,wrong-tool,15,24,0.625
+gemini-2.5-pro,user_intent,heavy,S2 Interface Grounding,wrong-tool,37,108,0.3425925925925926
+gemini-2.5-pro,user_intent,heavy,S3 Parameter Binding,no-call,8,108,0.07407407407407407

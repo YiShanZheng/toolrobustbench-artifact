@@ -1,0 +1,6 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+deepseek-v4-pro,light,wrong-parameter,wrong-tool,True,parameter_value_mismatch,1,192,0.005208333333333333
+deepseek-v4-pro,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,1,192,0.005208333333333333
+deepseek-v4-pro,light,wrong-tool,wrong-tool,False,wrong_canonical_tool,1,192,0.005208333333333333
+deepseek-v4-pro,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,22,192,0.11458333333333333
+deepseek-v4-pro,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,85,192,0.4427083333333333

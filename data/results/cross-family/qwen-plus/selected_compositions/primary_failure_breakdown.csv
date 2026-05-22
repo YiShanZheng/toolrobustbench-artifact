@@ -1,0 +1,7 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+qwen-plus,cross_family,medium,S1 Tool Selection,wrong-tool,7,38,0.18421052631578946
+qwen-plus,cross_family,heavy,S1 Tool Selection,wrong-tool,4,63,0.06349206349206349
+qwen-plus,cross_family,medium,S2 Interface Grounding,wrong-tool,20,38,0.5263157894736842
+qwen-plus,cross_family,heavy,S2 Interface Grounding,wrong-tool,30,63,0.47619047619047616
+qwen-plus,cross_family,medium,S4 Observation / Execution Handling,execution-fail,11,38,0.2894736842105263
+qwen-plus,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,29,63,0.4603174603174603

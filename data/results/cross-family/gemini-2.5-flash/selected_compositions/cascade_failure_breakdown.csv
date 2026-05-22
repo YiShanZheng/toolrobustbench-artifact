@@ -1,0 +1,9 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+gemini-2.5-flash,cross_family,medium,S1 Tool Selection,no-call,no-call,1,35,0.02857142857142857
+gemini-2.5-flash,cross_family,heavy,S1 Tool Selection,no-call,no-call,2,46,0.043478260869565216
+gemini-2.5-flash,cross_family,medium,S1 Tool Selection,wrong-tool,wrong-parameter,9,35,0.2571428571428571
+gemini-2.5-flash,cross_family,heavy,S1 Tool Selection,wrong-tool,wrong-parameter,5,46,0.10869565217391304
+gemini-2.5-flash,cross_family,medium,S2 Interface Grounding,wrong-tool,wrong-parameter,11,35,0.3142857142857143
+gemini-2.5-flash,cross_family,heavy,S2 Interface Grounding,wrong-tool,wrong-parameter,16,46,0.34782608695652173
+gemini-2.5-flash,cross_family,medium,S4 Observation / Execution Handling,execution-fail,wrong-parameter,14,35,0.4
+gemini-2.5-flash,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,wrong-parameter,23,46,0.5

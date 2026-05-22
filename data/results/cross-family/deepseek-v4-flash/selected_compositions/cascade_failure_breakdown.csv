@@ -1,0 +1,7 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+deepseek-v4-flash,cross_family,medium,S1 Tool Selection,wrong-tool,wrong-parameter,8,40,0.2
+deepseek-v4-flash,cross_family,heavy,S1 Tool Selection,wrong-tool,wrong-parameter,4,40,0.1
+deepseek-v4-flash,cross_family,medium,S2 Interface Grounding,wrong-tool,wrong-parameter,15,40,0.375
+deepseek-v4-flash,cross_family,heavy,S2 Interface Grounding,wrong-tool,wrong-parameter,13,40,0.325
+deepseek-v4-flash,cross_family,medium,S4 Observation / Execution Handling,execution-fail,wrong-parameter,17,40,0.425
+deepseek-v4-flash,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,wrong-parameter,23,40,0.575

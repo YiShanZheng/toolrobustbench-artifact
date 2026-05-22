@@ -1,0 +1,6 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+gemini-2.5-flash,interface_exposure,medium,S1 Tool Selection,wrong-tool,wrong-parameter,6,13,0.46153846153846156
+gemini-2.5-flash,interface_exposure,heavy,S1 Tool Selection,wrong-tool,wrong-parameter,6,16,0.375
+gemini-2.5-flash,interface_exposure,light,S2 Interface Grounding,wrong-tool,wrong-parameter,2,2,1.0
+gemini-2.5-flash,interface_exposure,medium,S2 Interface Grounding,wrong-tool,wrong-parameter,7,13,0.5384615384615384
+gemini-2.5-flash,interface_exposure,heavy,S2 Interface Grounding,wrong-tool,wrong-parameter,10,16,0.625

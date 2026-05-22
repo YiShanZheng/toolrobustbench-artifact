@@ -1,0 +1,9 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+deepseek-v4-flash,clean,clean,S3 Parameter Binding,wrong-parameter,1,1,1.0
+deepseek-v4-flash,user_intent,medium,S1 Tool Selection,wrong-tool,17,31,0.5483870967741935
+deepseek-v4-flash,user_intent,heavy,S1 Tool Selection,wrong-tool,48,85,0.5647058823529412
+deepseek-v4-flash,user_intent,heavy,S2 Interface Grounding,no-call,2,85,0.023529411764705882
+deepseek-v4-flash,user_intent,light,S2 Interface Grounding,wrong-tool,9,9,1.0
+deepseek-v4-flash,user_intent,medium,S2 Interface Grounding,wrong-tool,13,31,0.41935483870967744
+deepseek-v4-flash,user_intent,heavy,S2 Interface Grounding,wrong-tool,35,85,0.4117647058823529
+deepseek-v4-flash,user_intent,medium,S3 Parameter Binding,no-call,1,31,0.03225806451612903

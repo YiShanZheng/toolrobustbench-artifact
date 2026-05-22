@@ -1,0 +1,1801 @@
+{
+  "benchmark_version": "v3",
+  "operator_catalog_version": "v3.8",
+  "experiment_name": "paper_all_family_deepseek-v4-pro_observation",
+  "experiment_description": "Base config for paper all-family runs. The one-click script runs one model and one family per output directory.",
+  "models": [
+    "deepseek-v4-pro"
+  ],
+  "dataset": {
+    "source": "local_tools",
+    "task_scope": "single_step",
+    "max_clean_per_tool": 3,
+    "sample_tool_count": 16,
+    "sampled_tool_ids": [
+      "calculate_route",
+      "check_permission",
+      "convert_currency",
+      "convert_unit",
+      "create_support_ticket",
+      "estimate_travel_time",
+      "filter_items",
+      "get_air_quality",
+      "get_temperature",
+      "get_weather",
+      "lookup_product",
+      "query_table",
+      "search_document",
+      "search_faq",
+      "search_policy",
+      "sort_items"
+    ]
+  },
+  "enabled_families": [
+    "observation"
+  ],
+  "enabled_subtypes": "all",
+  "disabled_operators": [],
+  "severities": [
+    "clean",
+    "light",
+    "medium",
+    "heavy"
+  ],
+  "severity_policy": "standard",
+  "allow_cross_family_heavy": false,
+  "cross_family": {
+    "enabled": false,
+    "strategy": "pairwise",
+    "family_sets": [],
+    "severities": [
+      "medium",
+      "heavy"
+    ],
+    "samples_per_combo_bucket": 1,
+    "max_families_per_sample": 2,
+    "include_single_family_baseline": true,
+    "enabled_compositions": "all",
+    "composition_order": [],
+    "composite_stage_mapping": {}
+  },
+  "max_operators_per_sample": 3,
+  "samples_per_bucket": 1,
+  "seed": 20260511,
+  "output_profile": "lite",
+  "backend_map": {
+    "deepseek-v4-pro": "deepseek-v4-pro"
+  },
+  "severity_order": [
+    "clean",
+    "light",
+    "medium",
+    "heavy"
+  ],
+  "family_order": [
+    "observation"
+  ],
+  "subtype_order": [
+    "C1 Return Structure Noise",
+    "C2 Return Evidence Loss",
+    "C3 Return Evidence Corruption",
+    "C4 Return Evidence Competition"
+  ],
+  "subtype_family_mapping": {
+    "C1 Return Structure Noise": "observation",
+    "C2 Return Evidence Loss": "observation",
+    "C3 Return Evidence Corruption": "observation",
+    "C4 Return Evidence Competition": "observation"
+  },
+  "stage_order": [
+    "S1 Tool Selection",
+    "S2 Interface Grounding",
+    "S3 Parameter Binding",
+    "S4 Observation / Execution Handling",
+    "S5 End-to-End Task Success"
+  ],
+  "stage_mapping": {
+    "A1 Name Surface Shift": "S1 Tool Selection",
+    "A2 Description Abstraction": "S2 Interface Grounding",
+    "A3 Family Similarity Pressure": "S2 Interface Grounding",
+    "B1 Indirectness": "S2 Interface Grounding",
+    "B2 Underspecification": "S3 Parameter Binding",
+    "B3 Distraction": "S1 Tool Selection",
+    "B4 Conflict": "S1 Tool Selection",
+    "C1 Return Structure Noise": "S4 Observation / Execution Handling",
+    "C2 Return Evidence Loss": "S4 Observation / Execution Handling",
+    "C3 Return Evidence Corruption": "S4 Observation / Execution Handling",
+    "C4 Return Evidence Competition": "S4 Observation / Execution Handling",
+    "D1 Availability Failure": "S4 Observation / Execution Handling",
+    "D2 Runtime Variability": "S4 Observation / Execution Handling",
+    "D3 Failure Feedback Quality": "S4 Observation / Execution Handling"
+  },
+  "family_failure_profiles": {
+    "interface_exposure": {
+      "expected_primary_failures": [
+        "wrong-tool"
+      ],
+      "allowed_spillover_failures": [
+        "missing-parameter",
+        "wrong-parameter"
+      ],
+      "disallowed_direct_perturbations": [
+        "parameter schema semantic change",
+        "parameter key rename",
+        "required/default/order modification",
+        "parameter-level grounding drift"
+      ],
+      "explanation": "Interface exposure perturbs names, aliases, descriptions, and separability. Parameter errors may appear downstream as spillover, but direct schema-level changes are out of bounds."
+    },
+    "user_intent": {
+      "expected_primary_failures": [
+        "no-call",
+        "wrong-tool"
+      ],
+      "allowed_spillover_failures": [
+        "missing-parameter",
+        "wrong-parameter"
+      ],
+      "disallowed_direct_perturbations": [
+        "tool registry / schema level mutation",
+        "execution environment state mutation"
+      ],
+      "explanation": "User-intent perturbations directly distort request interpretation. Parameter mistakes are allowed as downstream spillover, but registry or environment mutations are disallowed direct effects."
+    },
+    "observation": {
+      "expected_primary_failures": [
+        "invalid-format",
+        "execution-fail",
+        "wrong-parameter"
+      ],
+      "allowed_spillover_failures": [
+        "no-call"
+      ],
+      "disallowed_direct_perturbations": [
+        "user intent rewrite",
+        "tool interface exposure mutation"
+      ],
+      "explanation": "Observation perturbations directly affect returned data and execution handling. A downstream no-call can be cascade, but request rewriting or interface-surface mutation is out of bounds."
+    },
+    "execution_environment": {
+      "expected_primary_failures": [
+        "execution-fail",
+        "invalid-format",
+        "no-call"
+      ],
+      "allowed_spillover_failures": [
+        "wrong-parameter"
+      ],
+      "disallowed_direct_perturbations": [
+        "user request semantics rewrite",
+        "interface exposure mutation",
+        "parameter schema semantic change"
+      ],
+      "explanation": "Execution-environment perturbations directly affect runtime behavior and error surfaces. Wrong-parameter may appear as spillover, but request or interface mutations are disallowed direct effects."
+    }
+  },
+  "stage_failure_profiles": {
+    "S1 Tool Selection": {
+      "expected_primary_failures": [
+        "wrong-tool",
+        "no-call"
+      ],
+      "allowed_spillover_failures": [
+        "missing-parameter",
+        "wrong-parameter"
+      ],
+      "disallowed_direct_perturbations": [],
+      "explanation": "S1 captures the earliest selection failure. Parameter mistakes can still show up later as spillover after a confused selection path."
+    },
+    "S2 Interface Grounding": {
+      "expected_primary_failures": [
+        "wrong-tool",
+        "missing-parameter",
+        "wrong-parameter"
+      ],
+      "allowed_spillover_failures": [
+        "no-call"
+      ],
+      "disallowed_direct_perturbations": [],
+      "explanation": "S2 covers interface grounding and description understanding. Wrong-tool and parameter-binding mistakes can both surface here, while no-call is treated as spillover from unresolved grounding."
+    },
+    "S3 Parameter Binding": {
+      "expected_primary_failures": [
+        "missing-parameter",
+        "wrong-parameter"
+      ],
+      "allowed_spillover_failures": [
+        "invalid-format"
+      ],
+      "disallowed_direct_perturbations": [],
+      "explanation": "S3 is the binding stage. Invalid-format may appear as spillover when parameter binding destabilizes the emitted call."
+    },
+    "S4 Observation / Execution Handling": {
+      "expected_primary_failures": [
+        "invalid-format",
+        "execution-fail",
+        "wrong-parameter"
+      ],
+      "allowed_spillover_failures": [
+        "no-call"
+      ],
+      "disallowed_direct_perturbations": [],
+      "explanation": "S4 captures observation/execution handling. A no-call can still be a cascade when the model gives up after unstable execution feedback."
+    }
+  },
+  "operator_primary_failure_risks": {
+    "transparent_alias": [
+      "wrong-tool"
+    ],
+    "semi_opaque_name": [
+      "wrong-tool"
+    ],
+    "opaque_internal_name": [
+      "wrong-tool"
+    ],
+    "alias_pruning": [
+      "wrong-tool"
+    ],
+    "light_description_rewrite": [
+      "wrong-tool"
+    ],
+    "description_abstraction": [
+      "wrong-tool"
+    ],
+    "sibling_similarity_hint": [
+      "wrong-tool"
+    ],
+    "family_collision_name": [
+      "wrong-tool"
+    ],
+    "cross_tool_description_blend": [
+      "wrong-tool"
+    ],
+    "paraphrase": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "style_transfer": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "constraint_reposition": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "cross_sentence_scatter": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "implication_rewrite": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "slot_implicitization": [
+      "missing-parameter",
+      "wrong-parameter"
+    ],
+    "vague_quantity": [
+      "missing-parameter",
+      "wrong-parameter"
+    ],
+    "omitted_modifier": [
+      "missing-parameter",
+      "wrong-parameter"
+    ],
+    "partial_constraint_drop": [
+      "missing-parameter",
+      "wrong-parameter"
+    ],
+    "redundant_context": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "near_semantic_distractor": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "side_goal_insertion": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "soft_topic_drift": [
+      "wrong-tool",
+      "wrong-parameter"
+    ],
+    "contradictory_constraint": [
+      "no-call",
+      "wrong-tool",
+      "missing-parameter",
+      "wrong-parameter"
+    ],
+    "late_revision": [
+      "no-call",
+      "wrong-tool",
+      "missing-parameter",
+      "wrong-parameter"
+    ],
+    "intra_prompt_conflict": [
+      "no-call",
+      "wrong-tool",
+      "missing-parameter",
+      "wrong-parameter"
+    ],
+    "ambiguity_probe": [
+      "no-call",
+      "wrong-tool",
+      "missing-parameter",
+      "wrong-parameter"
+    ],
+    "key_rename_soft": [
+      "invalid-format",
+      "wrong-parameter"
+    ],
+    "key_rename": [
+      "invalid-format",
+      "wrong-parameter"
+    ],
+    "camel_snake_shift": [
+      "invalid-format",
+      "wrong-parameter"
+    ],
+    "field_reorder": [
+      "invalid-format",
+      "wrong-parameter"
+    ],
+    "nesting_shift": [
+      "invalid-format",
+      "wrong-parameter"
+    ],
+    "wrapper_insertion": [
+      "invalid-format",
+      "wrong-parameter"
+    ],
+    "missing_field": [
+      "missing-parameter",
+      "execution-fail",
+      "wrong-parameter"
+    ],
+    "partial_truncation": [
+      "missing-parameter",
+      "execution-fail",
+      "wrong-parameter"
+    ],
+    "dropped_metadata": [
+      "missing-parameter",
+      "execution-fail",
+      "wrong-parameter"
+    ],
+    "sparse_result": [
+      "missing-parameter",
+      "execution-fail",
+      "wrong-parameter"
+    ],
+    "stale_value": [
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "supporting_conflict": [
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "wrong_fact_field": [
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "unit_mismatch": [
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "inconsistent_pair": [
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "misleading_note": [
+      "wrong-parameter"
+    ],
+    "distractor_candidate_soft": [
+      "wrong-parameter"
+    ],
+    "distractor_candidate": [
+      "wrong-parameter"
+    ],
+    "low_utility_redundancy_soft": [
+      "wrong-parameter"
+    ],
+    "low_utility_redundancy": [
+      "wrong-parameter"
+    ],
+    "spurious_auxiliary_field": [
+      "wrong-parameter"
+    ],
+    "cached_availability_fallback": [
+      "execution-fail",
+      "no-call"
+    ],
+    "service_unavailable_with_stale_cache": [
+      "execution-fail",
+      "no-call"
+    ],
+    "timeout_after_partial_stream": [
+      "execution-fail",
+      "no-call"
+    ],
+    "jittered_metadata": [
+      "invalid-format",
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "delayed_fresh_partial_with_stale_full": [
+      "invalid-format",
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "flaky_shape_conflicting_attempts": [
+      "invalid-format",
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "contaminated_flaky_attempts": [
+      "invalid-format",
+      "wrong-parameter",
+      "execution-fail"
+    ],
+    "vague_retry_hint": [
+      "execution-fail",
+      "no-call",
+      "wrong-parameter"
+    ],
+    "wrong_failure_label_with_evidence": [
+      "execution-fail",
+      "no-call",
+      "wrong-parameter"
+    ],
+    "hidden_partial_wrong_label": [
+      "execution-fail",
+      "no-call",
+      "wrong-parameter"
+    ],
+    "conflicting_diagnostic_decoy": [
+      "execution-fail",
+      "no-call",
+      "wrong-parameter"
+    ]
+  },
+  "operator_metadata": {
+    "transparent_alias": {
+      "family": "interface_exposure",
+      "subtype": "A1 Name Surface Shift",
+      "intrinsic_strength_score": 0.18,
+      "subtype_affinity": [
+        "A1 Name Surface Shift"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "name",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [
+        "semi_opaque_name",
+        "family_collision_name"
+      ],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.2
+    },
+    "semi_opaque_name": {
+      "family": "interface_exposure",
+      "subtype": "A1 Name Surface Shift",
+      "intrinsic_strength_score": 0.52,
+      "subtype_affinity": [
+        "A1 Name Surface Shift"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "name",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "opaque_internal_name"
+      ],
+      "should_not_stack_with": [
+        "transparent_alias",
+        "family_collision_name"
+      ],
+      "minimum_effect_expectation": 0.25,
+      "maximum_effect_expectation": 0.6
+    },
+    "opaque_internal_name": {
+      "family": "interface_exposure",
+      "subtype": "A1 Name Surface Shift",
+      "intrinsic_strength_score": 0.34,
+      "subtype_affinity": [
+        "A1 Name Surface Shift"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "name",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "semi_opaque_name"
+      ],
+      "should_not_stack_with": [
+        "transparent_alias",
+        "family_collision_name"
+      ],
+      "minimum_effect_expectation": 0.14,
+      "maximum_effect_expectation": 0.38
+    },
+    "alias_pruning": {
+      "family": "interface_exposure",
+      "subtype": "A1 Name Surface Shift",
+      "intrinsic_strength_score": 0.16,
+      "subtype_affinity": [
+        "A1 Name Surface Shift"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "name",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "semi_opaque_name"
+      ],
+      "should_not_stack_with": [
+        "transparent_alias"
+      ],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.18
+    },
+    "light_description_rewrite": {
+      "family": "interface_exposure",
+      "subtype": "A2 Description Abstraction",
+      "intrinsic_strength_score": 0.18,
+      "subtype_affinity": [
+        "A2 Description Abstraction"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "description",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [
+        "description_abstraction"
+      ],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.2
+    },
+    "description_abstraction": {
+      "family": "interface_exposure",
+      "subtype": "A2 Description Abstraction",
+      "intrinsic_strength_score": 0.55,
+      "subtype_affinity": [
+        "A2 Description Abstraction"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "description",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "family_collision_name"
+      ],
+      "should_not_stack_with": [
+        "light_description_rewrite"
+      ],
+      "minimum_effect_expectation": 0.22,
+      "maximum_effect_expectation": 0.68
+    },
+    "sibling_similarity_hint": {
+      "family": "interface_exposure",
+      "subtype": "A3 Family Similarity Pressure",
+      "intrinsic_strength_score": 0.18,
+      "subtype_affinity": [
+        "A3 Family Similarity Pressure"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "family_similarity",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [
+        "family_collision_name",
+        "cross_tool_description_blend"
+      ],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.2
+    },
+    "family_collision_name": {
+      "family": "interface_exposure",
+      "subtype": "A3 Family Similarity Pressure",
+      "intrinsic_strength_score": 0.5,
+      "subtype_affinity": [
+        "A1 Name Surface Shift",
+        "A2 Description Abstraction",
+        "A3 Family Similarity Pressure"
+      ],
+      "severity_fit": [
+        "heavy",
+        "medium"
+      ],
+      "exposure_axis": "family_similarity",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "alias_pruning",
+        "cross_tool_description_blend",
+        "description_abstraction"
+      ],
+      "should_not_stack_with": [
+        "transparent_alias",
+        "semi_opaque_name",
+        "sibling_similarity_hint"
+      ],
+      "minimum_effect_expectation": 0.2,
+      "maximum_effect_expectation": 0.62
+    },
+    "cross_tool_description_blend": {
+      "family": "interface_exposure",
+      "subtype": "A3 Family Similarity Pressure",
+      "intrinsic_strength_score": 0.2,
+      "subtype_affinity": [
+        "A3 Family Similarity Pressure"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "family_similarity",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "family_collision_name"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.1,
+      "maximum_effect_expectation": 0.24
+    },
+    "paraphrase": {
+      "family": "user_intent",
+      "subtype": "B1 Indirectness",
+      "intrinsic_strength_score": 0.08,
+      "subtype_affinity": [
+        "B1 Indirectness"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "indirectness",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [
+        "style_transfer"
+      ],
+      "minimum_effect_expectation": 0.02,
+      "maximum_effect_expectation": 0.1
+    },
+    "style_transfer": {
+      "family": "user_intent",
+      "subtype": "B1 Indirectness",
+      "intrinsic_strength_score": 0.34,
+      "subtype_affinity": [
+        "B1 Indirectness"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "indirectness",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "constraint_reposition",
+        "cross_sentence_scatter",
+        "implication_rewrite"
+      ],
+      "should_not_stack_with": [
+        "paraphrase"
+      ],
+      "minimum_effect_expectation": 0.1,
+      "maximum_effect_expectation": 0.34
+    },
+    "constraint_reposition": {
+      "family": "user_intent",
+      "subtype": "B1 Indirectness",
+      "intrinsic_strength_score": 0.18,
+      "subtype_affinity": [
+        "B1 Indirectness"
+      ],
+      "severity_fit": [
+        "light",
+        "medium"
+      ],
+      "exposure_axis": "indirectness",
+      "stack_role": "amplifier",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.2
+    },
+    "cross_sentence_scatter": {
+      "family": "user_intent",
+      "subtype": "B1 Indirectness",
+      "intrinsic_strength_score": 0.28,
+      "subtype_affinity": [
+        "B1 Indirectness"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "indirectness",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "style_transfer",
+        "implication_rewrite"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.08,
+      "maximum_effect_expectation": 0.3
+    },
+    "implication_rewrite": {
+      "family": "user_intent",
+      "subtype": "B1 Indirectness",
+      "intrinsic_strength_score": 0.32,
+      "subtype_affinity": [
+        "B1 Indirectness"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "indirectness",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "style_transfer",
+        "cross_sentence_scatter"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.08,
+      "maximum_effect_expectation": 0.34
+    },
+    "slot_implicitization": {
+      "family": "user_intent",
+      "subtype": "B2 Underspecification",
+      "intrinsic_strength_score": 0.36,
+      "subtype_affinity": [
+        "B2 Underspecification"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "underspecification",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "partial_constraint_drop"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.12,
+      "maximum_effect_expectation": 0.38
+    },
+    "vague_quantity": {
+      "family": "user_intent",
+      "subtype": "B2 Underspecification",
+      "intrinsic_strength_score": 0.14,
+      "subtype_affinity": [
+        "B2 Underspecification"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "underspecification",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.04,
+      "maximum_effect_expectation": 0.16
+    },
+    "omitted_modifier": {
+      "family": "user_intent",
+      "subtype": "B2 Underspecification",
+      "intrinsic_strength_score": 0.18,
+      "subtype_affinity": [
+        "B2 Underspecification"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "underspecification",
+      "stack_role": "amplifier",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.22
+    },
+    "partial_constraint_drop": {
+      "family": "user_intent",
+      "subtype": "B2 Underspecification",
+      "intrinsic_strength_score": 0.46,
+      "subtype_affinity": [
+        "B2 Underspecification"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "underspecification",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "slot_implicitization"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.14,
+      "maximum_effect_expectation": 0.5
+    },
+    "redundant_context": {
+      "family": "user_intent",
+      "subtype": "B3 Distraction",
+      "intrinsic_strength_score": 0.13,
+      "subtype_affinity": [
+        "B3 Distraction"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "distraction",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.03,
+      "maximum_effect_expectation": 0.14
+    },
+    "near_semantic_distractor": {
+      "family": "user_intent",
+      "subtype": "B3 Distraction",
+      "intrinsic_strength_score": 0.36,
+      "subtype_affinity": [
+        "B3 Distraction"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "distraction",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "side_goal_insertion",
+        "soft_topic_drift"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.14,
+      "maximum_effect_expectation": 0.4
+    },
+    "side_goal_insertion": {
+      "family": "user_intent",
+      "subtype": "B3 Distraction",
+      "intrinsic_strength_score": 0.2,
+      "subtype_affinity": [
+        "B3 Distraction"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "distraction",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "near_semantic_distractor",
+        "soft_topic_drift"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.22
+    },
+    "soft_topic_drift": {
+      "family": "user_intent",
+      "subtype": "B3 Distraction",
+      "intrinsic_strength_score": 0.2,
+      "subtype_affinity": [
+        "B3 Distraction"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "distraction",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "near_semantic_distractor",
+        "side_goal_insertion"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.22
+    },
+    "contradictory_constraint": {
+      "family": "user_intent",
+      "subtype": "B4 Conflict",
+      "intrinsic_strength_score": 0.36,
+      "subtype_affinity": [
+        "B4 Conflict"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "conflict",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "late_revision",
+        "intra_prompt_conflict"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.12,
+      "maximum_effect_expectation": 0.4
+    },
+    "late_revision": {
+      "family": "user_intent",
+      "subtype": "B4 Conflict",
+      "intrinsic_strength_score": 0.24,
+      "subtype_affinity": [
+        "B4 Conflict"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "conflict",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "contradictory_constraint",
+        "intra_prompt_conflict"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.06,
+      "maximum_effect_expectation": 0.26
+    },
+    "intra_prompt_conflict": {
+      "family": "user_intent",
+      "subtype": "B4 Conflict",
+      "intrinsic_strength_score": 0.26,
+      "subtype_affinity": [
+        "B4 Conflict"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "conflict",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "contradictory_constraint",
+        "late_revision"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.06,
+      "maximum_effect_expectation": 0.28
+    },
+    "ambiguity_probe": {
+      "family": "user_intent",
+      "subtype": "B4 Conflict",
+      "intrinsic_strength_score": 0.13,
+      "subtype_affinity": [
+        "B4 Conflict"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "conflict",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.03,
+      "maximum_effect_expectation": 0.14
+    },
+    "key_rename_soft": {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "intrinsic_strength_score": 0.12,
+      "subtype_affinity": [
+        "C1 Return Structure Noise"
+      ],
+      "severity_fit": [
+        "light",
+        "medium"
+      ],
+      "exposure_axis": "structure",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "field_reorder",
+        "nesting_shift"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.03,
+      "maximum_effect_expectation": 0.12
+    },
+    "key_rename": {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "intrinsic_strength_score": 0.18,
+      "subtype_affinity": [
+        "C1 Return Structure Noise"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "structure",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "field_reorder",
+        "camel_snake_shift",
+        "wrapper_insertion",
+        "nesting_shift"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.04,
+      "maximum_effect_expectation": 0.2
+    },
+    "camel_snake_shift": {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "intrinsic_strength_score": 0.16,
+      "subtype_affinity": [
+        "C1 Return Structure Noise"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "structure",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "key_rename",
+        "nesting_shift",
+        "wrapper_insertion"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.03,
+      "maximum_effect_expectation": 0.16
+    },
+    "field_reorder": {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "intrinsic_strength_score": 0.1,
+      "subtype_affinity": [
+        "C1 Return Structure Noise"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "structure",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "key_rename",
+        "key_rename_soft"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.02,
+      "maximum_effect_expectation": 0.12
+    },
+    "nesting_shift": {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "intrinsic_strength_score": 0.46,
+      "subtype_affinity": [
+        "C1 Return Structure Noise"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "structure",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "camel_snake_shift",
+        "key_rename",
+        "key_rename_soft"
+      ],
+      "should_not_stack_with": [
+        "wrapper_insertion"
+      ],
+      "minimum_effect_expectation": 0.16,
+      "maximum_effect_expectation": 0.48
+    },
+    "wrapper_insertion": {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "intrinsic_strength_score": 0.52,
+      "subtype_affinity": [
+        "C1 Return Structure Noise"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "structure",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "key_rename",
+        "camel_snake_shift"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.18,
+      "maximum_effect_expectation": 0.56
+    },
+    "missing_field": {
+      "family": "observation",
+      "subtype": "C2 Return Evidence Loss",
+      "intrinsic_strength_score": 0.48,
+      "subtype_affinity": [
+        "C2 Return Evidence Loss"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "evidence_loss",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "partial_truncation",
+        "sparse_result"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.18,
+      "maximum_effect_expectation": 0.52
+    },
+    "partial_truncation": {
+      "family": "observation",
+      "subtype": "C2 Return Evidence Loss",
+      "intrinsic_strength_score": 0.38,
+      "subtype_affinity": [
+        "C2 Return Evidence Loss"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "evidence_loss",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "missing_field"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.12,
+      "maximum_effect_expectation": 0.4
+    },
+    "dropped_metadata": {
+      "family": "observation",
+      "subtype": "C2 Return Evidence Loss",
+      "intrinsic_strength_score": 0.18,
+      "subtype_affinity": [
+        "C2 Return Evidence Loss"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "evidence_loss",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [
+        "sparse_result"
+      ],
+      "minimum_effect_expectation": 0.04,
+      "maximum_effect_expectation": 0.18
+    },
+    "sparse_result": {
+      "family": "observation",
+      "subtype": "C2 Return Evidence Loss",
+      "intrinsic_strength_score": 0.22,
+      "subtype_affinity": [
+        "C2 Return Evidence Loss"
+      ],
+      "severity_fit": [
+        "light",
+        "medium"
+      ],
+      "exposure_axis": "evidence_loss",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "missing_field"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.22
+    },
+    "stale_value": {
+      "family": "observation",
+      "subtype": "C3 Return Evidence Corruption",
+      "intrinsic_strength_score": 0.2,
+      "subtype_affinity": [
+        "C3 Return Evidence Corruption"
+      ],
+      "severity_fit": [
+        "light",
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "evidence_corruption",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "supporting_conflict",
+        "unit_mismatch"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.05,
+      "maximum_effect_expectation": 0.2
+    },
+    "supporting_conflict": {
+      "family": "observation",
+      "subtype": "C3 Return Evidence Corruption",
+      "intrinsic_strength_score": 0.3,
+      "subtype_affinity": [
+        "C3 Return Evidence Corruption"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "evidence_corruption",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "stale_value",
+        "unit_mismatch"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.09,
+      "maximum_effect_expectation": 0.28
+    },
+    "wrong_fact_field": {
+      "family": "observation",
+      "subtype": "C3 Return Evidence Corruption",
+      "intrinsic_strength_score": 0.44,
+      "subtype_affinity": [
+        "C3 Return Evidence Corruption"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "evidence_corruption",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "stale_value",
+        "inconsistent_pair"
+      ],
+      "should_not_stack_with": [
+        "unit_mismatch"
+      ],
+      "minimum_effect_expectation": 0.16,
+      "maximum_effect_expectation": 0.46
+    },
+    "unit_mismatch": {
+      "family": "observation",
+      "subtype": "C3 Return Evidence Corruption",
+      "intrinsic_strength_score": 0.52,
+      "subtype_affinity": [
+        "C3 Return Evidence Corruption"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "evidence_corruption",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "stale_value",
+        "supporting_conflict",
+        "inconsistent_pair"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.2,
+      "maximum_effect_expectation": 0.54
+    },
+    "inconsistent_pair": {
+      "family": "observation",
+      "subtype": "C3 Return Evidence Corruption",
+      "intrinsic_strength_score": 0.34,
+      "subtype_affinity": [
+        "C3 Return Evidence Corruption"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "evidence_corruption",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "unit_mismatch",
+        "wrong_fact_field"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.12,
+      "maximum_effect_expectation": 0.36
+    },
+    "misleading_note": {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "intrinsic_strength_score": 0.4,
+      "subtype_affinity": [
+        "C4 Return Evidence Competition"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "evidence_competition",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "distractor_candidate",
+        "low_utility_redundancy"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.14,
+      "maximum_effect_expectation": 0.44
+    },
+    "distractor_candidate_soft": {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "intrinsic_strength_score": 0.28,
+      "subtype_affinity": [
+        "C4 Return Evidence Competition"
+      ],
+      "severity_fit": [
+        "medium"
+      ],
+      "exposure_axis": "evidence_competition",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "low_utility_redundancy_soft"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.08,
+      "maximum_effect_expectation": 0.26
+    },
+    "distractor_candidate": {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "intrinsic_strength_score": 0.5,
+      "subtype_affinity": [
+        "C4 Return Evidence Competition"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "evidence_competition",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "spurious_auxiliary_field",
+        "misleading_note",
+        "low_utility_redundancy"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.18,
+      "maximum_effect_expectation": 0.54
+    },
+    "low_utility_redundancy_soft": {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "intrinsic_strength_score": 0.13,
+      "subtype_affinity": [
+        "C4 Return Evidence Competition"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "evidence_competition",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "distractor_candidate_soft"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.03,
+      "maximum_effect_expectation": 0.12
+    },
+    "low_utility_redundancy": {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "intrinsic_strength_score": 0.14,
+      "subtype_affinity": [
+        "C4 Return Evidence Competition"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "evidence_competition",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "distractor_candidate",
+        "misleading_note"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.03,
+      "maximum_effect_expectation": 0.14
+    },
+    "spurious_auxiliary_field": {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "intrinsic_strength_score": 0.32,
+      "subtype_affinity": [
+        "C4 Return Evidence Competition"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "evidence_competition",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "distractor_candidate"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.1,
+      "maximum_effect_expectation": 0.34
+    },
+    "cached_availability_fallback": {
+      "family": "execution_environment",
+      "subtype": "D1 Availability Failure",
+      "intrinsic_strength_score": 0.13,
+      "subtype_affinity": [
+        "D1 Availability Failure"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "availability",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.02,
+      "maximum_effect_expectation": 0.14
+    },
+    "service_unavailable_with_stale_cache": {
+      "family": "execution_environment",
+      "subtype": "D1 Availability Failure",
+      "intrinsic_strength_score": 0.26,
+      "subtype_affinity": [
+        "D1 Availability Failure"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "availability",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "timeout_after_partial_stream"
+      ],
+      "should_not_stack_with": [
+        "cached_availability_fallback"
+      ],
+      "minimum_effect_expectation": 0.08,
+      "maximum_effect_expectation": 0.3
+    },
+    "timeout_after_partial_stream": {
+      "family": "execution_environment",
+      "subtype": "D1 Availability Failure",
+      "intrinsic_strength_score": 0.42,
+      "subtype_affinity": [
+        "D1 Availability Failure"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "availability",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.14,
+      "maximum_effect_expectation": 0.44
+    },
+    "jittered_metadata": {
+      "family": "execution_environment",
+      "subtype": "D2 Runtime Variability",
+      "intrinsic_strength_score": 0.13,
+      "subtype_affinity": [
+        "D2 Runtime Variability"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "runtime_variability",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.02,
+      "maximum_effect_expectation": 0.14
+    },
+    "delayed_fresh_partial_with_stale_full": {
+      "family": "execution_environment",
+      "subtype": "D2 Runtime Variability",
+      "intrinsic_strength_score": 0.28,
+      "subtype_affinity": [
+        "D2 Runtime Variability"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "runtime_variability",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "flaky_shape_conflicting_attempts",
+        "contaminated_flaky_attempts"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.08,
+      "maximum_effect_expectation": 0.32
+    },
+    "flaky_shape_conflicting_attempts": {
+      "family": "execution_environment",
+      "subtype": "D2 Runtime Variability",
+      "intrinsic_strength_score": 0.18,
+      "subtype_affinity": [
+        "D2 Runtime Variability"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "runtime_variability",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "delayed_fresh_partial_with_stale_full"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.06,
+      "maximum_effect_expectation": 0.24
+    },
+    "contaminated_flaky_attempts": {
+      "family": "execution_environment",
+      "subtype": "D2 Runtime Variability",
+      "intrinsic_strength_score": 0.32,
+      "subtype_affinity": [
+        "D2 Runtime Variability"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "runtime_variability",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "delayed_fresh_partial_with_stale_full"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.12,
+      "maximum_effect_expectation": 0.4
+    },
+    "vague_retry_hint": {
+      "family": "execution_environment",
+      "subtype": "D3 Failure Feedback Quality",
+      "intrinsic_strength_score": 0.13,
+      "subtype_affinity": [
+        "D3 Failure Feedback Quality"
+      ],
+      "severity_fit": [
+        "light"
+      ],
+      "exposure_axis": "failure_feedback",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.02,
+      "maximum_effect_expectation": 0.14
+    },
+    "wrong_failure_label_with_evidence": {
+      "family": "execution_environment",
+      "subtype": "D3 Failure Feedback Quality",
+      "intrinsic_strength_score": 0.24,
+      "subtype_affinity": [
+        "D3 Failure Feedback Quality"
+      ],
+      "severity_fit": [
+        "medium"
+      ],
+      "exposure_axis": "failure_feedback",
+      "stack_role": "primary",
+      "can_stack_with": [],
+      "should_not_stack_with": [
+        "vague_retry_hint"
+      ],
+      "minimum_effect_expectation": 0.08,
+      "maximum_effect_expectation": 0.28
+    },
+    "hidden_partial_wrong_label": {
+      "family": "execution_environment",
+      "subtype": "D3 Failure Feedback Quality",
+      "intrinsic_strength_score": 0.4,
+      "subtype_affinity": [
+        "D3 Failure Feedback Quality"
+      ],
+      "severity_fit": [
+        "medium",
+        "heavy"
+      ],
+      "exposure_axis": "failure_feedback",
+      "stack_role": "primary",
+      "can_stack_with": [
+        "conflicting_diagnostic_decoy"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.12,
+      "maximum_effect_expectation": 0.42
+    },
+    "conflicting_diagnostic_decoy": {
+      "family": "execution_environment",
+      "subtype": "D3 Failure Feedback Quality",
+      "intrinsic_strength_score": 0.22,
+      "subtype_affinity": [
+        "D3 Failure Feedback Quality"
+      ],
+      "severity_fit": [
+        "heavy"
+      ],
+      "exposure_axis": "failure_feedback",
+      "stack_role": "amplifier",
+      "can_stack_with": [
+        "hidden_partial_wrong_label"
+      ],
+      "should_not_stack_with": [],
+      "minimum_effect_expectation": 0.08,
+      "maximum_effect_expectation": 0.32
+    }
+  },
+  "preflight_gate_rows": [
+    {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "severity": "light",
+      "template_name": "c1_light_key_rename_soft_plus_reorder",
+      "primary_operator": "key_rename_soft",
+      "amplifier_operator": "field_reorder",
+      "exposure_axis": "structure",
+      "static_strength_score": 22.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "severity": "medium",
+      "template_name": "c1_medium_nesting_plus_key_rename_soft",
+      "primary_operator": "nesting_shift",
+      "amplifier_operator": "key_rename_soft",
+      "exposure_axis": "structure",
+      "static_strength_score": 58.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C1 Return Structure Noise",
+      "severity": "heavy",
+      "template_name": "c1_heavy_wrapper_plus_key_rename",
+      "primary_operator": "wrapper_insertion",
+      "amplifier_operator": "key_rename",
+      "exposure_axis": "structure",
+      "static_strength_score": 70.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C2 Return Evidence Loss",
+      "severity": "light",
+      "template_name": "c2_light_dropped_metadata",
+      "primary_operator": "dropped_metadata",
+      "amplifier_operator": "",
+      "exposure_axis": "evidence_loss",
+      "static_strength_score": 18.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C2 Return Evidence Loss",
+      "severity": "medium",
+      "template_name": "c2_medium_sparse_result",
+      "primary_operator": "sparse_result",
+      "amplifier_operator": "",
+      "exposure_axis": "evidence_loss",
+      "static_strength_score": 22.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C2 Return Evidence Loss",
+      "severity": "heavy",
+      "template_name": "c2_heavy_missing_field_plus_partial",
+      "primary_operator": "missing_field",
+      "amplifier_operator": "partial_truncation",
+      "exposure_axis": "evidence_loss",
+      "static_strength_score": 86.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C3 Return Evidence Corruption",
+      "severity": "light",
+      "template_name": "c3_light_stale_value",
+      "primary_operator": "stale_value",
+      "amplifier_operator": "",
+      "exposure_axis": "evidence_corruption",
+      "static_strength_score": 20.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C3 Return Evidence Corruption",
+      "severity": "medium",
+      "template_name": "c3_medium_stale_value_supporting_conflict",
+      "primary_operator": "stale_value",
+      "amplifier_operator": "supporting_conflict",
+      "exposure_axis": "evidence_corruption",
+      "static_strength_score": 50.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C3 Return Evidence Corruption",
+      "severity": "heavy",
+      "template_name": "c3_heavy_stale_supporting_unit_mismatch",
+      "primary_operator": "stale_value",
+      "amplifier_operator": "supporting_conflict + unit_mismatch",
+      "exposure_axis": "evidence_corruption",
+      "static_strength_score": 100.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "severity": "light",
+      "template_name": "c4_light_low_utility_redundancy_soft",
+      "primary_operator": "low_utility_redundancy_soft",
+      "amplifier_operator": "",
+      "exposure_axis": "evidence_competition",
+      "static_strength_score": 13.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "severity": "medium",
+      "template_name": "c4_medium_distractor_candidate_soft",
+      "primary_operator": "distractor_candidate_soft",
+      "amplifier_operator": "",
+      "exposure_axis": "evidence_competition",
+      "static_strength_score": 28.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    },
+    {
+      "family": "observation",
+      "subtype": "C4 Return Evidence Competition",
+      "severity": "heavy",
+      "template_name": "c4_heavy_distractor_candidate",
+      "primary_operator": "distractor_candidate",
+      "amplifier_operator": "",
+      "exposure_axis": "evidence_competition",
+      "static_strength_score": 50.0,
+      "monotonic_pass": true,
+      "subtype_purity_pass": true,
+      "light_nonzero_pass": true,
+      "note": "static strengths are strictly increasing"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+model_name,condition,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,clean_overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,robustness_drop_vs_clean,scope_label
+gemini-2.5-pro,clean,16,0.9375,0.9375,0.9375,0.9375,0.0,0.0625,0.875,0.875,0.875,16,0.875,0.0,0.0,single_step
+gemini-2.5-pro,medium,80,0.8875,0.85,0.85,0.8875,0.0,0.5,0.475,0.3125,0.875,80,0.875,0.6125,0.5625,single_step
+gemini-2.5-pro,heavy,80,0.7875,0.6,0.6,0.7875,0.0,0.475,0.325,0.15,0.875,80,0.875,0.75,0.725,single_step

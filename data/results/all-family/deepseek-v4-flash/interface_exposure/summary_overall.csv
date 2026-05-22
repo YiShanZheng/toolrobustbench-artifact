@@ -1,0 +1,5 @@
+model_name,condition,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,clean_overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,robustness_drop_vs_clean,scope_label
+deepseek-v4-flash,clean,48,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+deepseek-v4-flash,light,144,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,1.0,144,1.0,0.0,0.0,single_step
+deepseek-v4-flash,medium,144,1.0,0.9722222222222222,0.9722222222222222,1.0,0.0,0.0,0.9722222222222222,0.9722222222222222,1.0,144,1.0,0.027777777777777776,0.02777777777777779,single_step
+deepseek-v4-flash,heavy,144,1.0,0.9166666666666666,0.9166666666666666,1.0,0.0,0.013888888888888888,0.9027777777777778,0.9027777777777778,1.0,144,1.0,0.09722222222222222,0.09722222222222221,single_step

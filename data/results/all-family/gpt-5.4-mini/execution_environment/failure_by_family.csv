@@ -1,0 +1,9 @@
+model_name,family,severity,observed_failure_tag,count,total,ratio
+gpt-5.4-mini,execution_environment,light,execution-fail,1,144,0.006944444444444444
+gpt-5.4-mini,execution_environment,medium,execution-fail,45,144,0.3125
+gpt-5.4-mini,execution_environment,heavy,execution-fail,14,144,0.09722222222222222
+gpt-5.4-mini,execution_environment,medium,missing-parameter,3,144,0.020833333333333332
+gpt-5.4-mini,execution_environment,heavy,missing-parameter,2,144,0.013888888888888888
+gpt-5.4-mini,execution_environment,light,wrong-parameter,8,144,0.05555555555555555
+gpt-5.4-mini,execution_environment,medium,wrong-parameter,7,144,0.04861111111111111
+gpt-5.4-mini,execution_environment,heavy,wrong-parameter,46,144,0.3194444444444444

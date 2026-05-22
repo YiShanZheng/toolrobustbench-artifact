@@ -1,0 +1,4 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+qwen-plus,observation,light,S3 Parameter Binding,wrong-parameter,91,91,1.0
+qwen-plus,observation,medium,S3 Parameter Binding,wrong-parameter,112,112,1.0
+qwen-plus,observation,heavy,S3 Parameter Binding,wrong-parameter,154,154,1.0

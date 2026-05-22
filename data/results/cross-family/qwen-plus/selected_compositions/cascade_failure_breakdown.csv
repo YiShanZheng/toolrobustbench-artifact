@@ -1,0 +1,7 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+qwen-plus,cross_family,medium,S1 Tool Selection,wrong-tool,wrong-parameter,7,26,0.2692307692307692
+qwen-plus,cross_family,heavy,S1 Tool Selection,wrong-tool,wrong-parameter,4,42,0.09523809523809523
+qwen-plus,cross_family,medium,S2 Interface Grounding,wrong-tool,wrong-parameter,12,26,0.46153846153846156
+qwen-plus,cross_family,heavy,S2 Interface Grounding,wrong-tool,wrong-parameter,13,42,0.30952380952380953
+qwen-plus,cross_family,medium,S4 Observation / Execution Handling,execution-fail,wrong-parameter,7,26,0.2692307692307692
+qwen-plus,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,wrong-parameter,25,42,0.5952380952380952

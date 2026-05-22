@@ -1,0 +1,10 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+deepseek-v4-flash,medium,no-call,no-call,False,no_tool_call,1,192,0.005208333333333333
+deepseek-v4-flash,heavy,no-call,no-call,False,no_tool_call,2,192,0.010416666666666666
+deepseek-v4-flash,clean,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,1,48,0.020833333333333332
+deepseek-v4-flash,light,wrong-parameter,wrong-tool,True,parameter_value_mismatch,5,192,0.026041666666666668
+deepseek-v4-flash,medium,wrong-parameter,wrong-tool,True,parameter_value_mismatch,1,192,0.005208333333333333
+deepseek-v4-flash,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,2,192,0.010416666666666666
+deepseek-v4-flash,light,wrong-tool,wrong-tool,False,wrong_canonical_tool,4,192,0.020833333333333332
+deepseek-v4-flash,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,29,192,0.15104166666666666
+deepseek-v4-flash,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,81,192,0.421875

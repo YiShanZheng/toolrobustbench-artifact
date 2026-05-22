@@ -1,0 +1,5 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+gpt-5.4-mini,medium,wrong-parameter,wrong-tool,True,parameter_value_mismatch,15,144,0.10416666666666667
+gpt-5.4-mini,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,15,144,0.10416666666666667
+gpt-5.4-mini,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,8,144,0.05555555555555555
+gpt-5.4-mini,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,24,144,0.16666666666666666

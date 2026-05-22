@@ -1,0 +1,4 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+qwen-plus,execution_environment,light,S4 Observation / Execution Handling,execution-fail,wrong-parameter,8,8,1.0
+qwen-plus,execution_environment,medium,S4 Observation / Execution Handling,execution-fail,wrong-parameter,26,26,1.0
+qwen-plus,execution_environment,heavy,S4 Observation / Execution Handling,execution-fail,wrong-parameter,51,51,1.0

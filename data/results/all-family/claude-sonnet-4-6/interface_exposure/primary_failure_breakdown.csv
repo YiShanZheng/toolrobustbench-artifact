@@ -1,0 +1,4 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+claude-sonnet-4-6,interface_exposure,medium,S1 Tool Selection,wrong-tool,2,4,0.5
+claude-sonnet-4-6,interface_exposure,medium,S2 Interface Grounding,wrong-tool,2,4,0.5
+claude-sonnet-4-6,interface_exposure,heavy,S2 Interface Grounding,wrong-tool,10,10,1.0

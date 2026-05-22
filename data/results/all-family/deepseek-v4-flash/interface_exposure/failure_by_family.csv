@@ -1,0 +1,4 @@
+model_name,family,severity,observed_failure_tag,count,total,ratio
+deepseek-v4-flash,interface_exposure,heavy,wrong-parameter,2,144,0.013888888888888888
+deepseek-v4-flash,interface_exposure,medium,wrong-tool,4,144,0.027777777777777776
+deepseek-v4-flash,interface_exposure,heavy,wrong-tool,12,144,0.08333333333333333

@@ -1,0 +1,7 @@
+model_name,family,severity,observed_failure_tag,count,total,ratio
+claude-sonnet-4-6,observation,light,invalid-format,1,192,0.005208333333333333
+claude-sonnet-4-6,observation,medium,invalid-format,13,192,0.06770833333333333
+claude-sonnet-4-6,observation,heavy,invalid-format,11,192,0.057291666666666664
+claude-sonnet-4-6,observation,light,wrong-parameter,64,192,0.3333333333333333
+claude-sonnet-4-6,observation,medium,wrong-parameter,59,192,0.3072916666666667
+claude-sonnet-4-6,observation,heavy,wrong-parameter,101,192,0.5260416666666666

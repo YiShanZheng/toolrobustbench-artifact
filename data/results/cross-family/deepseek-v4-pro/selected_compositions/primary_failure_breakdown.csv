@@ -1,0 +1,6 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+deepseek-v4-pro,cross_family,medium,S1 Tool Selection,wrong-tool,1,35,0.02857142857142857
+deepseek-v4-pro,cross_family,medium,S2 Interface Grounding,wrong-tool,17,35,0.4857142857142857
+deepseek-v4-pro,cross_family,heavy,S2 Interface Grounding,wrong-tool,29,59,0.4915254237288136
+deepseek-v4-pro,cross_family,medium,S4 Observation / Execution Handling,execution-fail,17,35,0.4857142857142857
+deepseek-v4-pro,cross_family,heavy,S4 Observation / Execution Handling,execution-fail,30,59,0.5084745762711864

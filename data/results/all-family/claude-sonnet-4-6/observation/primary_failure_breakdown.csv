@@ -1,0 +1,7 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+claude-sonnet-4-6,observation,light,S3 Parameter Binding,wrong-parameter,64,65,0.9846153846153847
+claude-sonnet-4-6,observation,medium,S3 Parameter Binding,wrong-parameter,59,72,0.8194444444444444
+claude-sonnet-4-6,observation,heavy,S3 Parameter Binding,wrong-parameter,101,112,0.9017857142857143
+claude-sonnet-4-6,observation,light,S4 Observation / Execution Handling,invalid-format,1,65,0.015384615384615385
+claude-sonnet-4-6,observation,medium,S4 Observation / Execution Handling,invalid-format,13,72,0.18055555555555555
+claude-sonnet-4-6,observation,heavy,S4 Observation / Execution Handling,invalid-format,11,112,0.09821428571428571

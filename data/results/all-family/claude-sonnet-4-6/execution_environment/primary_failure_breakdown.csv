@@ -1,0 +1,6 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+claude-sonnet-4-6,execution_environment,light,S4 Observation / Execution Handling,execution-fail,4,4,1.0
+claude-sonnet-4-6,execution_environment,medium,S4 Observation / Execution Handling,execution-fail,34,42,0.8095238095238095
+claude-sonnet-4-6,execution_environment,heavy,S4 Observation / Execution Handling,execution-fail,55,64,0.859375
+claude-sonnet-4-6,execution_environment,medium,S4 Observation / Execution Handling,invalid-format,8,42,0.19047619047619047
+claude-sonnet-4-6,execution_environment,heavy,S4 Observation / Execution Handling,invalid-format,9,64,0.140625

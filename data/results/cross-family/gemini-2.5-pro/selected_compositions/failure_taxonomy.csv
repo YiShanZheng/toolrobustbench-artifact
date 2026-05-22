@@ -1,0 +1,17 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+gemini-2.5-pro,medium,execution-fail,execution-fail,False,runtime_execution_error,6,80,0.075
+gemini-2.5-pro,heavy,execution-fail,execution-fail,False,runtime_execution_error,3,80,0.0375
+gemini-2.5-pro,medium,no-call,invalid-format,True,no_tool_call,2,80,0.025
+gemini-2.5-pro,heavy,no-call,invalid-format,True,no_tool_call,7,80,0.0875
+gemini-2.5-pro,clean,no-call,no-call,False,no_tool_call,1,16,0.0625
+gemini-2.5-pro,medium,no-call,no-call,False,no_tool_call,3,80,0.0375
+gemini-2.5-pro,medium,no-call,no-call,True,no_tool_call,4,80,0.05
+gemini-2.5-pro,heavy,no-call,no-call,False,no_tool_call,7,80,0.0875
+gemini-2.5-pro,heavy,no-call,no-call,True,no_tool_call,3,80,0.0375
+gemini-2.5-pro,medium,wrong-parameter,execution-fail,True,parameter_value_mismatch,20,80,0.25
+gemini-2.5-pro,heavy,wrong-parameter,execution-fail,True,parameter_value_mismatch,19,80,0.2375
+gemini-2.5-pro,clean,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,1,16,0.0625
+gemini-2.5-pro,medium,wrong-parameter,wrong-tool,True,parameter_value_mismatch,17,80,0.2125
+gemini-2.5-pro,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,14,80,0.175
+gemini-2.5-pro,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,3,80,0.0375
+gemini-2.5-pro,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,15,80,0.1875

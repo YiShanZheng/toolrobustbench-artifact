@@ -1,0 +1,4 @@
+model_name,condition,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,clean_overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,robustness_drop_vs_clean,scope_label
+gpt-5.4-mini,clean,16,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,1.0,16,1.0,0.0,0.0,single_step
+gpt-5.4-mini,medium,144,1.0,0.9861111111111112,0.9861111111111112,1.0,0.0,0.1875,0.4305555555555556,0.4305555555555556,1.0,144,1.0,0.5694444444444444,0.5694444444444444,single_step
+gpt-5.4-mini,heavy,144,1.0,0.9513888888888888,0.9513888888888888,1.0,0.020833333333333332,0.4305555555555556,0.3819444444444444,0.3819444444444444,1.0,144,1.0,0.6180555555555556,0.6180555555555556,single_step

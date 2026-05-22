@@ -1,0 +1,4 @@
+model_name,family,severity,sample_count,total_failures,primary_no_call_failures,primary_wrong_tool_failures,primary_missing_parameter_failures,primary_wrong_parameter_failures,primary_invalid_format_failures,primary_execution_fail_failures,cascade_wrong_parameter_failures,cascade_missing_parameter_failures,expected_primary_match_rate,allowed_spillover_match_rate,boundary_violation_rate,dominant_primary_failure_tag,dominant_observed_failure_tag,family_boundary_pass,notes
+qwen-plus,interface_exposure,light,144,0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,,,True,all failures stayed within expected primary/spillover envelope
+qwen-plus,interface_exposure,medium,144,8,0,8,0,0,0,0,0,0,1.0,0.0,0.0,wrong-tool,wrong-tool,True,all failures stayed within expected primary/spillover envelope
+qwen-plus,interface_exposure,heavy,144,22,0,22,0,0,0,0,2,0,1.0,0.09090909090909091,0.0,wrong-tool,wrong-tool,True,all failures stayed within expected primary/spillover envelope

@@ -1,0 +1,4 @@
+model_name,family,severity,sample_count,total_failures,primary_no_call_failures,primary_wrong_tool_failures,primary_missing_parameter_failures,primary_wrong_parameter_failures,primary_invalid_format_failures,primary_execution_fail_failures,cascade_wrong_parameter_failures,cascade_missing_parameter_failures,expected_primary_match_rate,allowed_spillover_match_rate,boundary_violation_rate,dominant_primary_failure_tag,dominant_observed_failure_tag,family_boundary_pass,notes
+claude-sonnet-4-6,user_intent,light,192,5,0,5,0,0,0,0,1,0,1.0,0.2,0.0,wrong-tool,wrong-tool,True,all failures stayed within expected primary/spillover envelope
+claude-sonnet-4-6,user_intent,medium,192,25,0,25,0,0,0,0,0,0,1.0,0.0,0.0,wrong-tool,wrong-tool,True,all failures stayed within expected primary/spillover envelope
+claude-sonnet-4-6,user_intent,heavy,192,94,0,94,0,0,0,0,1,0,1.0,0.010638297872340425,0.0,wrong-tool,wrong-tool,True,all failures stayed within expected primary/spillover envelope

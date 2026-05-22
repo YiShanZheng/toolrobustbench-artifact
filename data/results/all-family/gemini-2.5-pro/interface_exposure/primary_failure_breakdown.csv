@@ -1,0 +1,10 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+gemini-2.5-pro,interface_exposure,medium,S1 Tool Selection,no-call,6,14,0.42857142857142855
+gemini-2.5-pro,interface_exposure,heavy,S1 Tool Selection,no-call,4,26,0.15384615384615385
+gemini-2.5-pro,interface_exposure,medium,S1 Tool Selection,wrong-tool,1,14,0.07142857142857142
+gemini-2.5-pro,interface_exposure,heavy,S1 Tool Selection,wrong-tool,3,26,0.11538461538461539
+gemini-2.5-pro,interface_exposure,medium,S2 Interface Grounding,no-call,2,14,0.14285714285714285
+gemini-2.5-pro,interface_exposure,heavy,S2 Interface Grounding,no-call,8,26,0.3076923076923077
+gemini-2.5-pro,interface_exposure,light,S2 Interface Grounding,wrong-tool,3,3,1.0
+gemini-2.5-pro,interface_exposure,medium,S2 Interface Grounding,wrong-tool,5,14,0.35714285714285715
+gemini-2.5-pro,interface_exposure,heavy,S2 Interface Grounding,wrong-tool,11,26,0.4230769230769231

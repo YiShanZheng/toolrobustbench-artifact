@@ -1,0 +1,13 @@
+model_name,family,subtype,stage_target,severity,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,drop_vs_clean,scope_label
+qwen-plus,interface_exposure,A1 Name Surface Shift,S1 Tool Selection,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+qwen-plus,interface_exposure,A1 Name Surface Shift,S1 Tool Selection,light,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+qwen-plus,interface_exposure,A1 Name Surface Shift,S1 Tool Selection,medium,48.0,1.0,0.9166666666666666,0.9166666666666666,1.0,0.0,0.0,0.9166666666666666,0.9166666666666666,48,1.0,0.08333333333333333,0.08333333333333337,single_step
+qwen-plus,interface_exposure,A1 Name Surface Shift,S1 Tool Selection,heavy,48.0,1.0,0.9375,0.9375,1.0,0.0,0.0,0.9375,0.9375,48,1.0,0.0625,0.0625,single_step
+qwen-plus,interface_exposure,A2 Description Abstraction,S2 Interface Grounding,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+qwen-plus,interface_exposure,A2 Description Abstraction,S2 Interface Grounding,light,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+qwen-plus,interface_exposure,A2 Description Abstraction,S2 Interface Grounding,medium,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+qwen-plus,interface_exposure,A2 Description Abstraction,S2 Interface Grounding,heavy,48.0,1.0,0.8125,0.8125,1.0,0.0,0.0,0.8125,0.8125,48,1.0,0.1875,0.1875,single_step
+qwen-plus,interface_exposure,A3 Family Similarity Pressure,S2 Interface Grounding,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+qwen-plus,interface_exposure,A3 Family Similarity Pressure,S2 Interface Grounding,light,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+qwen-plus,interface_exposure,A3 Family Similarity Pressure,S2 Interface Grounding,medium,48.0,1.0,0.9166666666666666,0.9166666666666666,1.0,0.0,0.0,0.9166666666666666,0.9166666666666666,48,1.0,0.08333333333333333,0.08333333333333337,single_step
+qwen-plus,interface_exposure,A3 Family Similarity Pressure,S2 Interface Grounding,heavy,48.0,1.0,0.8333333333333334,0.8333333333333334,1.0,0.0,0.041666666666666664,0.7916666666666666,0.7916666666666666,48,1.0,0.20833333333333334,0.20833333333333337,single_step

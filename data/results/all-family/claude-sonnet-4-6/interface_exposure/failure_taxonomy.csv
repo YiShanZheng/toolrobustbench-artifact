@@ -1,0 +1,3 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+claude-sonnet-4-6,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,4,144,0.027777777777777776
+claude-sonnet-4-6,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,10,144,0.06944444444444445

@@ -1,0 +1,6 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+deepseek-v4-pro,user_intent,medium,S1 Tool Selection,wrong-tool,9,22,0.4090909090909091
+deepseek-v4-pro,user_intent,heavy,S1 Tool Selection,wrong-tool,51,86,0.5930232558139535
+deepseek-v4-pro,user_intent,light,S2 Interface Grounding,wrong-tool,2,2,1.0
+deepseek-v4-pro,user_intent,medium,S2 Interface Grounding,wrong-tool,13,22,0.5909090909090909
+deepseek-v4-pro,user_intent,heavy,S2 Interface Grounding,wrong-tool,35,86,0.4069767441860465

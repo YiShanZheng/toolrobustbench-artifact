@@ -1,0 +1,10 @@
+model_name,family,severity,first_failure_stage,primary_failure_tag,count,total,ratio
+deepseek-v4-flash,clean,clean,S3 Parameter Binding,missing-parameter,9,12,0.75
+deepseek-v4-flash,clean,clean,S3 Parameter Binding,wrong-parameter,3,12,0.25
+deepseek-v4-flash,observation,heavy,S2 Interface Grounding,wrong-tool,1,157,0.006369426751592357
+deepseek-v4-flash,observation,light,S3 Parameter Binding,missing-parameter,42,114,0.3684210526315789
+deepseek-v4-flash,observation,medium,S3 Parameter Binding,missing-parameter,44,121,0.36363636363636365
+deepseek-v4-flash,observation,heavy,S3 Parameter Binding,missing-parameter,44,157,0.2802547770700637
+deepseek-v4-flash,observation,light,S3 Parameter Binding,wrong-parameter,72,114,0.631578947368421
+deepseek-v4-flash,observation,medium,S3 Parameter Binding,wrong-parameter,77,121,0.6363636363636364
+deepseek-v4-flash,observation,heavy,S3 Parameter Binding,wrong-parameter,112,157,0.7133757961783439

@@ -1,0 +1,7 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+gpt-5.4-mini,user_intent,light,S2 Interface Grounding,wrong-tool,missing-parameter,1,3,0.3333333333333333
+gpt-5.4-mini,user_intent,medium,S2 Interface Grounding,wrong-tool,missing-parameter,1,3,0.3333333333333333
+gpt-5.4-mini,user_intent,heavy,S2 Interface Grounding,wrong-tool,missing-parameter,3,6,0.5
+gpt-5.4-mini,user_intent,light,S2 Interface Grounding,wrong-tool,wrong-parameter,2,3,0.6666666666666666
+gpt-5.4-mini,user_intent,medium,S2 Interface Grounding,wrong-tool,wrong-parameter,2,3,0.6666666666666666
+gpt-5.4-mini,user_intent,heavy,S2 Interface Grounding,wrong-tool,wrong-parameter,3,6,0.5

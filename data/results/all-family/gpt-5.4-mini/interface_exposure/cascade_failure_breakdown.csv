@@ -1,0 +1,5 @@
+model_name,family,severity,cascade_from_stage,primary_failure_tag,observed_failure_tag,count,total,ratio
+gpt-5.4-mini,interface_exposure,medium,S1 Tool Selection,wrong-tool,wrong-parameter,7,15,0.4666666666666667
+gpt-5.4-mini,interface_exposure,heavy,S1 Tool Selection,wrong-tool,wrong-parameter,5,15,0.3333333333333333
+gpt-5.4-mini,interface_exposure,medium,S2 Interface Grounding,wrong-tool,wrong-parameter,8,15,0.5333333333333333
+gpt-5.4-mini,interface_exposure,heavy,S2 Interface Grounding,wrong-tool,wrong-parameter,10,15,0.6666666666666666

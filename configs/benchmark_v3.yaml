@@ -1,0 +1,60 @@
+benchmark_version: v3
+
+experiment:
+  name: "d11"
+  description: "test1"
+
+models:
+  include:
+    - gpt-5.4-mini
+
+dataset:
+  source: local_tools
+  task_scope: single_step
+  max_clean_per_tool: 3 # 每个工具生成几个任务样本
+  sample_tool_count: 5 # null 表示包含全部工具；也可改成 5 这类正整数
+  seed: 42
+
+noise:
+  enabled_families:
+    # - interface_exposure
+    # - user_intent
+    # - observation
+     - execution_environment
+  enabled_subtypes: all
+  disabled_operators: []
+  severities:
+    - clean
+    - light
+    - medium
+    - heavy
+  severity_policy: standard
+  allow_cross_family_heavy: false
+  max_operators_per_sample: 3 # 每个样本最多几个噪声操作
+  samples_per_bucket: 2 # 每个工具的每个严重程度生成几个样本
+
+cross_family:
+  enabled: false
+  strategy: pairwise
+  family_sets: []
+  severities:
+    - medium
+    - heavy
+  samples_per_combo_bucket: 1
+  max_families_per_sample: 2
+  include_single_family_baseline: true
+
+execution:
+  timeout_sec: 120
+  retry_times: 2
+
+output:
+  profile: lite
+  clean_output: true
+  generate_plots: true
+  keep_missing_buckets: true
+  severity_order:
+    - clean
+    - light
+    - medium
+    - heavy

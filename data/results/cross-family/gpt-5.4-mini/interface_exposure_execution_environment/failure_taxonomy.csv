@@ -1,0 +1,8 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+gpt-5.4-mini,medium,execution-fail,execution-fail,False,runtime_execution_error,53,144,0.3680555555555556
+gpt-5.4-mini,heavy,execution-fail,execution-fail,False,runtime_execution_error,22,144,0.1527777777777778
+gpt-5.4-mini,heavy,missing-parameter,wrong-tool,True,missing_required_parameter,3,144,0.020833333333333332
+gpt-5.4-mini,medium,wrong-parameter,wrong-tool,True,parameter_value_mismatch,27,144,0.1875
+gpt-5.4-mini,heavy,wrong-parameter,wrong-tool,True,parameter_value_mismatch,57,144,0.3958333333333333
+gpt-5.4-mini,medium,wrong-tool,wrong-tool,False,wrong_canonical_tool,2,144,0.013888888888888888
+gpt-5.4-mini,heavy,wrong-tool,wrong-tool,False,wrong_canonical_tool,7,144,0.04861111111111111

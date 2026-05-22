@@ -1,0 +1,17 @@
+model_name,family,subtype,stage_target,severity,sample_count,call_rate,interface_name_accuracy,canonical_tool_accuracy,format_valid_rate,missing_parameter_rate,wrong_parameter_rate,execution_success_rate,overall_task_success_rate,paired_clean_sample_count,paired_clean_success_rate,paired_success_flip_rate,drop_vs_clean,scope_label
+claude-sonnet-4-6,user_intent,B1 Indirectness,S2 Interface Grounding,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,B1 Indirectness,S2 Interface Grounding,light,48.0,1.0,0.9166666666666666,0.9166666666666666,1.0,0.0,0.0,0.9166666666666666,0.9166666666666666,48,1.0,0.08333333333333333,0.08333333333333337,single_step
+claude-sonnet-4-6,user_intent,B1 Indirectness,S2 Interface Grounding,medium,48.0,1.0,0.7916666666666666,0.7916666666666666,1.0,0.0,0.0,0.7916666666666666,0.7916666666666666,48,1.0,0.20833333333333334,0.20833333333333337,single_step
+claude-sonnet-4-6,user_intent,B1 Indirectness,S2 Interface Grounding,heavy,48.0,1.0,0.75,0.75,1.0,0.0,0.020833333333333332,0.7291666666666666,0.7291666666666666,48,1.0,0.2708333333333333,0.27083333333333337,single_step
+claude-sonnet-4-6,user_intent,B2 Underspecification,S3 Parameter Binding,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,B2 Underspecification,S3 Parameter Binding,light,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,B2 Underspecification,S3 Parameter Binding,medium,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,B2 Underspecification,S3 Parameter Binding,heavy,48.0,1.0,0.5416666666666666,0.5416666666666666,1.0,0.0,0.0,0.5416666666666666,0.5416666666666666,48,1.0,0.4583333333333333,0.45833333333333337,single_step
+claude-sonnet-4-6,user_intent,B3 Distraction,S1 Tool Selection,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,B3 Distraction,S1 Tool Selection,light,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,B3 Distraction,S1 Tool Selection,medium,48.0,1.0,0.6875,0.6875,1.0,0.0,0.0,0.6875,0.6875,48,1.0,0.3125,0.3125,single_step
+claude-sonnet-4-6,user_intent,B3 Distraction,S1 Tool Selection,heavy,48.0,1.0,0.10416666666666667,0.10416666666666667,1.0,0.0,0.0,0.10416666666666667,0.10416666666666667,48,1.0,0.8958333333333334,0.8958333333333334,single_step
+claude-sonnet-4-6,user_intent,B4 Conflict,S1 Tool Selection,clean,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,B4 Conflict,S1 Tool Selection,light,48.0,1.0,1.0,1.0,1.0,0.0,0.020833333333333332,0.9791666666666666,0.9791666666666666,48,1.0,0.020833333333333332,0.02083333333333337,single_step
+claude-sonnet-4-6,user_intent,B4 Conflict,S1 Tool Selection,medium,48.0,1.0,1.0,1.0,1.0,0.0,0.0,1.0,1.0,48,1.0,0.0,0.0,single_step
+claude-sonnet-4-6,user_intent,B4 Conflict,S1 Tool Selection,heavy,48.0,1.0,0.6666666666666666,0.6666666666666666,1.0,0.0,0.0,0.6666666666666666,0.6666666666666666,48,1.0,0.3333333333333333,0.33333333333333337,single_step

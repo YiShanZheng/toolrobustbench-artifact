@@ -1,0 +1,7 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+qwen-plus,light,execution-fail,execution-fail,False,runtime_execution_error,13,144,0.09027777777777778
+qwen-plus,medium,execution-fail,execution-fail,False,runtime_execution_error,13,144,0.09027777777777778
+qwen-plus,heavy,execution-fail,execution-fail,False,runtime_execution_error,13,144,0.09027777777777778
+qwen-plus,light,wrong-parameter,execution-fail,True,parameter_value_mismatch,8,144,0.05555555555555555
+qwen-plus,medium,wrong-parameter,execution-fail,True,parameter_value_mismatch,26,144,0.18055555555555555
+qwen-plus,heavy,wrong-parameter,execution-fail,True,parameter_value_mismatch,51,144,0.3541666666666667

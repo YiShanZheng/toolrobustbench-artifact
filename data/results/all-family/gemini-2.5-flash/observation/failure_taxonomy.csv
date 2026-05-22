@@ -1,0 +1,5 @@
+model_name,severity,observed_failure_tag,primary_failure_tag,is_cascade_failure,secondary_reason,count,total,ratio
+gemini-2.5-flash,clean,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,1,48,0.020833333333333332
+gemini-2.5-flash,light,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,70,192,0.3645833333333333
+gemini-2.5-flash,medium,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,97,192,0.5052083333333334
+gemini-2.5-flash,heavy,wrong-parameter,wrong-parameter,False,parameter_value_mismatch,167,192,0.8697916666666666
