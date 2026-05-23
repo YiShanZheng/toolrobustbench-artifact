@@ -120,3 +120,7 @@ Figures referenced by the paper are stored in `picture/`.
 ## Anonymity Note
 
 This repository is prepared for anonymous review. It removes local caches, backup folders, private credentials, and author-identifying metadata. The public, non-anonymous repository will be released after review.
+
+## License
+
+This artifact is released under the MIT License. During double-blind review, the copyright holder is anonymized as "Anonymous Authors".
