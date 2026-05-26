@@ -18,3 +18,6 @@ main.pdf
 *.bak_*
 *.tmp
 *~
+results/validation/*backup*
+results/validation/*provisional*
+results/validation/llm_validation_raw_responses.jsonl

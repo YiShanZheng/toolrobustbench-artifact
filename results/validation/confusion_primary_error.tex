@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+Human / scorer & incorrect\_argument & missing\_argument & no\_call & none & runtime\_failure & schema\_format\_violation & tool\_misselection \\
+\midrule
+incorrect\_argument & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+missing\_argument & 0 & 6 & 0 & 0 & 0 & 0 & 0 \\
+no\_call & 0 & 0 & 7 & 0 & 0 & 4 & 0 \\
+none & 0 & 0 & 0 & 27 & 7 & 0 & 2 \\
+runtime\_failure & 0 & 0 & 0 & 0 & 8 & 2 & 0 \\
+schema\_format\_violation & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+tool\_misselection & 0 & 0 & 0 & 0 & 0 & 0 & 22 \\
+\bottomrule
+\end{tabular}
+\caption{Human--automatic scorer confusion matrix for primary error.}
+\end{table}

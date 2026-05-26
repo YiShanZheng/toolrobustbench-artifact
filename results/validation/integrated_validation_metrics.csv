@@ -1,0 +1,35 @@
+﻿comparison,metric,n,agreement_or_rate,kappa
+data_construction,Gold tool correctness,114,1.0,
+data_construction,Gold argument correctness,140,1.0,
+data_construction,Expected result correctness,92,0.5108695652173914,
+data_construction,Subtype validity,140,0.8,
+data_construction,Severity reasonableness,140,0.8,
+data_construction,Human solvability,127,0.6062992125984252,
+data_construction,Human ambiguity,140,0.39285714285714285,
+Human--scorer,Task success,86,0.8953488372093024,0.7772020725388602
+Human--scorer,Observed error,86,0.8372093023255814,0.7895104895104894
+Human--scorer,Primary error,86,0.813953488372093,0.7552907700515739
+Human--scorer,Earliest stage,86,0.6046511627906976,0.4971625107480653
+Human--scorer,Boundary violation,140,0.7642857142857142,0.3237704918032785
+Human--scorer,Status,140,0.9071428571428571,0.7336845185835529
+Human--scorer,Retryability,140,0.9571428571428572,0.872611464968153
+Human--scorer,Failure type,139,0.920863309352518,0.772300819061802
+Human--scorer,Final result correctness,109,0.7981651376146789,
+LLM--scorer,Task success,138,0.8188405797101449,0.5259686727122835
+LLM--scorer,Observed error,139,0.6690647482014388,0.5867907457670931
+LLM--scorer,Primary error,139,0.7122302158273381,0.6341864596355024
+LLM--scorer,Earliest stage,139,0.4892086330935252,0.3724006359300477
+LLM--scorer,Boundary violation,140,0.85,-0.048502139800285095
+LLM--scorer,Status,140,0.8785714285714286,0.6550724637681159
+LLM--scorer,Retryability,140,0.9642857142857143,0.8911014312383324
+LLM--scorer,Failure type,140,0.8785714285714286,0.6614027599943092
+LLM--scorer,Final result correctness,136,0.16911764705882354,
+Human--LLM,Task success,86,0.8023255813953488,0.5651397977394408
+Human--LLM,Observed error,86,0.7790697674418605,0.7181786823042429
+Human--LLM,Primary error,86,0.7790697674418605,0.7181786823042429
+Human--LLM,Earliest stage,86,0.7674418604651163,0.6724433441249287
+Human--LLM,Boundary violation,140,0.7,0.03669724770642175
+Human--LLM,Status,140,0.9,0.7250280583613917
+Human--LLM,Retryability,140,0.9714285714285714,0.9167904903417533
+Human--LLM,Failure type,139,0.8920863309352518,0.7065033783783784
+Human--LLM,Final result correctness,107,0.22429906542056074,

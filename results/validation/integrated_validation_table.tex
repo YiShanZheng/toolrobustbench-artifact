@@ -1,0 +1,23 @@
+\begin{table*}[htbp]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Validation comparison & Label & Valid $n$ & Agreement / $\kappa$ \\
+\midrule
+Human--scorer & Task success & 86 & 0.895 / 0.777 \\
+Human--scorer & Observed error & 86 & 0.837 / 0.790 \\
+Human--scorer & Primary error & 86 & 0.814 / 0.755 \\
+Human--scorer & Status & 140 & 0.907 / 0.734 \\
+Human--scorer & Retryability & 140 & 0.957 / 0.873 \\
+Human--scorer & Failure type & 139 & 0.921 / 0.772 \\
+\midrule
+Human--LLM & Task success & 86 & 0.802 / 0.565 \\
+Human--LLM & Status & 140 & 0.900 / 0.725 \\
+Human--LLM & Retryability & 140 & 0.971 / 0.917 \\
+Human--LLM & Failure type & 139 & 0.892 / 0.707 \\
+\bottomrule
+\end{tabular}
+\caption{Integrated validation on 140 stratified human-audited records. Valid $n$ denotes the number of comparable records for each label after excluding \texttt{unclear} judgments and applying the prespecified \texttt{not\_applicable} convention for non-runtime decision fields.}
+\label{tab:integrated-validation}
+\end{table*}

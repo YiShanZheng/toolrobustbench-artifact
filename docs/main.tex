@@ -34,11 +34,13 @@
 \usepackage{multirow}
 \usepackage{adjustbox}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{array}
 \usepackage{xurl}
+\usepackage{xspace}
 \usepackage{placeins}
 
-\newcommand{\ToolRobustBench}{\textsc{ToolRobustBench}}
+\newcommand{\ToolRobustBench}{ToolRobustBench\xspace}
 \newcommand{\safeincludegraphics}[2][]{%
   \IfFileExists{#2}{\includegraphics[#1]{#2}}{%
     \IfFileExists{../#2}{\includegraphics[#1]{../#2}}{%
@@ -48,7 +50,7 @@
 }
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
-\title{\ToolRobustBench: Stage-Wise Perturbation Evaluation and Failure Diagnosis for Tool-Calling Robustness}
+\title{\ToolRobustBench: Stage-Wise Perturbation Evaluation and Failure Diagnosis for Tool-Calling Agents}
 
 \author{Anonymous ACL submission}
 
@@ -56,55 +58,70 @@
 \maketitle
 
 \begin{abstract}
-Large language models increasingly rely on function calling and tool execution, yet aggregate success rates under clean conditions do not explain where tool-use failures begin or how they cascade across a call. We introduce \ToolRobustBench, a stage-wise diagnostic benchmark for tool-calling robustness. It aligns four perturbation families with the tool-use pipeline: tool-interface perturbation, user-intent perturbation, tool-output / observation perturbation, and runtime-environment perturbation, and attributes failures across tool selection, schema grounding, argument binding, runtime-feedback handling, and end-to-end task success.
-
-We evaluated 15,456 single-family instances across 7 models, 16 sampled local tools, 4 perturbation families, and 14 subtypes in a deterministic local-tool environment. Clean-setting performance is near saturated, with an average success rate of 97.9\%, but family-level robustness drops to 70.8\% under perturbation and 49.1\% under heavy perturbation. The main bottleneck is tool-output / observation perturbation, where no model reaches 0.60, and the average success rate is 45.5\%. Representative cross-family experiments further show that composition difficulty is not reducible to the weakest single-family component: A3+C4 and B4+C4 create strong negative interactions, while A2+B3 and B2+D2 expose floor effects or apparent reversals. \ToolRobustBench provides a reproducible benchmark for measuring robustness, diagnosing cascade-aware error sources, and improving tool-using agents beyond clean tool-call accuracy.
+Large language models (LLMs) rely on tool calling as a fundamental agent capability, enabling them to invoke external systems and complete tasks beyond text generation. However, clean end-to-end (E2E) success cannot identify where a tool-use failure originates or how it propagates through a call. We introduce \ToolRobustBench, a stage-wise diagnostic benchmark for tool-calling agents, where a tool-calling agent is an LLM system that selects a tool, supplies structured arguments, and interprets its returned feedback. \ToolRobustBench aligns four perturbation families with the tool-use pipeline: tool-interface, user-intent, tool-output/observation, and runtime-environment perturbations. It attributes failures to tool selection, schema grounding, argument binding, tool-output/runtime-feedback handling, and E2E task success. Experiments on 15,456 single-family instances across 7 models, 16 sampled local tools, 4 perturbation families, and 14 subtypes show nearly saturated clean performance but substantial robustness degradation, with tool-output/observation perturbation the dominant bottleneck. Mixed-family experiments reveal non-additive failure patterns that are not explained by isolated single-family results. Thus, \ToolRobustBench provides a deterministic and cascade-aware benchmark for diagnosing robustness beyond clean tool-calling accuracy; the anonymized artifact is available at \url{https://anonymous.4open.science/r/toolrobustbench/}.
 \end{abstract}
 
 \section{Introduction}
 
-Tool calling has become a central interface through which large language models move from text generation to executable agents. Unlike ordinary question answering, tool use requires a multi-stage decision process: the model must first understand the user's intent, then choose the correct tool from a candidate set, bind the request to structured arguments, and finally make a stable judgment from tool returns or execution feedback. In real deployments, this process is often noisy. Tool names may change from semantic labels to semi-opaque service names; descriptions of nearby tools may overlap heavily; user requests may be indirect, underspecified, or internally conflicting; and tool feedback may contain schema drift, evidence loss, false facts, misleading candidates, or runtime failures. Therefore, tool-use evaluation should not only measure final accuracy under clean inputs, but also test whether model behavior remains robust, interpretable, and diagnosable under perturbed environments.
+Large language models (LLMs) increasingly rely on tool calling as a central mechanism for interacting with external systems. Unlike ordinary question answering, tool calling requires a sequence of decisions: inferring the user's intent, selecting an appropriate tool, binding the request to structured arguments, and interpreting returned results or execution feedback. Here, a \emph{tool-calling agent} is an LLM-based system performing these decisions, and the \emph{clean setting} is the unperturbed tool-calling condition. Each step can be disrupted in deployment. Tool names may be replaced with semi-opaque service identifiers, descriptions of neighboring tools may overlap, requests may be indirect or internally inconsistent, and returned feedback may contain schema drift, missing evidence, misleading candidates, or runtime faults. Evaluation based only on final accuracy in clean settings cannot show whether these disruptions are handled reliably or where a failed call first departs from the intended process.
 
-Existing work has advanced tool-use evaluation from several directions. ToolBench, API-Bank, and StableToolBench study large-scale tool use, API calling ability, and reproducible execution environments, providing important foundations for evaluating tool selection and call formatting \citep{qin2024toolllm,li2023apibank,guo2024stabletoolbench}. ToolSandbox and $\tau$-bench extend evaluation from single calls to process-level and trajectory-level interaction, emphasizing state tracking and behavioral diagnosis in multi-step environments \citep{lu2025toolsandbox,yao2025taubench}. AgentNoiseBench injects realistic user-side and tool-side noise while preserving task solvability \citep{wang2026agentnoisebench}. Together, these studies show that tool-use robustness is a core problem for agent evaluation, and that noise injection and process diagnosis provide a finer-grained view than clean accuracy alone.
+Existing benchmarks cover large-scale tool use and stable API execution \citep{qin2024toolllm,guo2024stabletoolbench}, as well as interactive trajectories and noisy tool-use conditions \citep{lu2025toolsandbox,wang2026agentnoisebench}. However, they leave room for controlled evaluation that localizes the first failed stage of a noisy tool-calling process.
 
-However, a key diagnostic gap remains. When a model fails under perturbed tool use, we need to know not only whether it failed, but why the failure occurred, which stage failed first, what the primary failure type was, and whether the final observed error was merely a cascade from an upstream mistake. This distinction is crucial for tool calling. A final wrong-parameter failure does not necessarily mean that argument binding was directly perturbed; it may originate from earlier tool-selection confusion or from an interface description that pushed the model toward the wrong tool path. Likewise, an execution failure may not be the direct result of runtime perturbation, but a downstream consequence of wrong arguments, wrong tools, or wrong interpretation. If a benchmark records only the final failure label, it can mistake reasonable cascade behavior for perturbation-construction error and can obscure the stage where the model is truly fragile.
+A failed tool call has both a symptom and a source. An incorrect-argument output, for example, may arise directly during argument binding or may follow from earlier tool-selection confusion induced by an ambiguous interface. Similarly, a runtime-failure symptom may result from corrupted arguments rather than from the execution environment. Recording only the final failure label conflates these cases: it can attribute an upstream error to the wrong capability and may incorrectly suggest that a perturbation crossed its intended boundary.
 
-To address this gap, we propose \ToolRobustBench, a controlled robustness benchmark for single-step tool calling. Unlike tool-use benchmarks that mainly ask whether the final task succeeds, \ToolRobustBench{} decomposes the tool-calling process into four perturbation families: tool-interface exposure, user intent, tool-output / observation return, and runtime environment. Each family contains calibrated light, medium, and heavy perturbation severities. More importantly, \ToolRobustBench{} explicitly tracks observed failure, primary failure, first failure stage, cascade source, and boundary violation. This lets us determine whether a failure is the direct effect of the intended perturbation family or a natural cascade from an upstream stage. The evaluation goal is therefore expanded from ``does the model get the noisy case right?'' to ``where does the model first go wrong, how does the error propagate, and whether the perturbation boundary remains clear.''
+\ToolRobustBench{} addresses this gap through controlled, single-step evaluation with stage-aligned perturbations and cascade-aware attribution. It measures not only whether a model succeeds under noise, but where its behavior first fails and how the error propagates.
 
-This paper addresses that gap with \ToolRobustBench, a reproducible and attributable benchmark for robust tool calling. Our main contributions are:
+Our contributions are:
 
 \begin{enumerate}
-    \item \textbf{Stage-aligned perturbation taxonomy.} We define four perturbation families: tool-interface, user-intent, tool-output / observation, and runtime-environment perturbation, that correspond to distinct entry points in the tool-calling pipeline.
-    \item \textbf{Cascade-aware error attribution.} We distinguish observed error labels from primary error labels, earliest failure stages, error source stages, and boundary-violation indicators, so downstream symptoms are not mistaken for direct perturbation failures.
-    \item \textbf{Reproducible deterministic local-tool benchmark.} We evaluate sampled local tools from a 40-tool deterministic environment, enabling stable gold arguments, expected results, and failure attribution without live-API volatility.
-    \item \textbf{Empirical findings on single-family and cross-family robustness.} Across 15,456 single-family instances and representative mixed perturbations, we show that observation handling is the main bottleneck and that cross-family difficulty is not reducible to the weakest single-family component.
+    \item \textbf{Stage-aligned perturbation taxonomy.} We define four perturbation families that enter at distinct points in the tool-calling pipeline: tool-interface, user-intent, tool-output/observation, and runtime-environment perturbations.
+    \item \textbf{Cascade-aware error attribution.} We separate observed error labels from primary error labels, earliest failed stages, error source stages, and boundary-violation indicators, so that downstream symptoms are not treated as direct perturbation effects.
+    \item \textbf{Deterministic and reproducible evaluation.} We evaluate sampled tools from a 40-tool local environment with stable gold arguments, expected results, and attribution signals, avoiding volatility from live APIs.
+    \item \textbf{Evidence on isolated and combined robustness.} Across 15,456 single-family instances and representative mixed-family perturbations, we identify observation handling as the main bottleneck and show that mixed-family robustness is not captured by the weaker constituent family alone.
 \end{enumerate}
 
-Overall, \ToolRobustBench{} complements existing tool-use benchmarks by making robustness failures localizable, reproducible, and interpretable across stages.
+\ToolRobustBench{} therefore complements existing tool-use benchmarks with reproducible, stage-localized explanations of robustness failures.
 
 \begin{figure*}[t]
     \centering
     \safeincludegraphics[width=0.95\linewidth]{picture/fig01_toolrobustbench_pipeline.png}
-    \caption{\ToolRobustBench{} diagnostic pipeline. The figure shows the relationship among the user request, tool registry, model tool call, tool execution, runtime feedback, post-execution decision, and scorer, and marks the insertion positions of the four perturbation families A/B/C/D.}
+    \caption{\ToolRobustBench{} diagnostic pipeline. The tool-interface perturbation (family A) alters the exposed registry before selection, the user-intent perturbation (family B) alters the request before grounding and binding, the tool-output/observation perturbation (family C) alters returned evidence after execution, and the runtime-environment perturbation (family D) alters execution state or feedback. S1--S5 locate the earliest failed stage.}
     \label{fig:pipeline}
 \end{figure*}
 
 \section{Related Work}
 
+Evaluation has become a central problem for large language model research. Broad benchmarks such as MMLU \citep{hendrycks2021mmlu}, BIG-bench \citep{srivastava2023bigbench}, and HELM \citep{liang2023helm} establish capability and evaluation-protocol foundations, while survey work synthesizes this expanding landscape \citep{chang2024survey}. Tool-mediated action further makes process-level failure localization necessary.
+
 \paragraph{Tool-calling evaluation.}
-API-Bank and ToolBench extend evaluation from question answering to API retrieval, tool selection, and argument calling \citep{li2023apibank,qin2024toolllm}. StableToolBench shows that live API instability can contaminate evaluation and therefore uses stable simulated APIs \citep{guo2024stabletoolbench}. \ToolRobustBench{} follows the reproducibility motivation but evaluates controlled perturbations across tool interfaces, user intent, tool outputs, and runtime environments rather than clean API calling alone.
+API-Bank \citep{li2023apibank} and ToolBench \citep{qin2024toolllm} extend evaluation from question answering to API retrieval, tool selection, and argument binding. Gorilla introduces APIBench for API selection and invocation under large and changing API collections \citep{patil2024gorilla}, while ToolAlpaca examines generalization to unseen tools using simulated tool-use cases \citep{tang2023toolalpaca}. StableToolBench \citep{guo2024stabletoolbench} addresses live-API instability with stable simulated APIs, and BFCL expands function-calling evaluation to serial, parallel, and agentic settings \citep{patil2025bfcl}. \ToolRobustBench{} adopts this reproducibility motivation while targeting controlled tool-interface, user-intent, tool-output/observation, and runtime-environment perturbations rather than unperturbed tool-calling performance alone.
 
 \paragraph{Agent-process evaluation.}
-ToolSandbox and $\tau$-bench focus on stateful and interactive tool use, where evaluation depends on state updates, action sequences, and trajectory quality \citep{lu2025toolsandbox,yao2025taubench}. \ToolRobustBench{} remains single-step, but the tool-output and runtime-environment families introduce a post-execution decision stage: the model first makes a tool call, receives perturbed feedback, and must recover the result or decide the execution state. This isolates observation interpretation and runtime-state judgment without requiring a long-horizon environment.
+AgentBench \citep{liu2024agentbench} and WebArena \citep{zhou2024webarena} evaluate LLM agents in interactive or web-based environments. ToolSandbox \citep{lu2025toolsandbox} and $\tau$-bench \citep{yao2025taubench} likewise focus on stateful tool use, for which evaluation depends on state updates, action sequences, and trajectory quality. \ToolRobustBench{} is complementary: its deterministic single-step tasks and post-execution decisions isolate observation recovery and runtime-state judgment without introducing long-horizon dependencies.
 
 \paragraph{Noise-robustness evaluation.}
-AgentNoiseBench categorizes realistic user-side and tool-side noise with solvability-preserving perturbations \citep{wang2026agentnoisebench}, while RoTBench studies multi-level robustness for tool learning \citep{ye2024rotbench}. Our difference is diagnostic granularity: \ToolRobustBench{} binds perturbation families to tool-use stages and reports cascade-aware attribution fields, allowing each failed instance to be traced through an observed error label, primary error label, earliest failure stage, and boundary-violation indicator.
+AgentNoiseBench \citep{wang2026agentnoisebench} categorizes realistic user-side and tool-side noise using solvability-preserving perturbations, while RoTBench \citep{ye2024rotbench} studies multi-level robustness for tool learning. \ToolRobustBench{} differs in providing stage-localized, cascade-aware diagnosis under controlled perturbations.
 
 \section{Design of \ToolRobustBench}
 
+\subsection{Task Formulation}
+\label{sec:task-formulation}
+
+Each \ToolRobustBench{} instance is represented as
+\begin{equation}
+I=(x,\mathcal{R},t^*,a^*,o^*,y^*,p),
+\end{equation}
+where $x$ is the user request and $\mathcal{R}=\{t_1,\ldots,t_n\}$ is the candidate tool registry. Each tool $t\in\mathcal{R}$ exposes a name, a natural-language description, a JSON schema, a deterministic executor, and an output format. The gold target consists of the intended tool $t^*$, structured argument object $a^*$, deterministic tool output $o^*$, and expected final result $y^*$; $p$ records the perturbation family, subtype, and severity applied to the instance.
+
+In pre-execution settings---clean, tool-interface, and user-intent---the model outputs a structured tool call $\hat{c}=(\hat{t},\hat{a})$. The scorer checks the selected tool, schema validity, bound arguments, and the result obtained by deterministic execution. In post-execution settings---tool-output/observation and runtime-environment---the model first completes the initial tool call and then, after receiving perturbed returned evidence or runtime feedback, outputs an observation-recovery or post-execution decision. These settings therefore evaluate not only selection and binding, but also interpretation of noisy evidence and execution-state feedback.
+
+At the instance level, success is binary: $s_i=1$ when the model selects $t^*$, produces a schema-valid argument object matching $a^*$, obtains the expected executed output where execution is applicable, and returns the expected final result $y^*$; otherwise $s_i=0$. For runtime-environment instances, success additionally requires the predicted runtime fields defined in Section~\ref{sec:taxonomy}---status, retryability, failure type, and final result---to agree with their gold targets whenever those judgments apply. Aggregate robustness metrics are defined separately below.
+
+The diagnostic objective is not only to determine whether a tool call succeeds, but also to identify the earliest stage at which the model departs from the intended tool-use process. Accordingly, each evaluated record preserves the observed error label, primary error label, earliest failed stage, error source stage, cascade indicator, and boundary-violation indicator. To operationalize this diagnostic objective, we decompose each tool call into five capability axes, described next.
+
 \subsection{Tool-Calling Capability Axes}
 
-\ToolRobustBench{} decomposes tool use into five diagnostic capability axes. They follow the temporal order of a tool call, but their main role is attribution: each axis identifies a capability that can become the earliest source of failure.
+\ToolRobustBench{} uses five diagnostic capability axes, summarized in Table~\ref{tab:stages}: S1 tool selection, S2 schema grounding, S3 argument binding, S4 tool-output/runtime-feedback handling, and S5 end-to-end (E2E) task success. The axes roughly follow the temporal order of a tool call, but are used primarily for attribution: when a task fails, they identify the earliest source stage rather than every transition in a full execution trace.
 
 \begin{table*}[t]
 \centering
@@ -113,36 +130,35 @@ AgentNoiseBench categorizes realistic user-side and tool-side noise with solvabi
 \toprule
 Stage & Name & Target capability & Typical failures \\
 \midrule
-S1 & Tool Selection & Select the correct tool from candidate tools & no-call, tool misselection \\
-S2 & Schema Grounding & Understand tool names, descriptions, and schemas & tool misselection, schema-format violation \\
-S3 & Argument Binding & Bind user intent to arguments & missing argument, incorrect argument \\
-S4 & Tool Output / Runtime Feedback Handling & Interpret tool returns and runtime feedback & incorrect argument, schema-format violation, runtime failure \\
-S5 & End-to-End Task Success & Whether the end-to-end task succeeds & all failure tags \\
+S1 & tool selection & Select the correct tool from candidate tools & no-call, tool misselection \\
+S2 & schema grounding & Understand tool names, descriptions, and schemas & tool misselection, schema-format violation \\
+S3 & argument binding & Bind user intent to arguments & missing argument, incorrect argument \\
+S4 & tool-output/runtime-feedback handling & Interpret tool returns and runtime feedback & incorrect argument, schema-format violation, runtime failure \\
+S5 & end-to-end task success & Whether the end-to-end task succeeds & all failure tags \\
 \bottomrule
 \end{tabularx}
-\caption{Five diagnostic capability axes in \ToolRobustBench.}
+\caption{The five diagnostic capability axes (S1--S5) in \ToolRobustBench. The axes locate the earliest source of a failed tool call; S5 reports final E2E success.}
 \label{tab:stages}
 \end{table*}
 
-This decomposition provides the coordinate system for perturbation design and failure attribution. Because downstream behavior may be a cascade, each record preserves the earliest failure stage, primary error label, observed error label, and error source stage.
-
 \subsection{Stage-Aligned Perturbation Taxonomy}
+\label{sec:taxonomy}
 
-\ToolRobustBench{} contains four single-family perturbation types aligned with these axes.
+\ToolRobustBench{} defines four single-family perturbation families aligned with these axes.
 
-\textbf{Tool-interface perturbation} simulates interface-level shifts, including surface changes in tool names, abstract descriptions, and blurred boundaries among similar tools. This family tests whether models over-rely on name or description cues.
+\textbf{Tool-interface perturbation} applies interface-level shifts, including surface changes to tool names, abstracted descriptions, and blurred boundaries among similar tools. It tests whether models rely excessively on lexical or descriptive cues.
 
-\textbf{User-intent perturbation} simulates user-expression shifts, including indirectness, underspecification, distracting context, and internal conflicts. This family tests whether models can recover task goals and required arguments from natural language.
+\textbf{User-intent perturbation} varies the expression of the request through indirectness, underspecification, distracting context, and internal conflict. It tests whether models can recover the task goal and required arguments from natural-language input.
 
-\textbf{Tool-output / observation perturbation} simulates problems in processing perturbed returned content. After the initial call, the model must recover the clean target from noisy feedback, distinguish the primary result from supporting evidence, and handle missing or conflicting evidence.
+\textbf{Tool-output/observation perturbation} modifies returned content after the initial call. The model must recover the clean target from noisy feedback, distinguish the primary result from supporting evidence, and manage missing or conflicting evidence.
 
-\textbf{Runtime-environment perturbation} simulates execution-state and runtime-feedback shifts. The model must decide whether the output is success, partial success, or error, and recover the corresponding retryability, failure type, and final result.
+\textbf{Runtime-environment perturbation} enters during execution or the resulting runtime feedback. \emph{Runtime feedback} is the returned execution-state evidence made visible to the model; \emph{status} is its success, partial-success, or error state; \emph{failure type} categorizes an unsuccessful state; and \emph{final result} is the output that should be retained after interpreting all feedback. \emph{Retryability} denotes whether a failed or partial execution should be retried under the observed runtime state. For example, a timeout or temporary service unavailability may be retryable, whereas a permission denial or invalid argument error is usually non-retryable.
 
-At the template level, the single-family setting contains 14 subtypes with clean, light, medium, and heavy severities. The pairwise setting contains 5 representative family pairs and 122 cross-family templates at medium or heavy severity; full template details are deferred to the appendix.
+At the template level, a \emph{template} is a deterministic rule that derives a perturbed instance from a clean seed task. The single-family setting includes 14 subtypes with clean, light, medium, and heavy conditions. The main-text subtype definitions are summarized in Table~\ref{tab:subtypes}, with deterministic construction rules and intended diagnostic targets expanded in Appendix Table~\ref{tab:subtype-details}.
 
 \subsection{Cascade-Aware Error Attribution}
 
-Real tool-calling errors often have a cascade structure. A final incorrect-argument symptom may originate from S1/S2 tool misselection; a runtime failure may be induced by upstream argument corruption rather than the execution environment itself. To avoid confusing downstream symptoms with earliest causes, \ToolRobustBench{} records five diagnostic fields during scoring.
+Tool-calling errors often cascade across stages. A final incorrect-argument symptom may originate in S1/S2 tool misselection, and a runtime-failure symptom may be induced by upstream argument corruption rather than by the execution environment. To distinguish downstream symptoms from their earliest causes, \ToolRobustBench{} records six diagnostic fields during scoring.
 
 \begin{table*}[t]
 \centering
@@ -151,46 +167,128 @@ Real tool-calling errors often have a cascade structure. A final incorrect-argum
 \toprule
 Field & Meaning & Purpose \\
 \midrule
-Observed error label & Final observed failure type & Describes end-to-end output behavior \\
-Primary error label & Main failure type after cascade backtracking & Points to the main and earliest error source \\
-Earliest failure stage & First failed stage & Localizes the error to S1--S4 \\
-Error source stage & Source stage if the failure is cascaded & Distinguishes upstream causes from downstream symptoms \\
-Boundary-violation indicator & Whether the failure violates the expected family boundary & Checks perturbation construction and failure attribution \\
+Observed error label & Final observed failure type & Characterizes end-to-end output behavior \\
+Primary error label & Principal failure after cascade backtracking & Identifies the earliest substantive source \\
+Earliest failed stage & First stage at which failure occurs & Localizes error onset to S1--S4 \\
+Error source stage & Origin stage for a cascaded failure & Separates upstream causes from downstream symptoms \\
+Cascade indicator & Whether an observed symptom is attributed to an earlier source & Quantifies failure propagation across stages \\
+Boundary-violation indicator & Whether failure falls outside the expected family boundary & Audits perturbation construction and attribution \\
 \bottomrule
 \end{tabularx}
 \caption{Cascade-aware diagnostic fields.}
 \label{tab:diagnostic-fields}
 \end{table*}
 
-The main text focuses on primary failures, cascade rates, and boundary-violation indicators. This separation lets us report both the final symptom and whether that symptom is consistent with the expected perturbation boundary.
+A \emph{cascade} occurs when the observed downstream symptom differs from the primary source recovered by backtracking; its \emph{cascade source} is the recorded error source stage. A \emph{boundary violation} occurs when the attributed source lies outside the stage boundary intended for that perturbation family. The main analysis focuses on primary failures, cascade rates, and boundary-violation indicators, reporting both the final symptom and whether it is consistent with the intended perturbation boundary.
 
 \subsection{Metrics}
 
-We report clean-setting performance, family-level robustness, overall robustness, and robustness drop. Clean-setting performance is end-to-end success under the clean condition. Family-level robustness is the macro-averaged success rate of one perturbation family under light, medium, and heavy conditions. Overall robustness is the macro-average over the four families. Robustness drop compares paired clean and perturbed success. Failure analysis uses primary error labels, earliest failure stages, and boundary-violation indicators; lower-level scorer outputs are reported in the appendix.
+Let $s_i\in\{0,1\}$ be the instance-level success for model $m$, as defined above, and define its success on a set $\mathcal{D}$ as
+\begin{align}
+\mathrm{Succ}_m(\mathcal{D}) &=
+\frac{1}{|\mathcal{D}|}\sum_{i\in \mathcal{D}}s_i.
+\end{align}
+Let $\mathcal{D}_{clean}$ be clean instances, $\mathcal{D}_{f,z}$ be instances in family $f\in\{A,B,C,D\}$ at severity $z$, and $Z=\{\text{light},\text{medium},\text{heavy}\}$. We report
+\begin{align}
+\mathrm{Clean}(m) &= \mathrm{Succ}_m(\mathcal{D}_{clean}), \\
+\mathrm{Robust}_{f}(m) &= \frac{1}{3}\sum_{z\in Z}
+\mathrm{Succ}_m(\mathcal{D}_{f,z}), \\
+\mathrm{Overall}(m) &=
+\frac{1}{4}\sum_{f\in\{A,B,C,D\}}\mathrm{Robust}_{f}(m), \\
+\mathrm{Drop}_{f}(m) &=
+\mathrm{Clean}(m)-\mathrm{Robust}_{f}(m).
+\end{align}
+
+For failed instances $\mathcal{F}_{f}$, let $e_i^{o}$ and $e_i^{p}$ be the observed and primary error labels and let $b_i$ indicate a boundary violation. Cascade and boundary-violation rates are
+\begin{align}
+\mathrm{CR}_{f} &=
+\frac{1}{|\mathcal{F}_{f}|}\sum_{i\in\mathcal{F}_{f}}
+\mathbf{1}[e_i^{o}\neq e_i^{p}], \\
+\mathrm{BVR}_{f} &=
+\frac{1}{|\mathcal{F}_{f}|}\sum_{i\in\mathcal{F}_{f}}
+\mathbf{1}[b_i=1].
+\end{align}
+The primary-error distribution counts attributed source failures rather than downstream symptoms.
+
+For a mixed-family pair $p=(f_1,f_2)$ at severity $z$, let $M(m,p,z)$ denote mixed-instance success, $W(m,p,z)$ the weaker constituent success, and $\bar{S}(m,p,z)$ their mean. We report
+\begin{align}
+\Delta(m,p,z) &= M(m,p,z)-W(m,p,z).
+\end{align}
+Figure~\ref{fig:cross-vs-single} reports $M$ and $W$; $\bar{S}$ is reported in the accompanying analysis.
+A negative $\Delta$ indicates that the mixed-family perturbation is harder than its weaker isolated constituent, while a positive $\Delta$ does not imply improved robustness: it can arise from floor effects, more salient failure cues, explicit runtime feedback, or template-level variation between selected pairs and full family averages.
 
 \section{Experimental Setup}
 
-\subsection{Data and Models}
+\subsection{Data Construction}
+\label{sec:data-construction}
 
-\ToolRobustBench{} uses deterministic local tools so that tool outputs, gold arguments, expected results, and failure attribution are stable across runs. The complete environment contains 40 tools organized into 12 similar tool groups; the main experiments sample 16 local tools with a fixed seed to control cost and preserve cross-model comparability. The full tool list is reported in Appendix Table~\ref{tab:tool-env}.
+\paragraph{Construction overview.}
+\ToolRobustBench{} first creates executable clean anchors in a deterministic local-tool environment, then derives stage-aligned perturbed variants at three severity levels and attaches gold and diagnostic targets. Appendix~\ref{app:data-construction} supplies a clean-seed example and template-level construction details.
 
-We evaluate 7 models on 4 perturbation families and 14 subtypes. For each model, tool-interface and runtime-environment perturbations contain 480 records each, while tool-output / observation and user-intent perturbations contain 624 records each. The single-family analysis therefore covers 15,456 raw instances. Each family is evaluated under clean, light, medium, and heavy conditions, and all models use the same task set, sampled tool registry, and scorer.
+\paragraph{Deterministic local-tool environment.}
+\ToolRobustBench{} uses deterministic local tools whose outputs are fixed for valid argument objects. The environment contains 40 tools in 12 functional groups; the main experiments sample 16 tools using fixed seed 20260511. This design avoids live-API volatility and makes gold execution and scoring reproducible. Appendix Table~\ref{tab:tool-env} enumerates the complete environment.
+
+\paragraph{Clean seed task construction.}
+Only clean tasks whose gold calls resolve through the deterministic executor are retained as perturbation anchors. A/B variants inherit the clean tool, arguments, and final result; C variants retain the clean target while altering returned evidence; and D variants may alter the expected status, retryability, failure type, or final result under the intended runtime state. Appendix Table~\ref{tab:clean-seed-example} gives one concrete seed record.
+
+
+\paragraph{Perturbation family construction.}
+Templates instantiate the four entry points defined in Section~\ref{sec:taxonomy}. Table~\ref{tab:subtypes} gives compact main-text definitions for all 14 subtypes. Detailed deterministic template operations and expected failure modes are provided in Appendix Table~\ref{tab:subtype-details}.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}p{0.24\columnwidth}X@{}}
+\toprule
+Family & Main-text subtypes \\
+\midrule
+A: Interface & A1 name shift; A2 description abstraction; A3 sibling confusability. \\
+B: Intent & B1 indirectness; B2 underspecification; B3 distraction; B4 conflict. \\
+C: Observation & C1 structure noise; C2 evidence loss; C3 corruption; C4 evidence competition. \\
+D: Runtime & D1 availability failure; D2 variability; D3 feedback quality. \\
+\bottomrule
+\end{tabularx}
+\caption{Main-text subtype map. Family A enters at the tool registry/schema, B at the user request, C at returned evidence, and D at runtime feedback; Appendix Table~\ref{tab:subtype-details} gives deterministic construction rules and expected failure modes.}
+\label{tab:subtypes}
+\end{table}
+
+\paragraph{Severity-controlled expansion.}
+For every non-clean subtype, a clean anchor is expanded into light, medium, and heavy templates. Light severity applies a surface-level or weak perturbation while leaving the target highly recoverable. Medium severity increases ambiguity, missing evidence, competing cues, or runtime uncertainty. Heavy severity applies the strongest controlled operation in the subtype template while maintaining a defined diagnostic target, including an intentionally failed or partial target state for applicable D variants. Severity is consequently a controlled stress axis, not a guarantee that accuracy decreases monotonically for every subtype or model. Appendix Table~\ref{tab:severity-criteria} records the general criteria used for this expansion.
+
+\paragraph{Diagnostic label construction.}
+Constructed instances store the gold and attribution targets defined in Section~\ref{sec:task-formulation} and Section~\ref{sec:taxonomy}, with runtime-decision targets where applicable. Appendix Table~\ref{tab:construction-labels} maps these concepts to serialized record fields.
+
+\paragraph{Dataset scale.}
+The complete construction space contains 40 deterministic tools in 12 groups; the main experiment uses 16 sampled tools, four perturbation families, 14 subtypes, and conditions \{clean, light, medium, heavy\}. The raw single-family evaluation files were checked directly: each of seven models contributes 48 seed tasks for each of four family-specific clean baselines and $48 \times 14 \times 3$ perturbed records. Thus,
+\[
+7 \times \left[(4 \times 48) + (14 \times 3 \times 48)\right] = 15{,}456
+\]
+single-family raw model-output records, comprising 1,344 stored clean-baseline records and 14,112 perturbed records. Mixed-family records are constructed separately for representative mixed-family interactions and are not included in this single-family count.
+
+\subsection{Data Quality and Scorer Reliability}
+
+We audit 140 stratified single-family records, sampling ten records from each A1--D3 subtype and hiding automatic scorer labels during annotation. Human judgments show substantial agreement with automatic scoring on task success, observed error, primary error, and runtime-decision fields; a blind LLM annotation provides a secondary consistency check. Appendix~\ref{app:validity} and Appendix Table~\ref{tab:integrated-validation} detail the protocol and validation results.
+
+\subsection{Models and Evaluation Scope}
+
+We evaluate 7 models on the shared task set and sampled registry. For each model, the tool-interface and runtime-environment families contain 480 records each, whereas the tool-output/observation and user-intent families contain 624 records each; conditions are clean, light, medium, and heavy.
 
 \subsection{Scoring Workflow}
 
-For each instance, the model first generates a tool call. For tool-interface, user-intent, and clean instances, the scorer parses the call and checks tool identity, schema validity, arguments, and execution result. For tool-output and runtime-environment instances, the model first completes the initial call; the system then injects perturbed feedback; the model returns an observation recovery or post-execution decision; and the scorer checks the expected result, status, retryability, and failure type.
-
-Provider-specific parameters are used only for protocol compatibility and do not change task content or scoring criteria. The main findings are robust to scorer normalization and protocol-compatibility adjustments; details are deferred to Appendix~\ref{app:validity}.
+Scoring follows the pre- and post-execution protocol in Section~\ref{sec:task-formulation}. Provider-specific parameters are used only for protocol compatibility; they do not alter task content or scoring criteria. Appendix~\ref{app:validity} describes scorer normalization and compatibility checks.
 
 \section{Single-Family Results}
 
 \subsection{Overall Robustness and Family Ranking}
 
-The single-family experiment asks whether clean tool-calling performance predicts robustness under controlled perturbations. Table~\ref{tab:leaderboard} shows that it does not. The average clean-setting success rate is 0.979, and three models reach 1.000, yet overall robustness ranges from 0.766 to 0.664 once perturbations are introduced. The main takeaway is therefore not a narrow model ranking, but the gap between clean capability and stage-wise robustness.
+\noindent\textbf{Finding 1: Clean tool-calling accuracy is nearly saturated, but stage-wise robustness remains far from solved.}
+The single-family experiment tests whether clean tool-calling performance predicts behavior under controlled perturbations. Table~\ref{tab:leaderboard} indicates that it does not: average clean-setting success is 0.979, with three models reaching 1.000, yet overall robustness under perturbation ranges from 0.766 to 0.664. The central result is thus the separation between clean capability and stage-wise robustness, rather than the exact ordering of models.
 
-Family-level results expose the mechanism behind this gap. Averaged across models, tool-interface perturbation is easiest at 0.918, followed by user-intent perturbation at 0.773 and runtime-environment perturbation at 0.688. Tool-output / observation perturbation is the bottleneck at 0.455, and no model reaches 0.60 in this family. This indicates that current models are better at selecting and grounding tools than at recovering reliable results from corrupted or incomplete returned evidence.
+\noindent\textbf{Finding 2: Tool-output/observation perturbation is the dominant bottleneck across all evaluated models.}
+Family-level results identify where this separation arises. Averaged across models, tool-interface perturbation is least damaging at 0.918, followed by user-intent perturbation at 0.773 and runtime-environment perturbation at 0.688. Tool-output/observation perturbation is the bottleneck at 0.455, and no model reaches 0.60 in this family. In this evaluation, models handle tool selection and grounding more reliably than recovery from corrupted or incomplete returned evidence.
 
-The main exception illustrates why family decomposition is necessary. \texttt{deepseek-v4-flash} reaches 0.958 on tool-interface perturbation and 0.783 on user-intent perturbation, but drops to 0.319 on tool-output / observation perturbation. Strong tool selection therefore does not imply strong observation recovery. Conversely, \texttt{qwen-plus} is competitive on runtime-environment perturbation at 0.713 but weak on observation at 0.380, showing that runtime-state judgment and evidence recovery are separable capabilities.
+Individual profiles show the same pattern: strong interface robustness does not imply reliable observation recovery.
 
 \begin{table*}[t]
 \centering
@@ -210,92 +308,89 @@ Model & Clean & Overall & A Interface & B Intent & C Output & D Runtime & Heavy 
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\caption{Main leaderboard recomputed from raw records. The maximum-drop family for every model is tool-output / observation perturbation.}
+\caption{Main leaderboard recomputed from raw records. Tool-output/observation perturbation produces the largest drop for every model.}
 \label{tab:leaderboard}
 \end{table*}
 
 \begin{figure}[t]
     \centering
     \safeincludegraphics[width=\linewidth]{picture/fig03_family_model_heatmap.png}
-    \caption{Family-level robustness heatmap. Tool-output / observation perturbation is the largest-drop family for all models, and no model reaches 0.60 in family C.}
+    \caption{Family-level robustness heatmap. Tool-output/observation perturbation causes the largest drop for all models, and no model reaches 0.60 in family C.}
     \label{fig:family-heatmap}
 \end{figure}
 
 \subsection{Subtype and Severity Effects}
 
-This experiment asks whether family-level rankings are driven by broad perturbation categories or by a few subtype-specific stressors. The severity trend is clear at the aggregate level: average success falls from 0.979 under clean conditions to 0.869, 0.724, and 0.491 under light, medium, and heavy perturbations. Heavy perturbations therefore expose robustness gaps that are mostly hidden by clean performance.
+\noindent\textbf{Finding 3: Missing or competing returned evidence is substantially harder than surface-level interface change.}
+Average success falls from 0.979 in clean conditions to 0.869, 0.724, and 0.491 under light, medium, and heavy perturbations, respectively, exposing failures largely hidden in clean evaluation.
 
-Subtype results further explain the family-level differences. The hardest subtype is C2 Return Evidence Loss, with a success rate of only 0.142, followed by C1 Return Structure Noise at 0.460 and D2 Runtime Variability at 0.469. By contrast, A2 Description Abstraction and A1 Name Surface Shift reach 0.927 and 0.930, indicating that surface interface changes are usually easier to recover from than missing return evidence.
+Subtype results explain much of the family-level difference. C2 Return Evidence Loss is the hardest subtype (0.142), followed by C1 Return Structure Noise (0.460) and D2 Runtime Variability (0.469), whereas A2 Description Abstraction and A1 Name Surface Shift remain high at 0.927 and 0.930. Within families B and D, B3 Distraction and D2 Runtime Variability are the hardest subtypes, indicating sensitivity to competing context and unstable execution feedback.
 
-Within B, B3 Distraction has a success rate of 0.658, clearly lower than B1 Indirectness at 0.801, B4 Conflict at 0.812, and B2 Underspecification at 0.820. This result suggests that distracting information is more likely than simple omission or indirectness to push the model toward a wrong tool or wrong task interpretation. Within D, D2 Runtime Variability has a success rate of 0.469, much lower than D1 Availability Failure at 0.736 and D3 Failure Feedback Quality at 0.858, showing that models have the most difficulty stably judging final state when stale/full, fresh/partial, and multiple attempts are mixed.
-
-Subtype-level non-monotonicity also matters. Static template severity is monotonic, but model accuracy does not always decrease strictly from light to medium to heavy. Some heavy runtime-availability failures, such as timeout or permission denied, are more explicit than ambiguous stale-cache plus partial-fragment states and can be easier to classify. We therefore interpret severity as a controlled stress axis rather than as a guarantee of monotonic model accuracy for every subtype.
+Accuracy is not strictly monotonic with template severity for every subtype: explicit heavy runtime failures can be easier to classify than ambiguous stale-cache or partial-fragment combinations. Severity is therefore a controlled stress axis, not a guarantee of monotonic accuracy for each model and subtype.
 
 \subsection{Failure Taxonomy and Cascade Attribution}
 
-Across all perturbed failures, incorrect argument is the most frequent primary error label, with 2,015 cases. It is followed by tool misselection with 1,051 cases, runtime failure with 921 cases, missing argument with 149 cases, no-call with 121 cases, and schema-format violation with 49 cases. This distribution shows that the main problem in tool-calling robustness is not that models completely fail to call tools. Rather, after entering the tool-calling chain, models convert wrong evidence, wrong tool paths, or wrong runtime interpretations into wrong arguments and wrong final states.
-
-When decomposed by family, failure patterns are highly concentrated: 89.1\% of tool-interface failures are tool misselection, 89.9\% of user-intent failures are tool misselection, 91.7\% of tool-output / observation failures are incorrect arguments, and 97.6\% of runtime-environment failures are runtime failures. This concentration supports the family design in \ToolRobustBench: different perturbation sources induce different error types instead of randomly mixing into the same failure pool. Without failure taxonomy, A/B tool-misselection failures, C incorrect-argument failures, and D runtime failures would be collapsed into an uninterpretable aggregate failure rate.
+\noindent\textbf{Finding 4: Cascade-aware attribution separates downstream symptoms from upstream failure sources.}
+Across perturbed failures, \emph{incorrect argument} is the dominant primary error, followed by \emph{tool misselection} and \emph{runtime failure}; outright no-calls and schema-format violations are comparatively rare. Family composition is strongly concentrated: 89.1\% of tool-interface failures and 89.9\% of user-intent failures are tool misselections, 91.7\% of tool-output/observation failures are incorrect arguments, and 97.6\% of runtime-environment failures are runtime failures. An aggregate failure rate would collapse these distinct diagnostic modes.
 
 \begin{figure}[t]
     \centering
     \safeincludegraphics[width=\linewidth]{picture/fig04_failure_taxonomy.png}
-    \caption{Primary failure taxonomy by perturbation family. Different families have clearly different failure compositions, showing that aggregate success rate must be interpreted together with failure attribution.}
+    \caption{Primary failure taxonomy by perturbation family. Family-specific failure compositions show why aggregate success should be interpreted together with attribution.}
     \label{fig:failure-taxonomy}
 \end{figure}
 
-Cascade-aware attribution explains why these labels should not be read mechanically. Runtime-environment perturbation has the highest cascade rate, 0.638, because runtime feedback lies late in the tool chain and absorbs upstream selection or argument errors. Tool-interface perturbation has a cascade rate of 0.352, often because tool-boundary confusion causes downstream argument or execution symptoms. Tool-output / observation perturbation has a cascade rate of only 0.003, showing that its failures usually occur directly during evidence selection or result recovery. Boundary statistics in Appendix Table~\ref{tab:boundary-stats} further show that a high cascade rate is not the same as perturbation-construction failure: runtime-environment perturbation has a boundary-violation rate of only 0.006.
+Cascade-aware attribution qualifies this interpretation. Runtime-environment perturbation has the highest cascade rate, 0.638, because runtime feedback occurs late in the tool chain and can expose upstream selection or argument errors. Tool-interface perturbation has a cascade rate of 0.352, often because boundary confusion produces downstream argument or execution symptoms. By contrast, tool-output/observation perturbation has a cascade rate of only 0.003, indicating that its failures usually arise directly during evidence selection or result recovery. Appendix Table~\ref{tab:boundary-stats} also distinguishes cascades from invalid construction: despite its high cascade rate, runtime-environment perturbation has a boundary-violation rate of only 0.006.
 
 \subsection{Post-Execution Diagnostics}
 
-Runtime-environment instances require a post-execution decision over status, retryability, failure type, and final result. Averaged across models, retryability matching is highest at 0.949, followed by failure-type matching at 0.917, status matching at 0.783, and result matching at 0.738. Models therefore understand many explicit runtime labels but struggle more with recovering the final result from mixed feedback. Detailed post-execution profiles are deferred to Appendix Figures~\ref{fig:app-stage2} and \ref{fig:app-gemini-profile}.
+Runtime-environment instances require a post-execution decision about status, retryability, failure type, and final result, as defined in Section~\ref{sec:taxonomy}. Averaged across models, matching is highest for retryability (0.949), followed by failure type (0.917), status (0.783), and result (0.738). Models therefore identify many explicit runtime labels but are less reliable at recovering the final result from mixed feedback. Appendix Figures~\ref{fig:app-stage2} and \ref{fig:app-gemini-profile} provide detailed profiles.
 
-\section{Mixed Perturbation Results}
+\section{Mixed-Family Results}
+\label{sec:mixed}
 
-This section asks whether multi-source perturbations can be predicted from their single-family components. We evaluate five representative pairwise combinations under medium and heavy severities: A2+B3, A3+C4, A1+D1, B4+C4, and B2+D2. Each model, combination, and severity contains 16 perturbed instances, producing 70 comparable cells. Figure~\ref{fig:cross-vs-single} compares cross-family success with the weaker of the two corresponding single-family components.
+We evaluate five interpretable subtype pairs at medium and heavy severity: A2+B3, A3+C4, A1+D1, B4+C4, and B2+D2. They cover distinct stage interactions, include observation-related combinations because family C is the dominant bottleneck, and retain non-degenerate accuracy ranges for model comparison.
 
-Overall, cross-family success rates are clearly lower than single-family success rates. Under medium severity, the average success rate over the five combinations and seven models is 0.448, while the average weakest single-family component is 0.621 and the mean of the two components is 0.754. Under heavy severity, the cross-family average further drops to 0.200, while the weakest-component average is 0.292 and the component mean is 0.507. In other words, cross-family difficulty is not simply the minimum of two single-family scores; it often produces additional composition loss. Relative to the mean of the two components, the average gaps under medium and heavy are -0.306 and -0.307.
+We exclude degenerate mixtures that approach all-zero performance and combinations without an interpretable additional mechanism. In particular, many C--D mixtures are incompatible: C assumes an existing observation to corrupt, whereas D may replace that return with error or partial-execution feedback, preventing clean attribution. The broader \texttt{gpt-5.4-mini} composition matrix is reported in Appendix Figure~\ref{fig:app-gpt-cross-matrix}.
+
+Each model--combination--severity cell contains 16 instances, yielding 70 comparable cells. Figure~\ref{fig:cross-vs-single} compares mixed success with its weaker isolated constituent baseline.
+
+\noindent\textbf{Finding 5: Mixed-family perturbations often introduce negative interactions not predictable from isolated single-family robustness.}
+Mixed-family success is generally lower than its single-family comparators. At medium severity, mean success across the five pairs and seven models is 0.448, compared with 0.621 for the weaker constituent and 0.754 for the mean of both constituents. At heavy severity, mixed-family success decreases to 0.200, compared with 0.292 and 0.507 for these two baselines. Thus, combined difficulty is not generally approximated by taking the minimum of two isolated scores. Relative to the mean of both constituents, the mixed-family gaps are -0.306 at medium severity and -0.307 at heavy severity.
 
 \begin{figure}[t]
     \centering
     \safeincludegraphics[width=\linewidth]{picture/fig06_crossfamily_vs_single_family_delta.png}
-    \caption{Cross-family perturbations versus the weakest single-family component. Gray bars denote the weaker of the two single-family success rates under the same model and severity; colored bars denote cross-family success; the right-side numbers show the mean difference between cross-family and weakest-component success.}
+    \caption{Selected mixed-family success compared with the weaker constituent baseline. Negative $\Delta$ indicates additional measured degradation under composition.}
     \label{fig:cross-vs-single}
 \end{figure}
 
-A3+C4 is the strongest negative interaction. Under medium severity, its average cross-family success rate is 0.259, below the weakest single-family component at 0.545; under heavy severity, it drops to 0.027, below the weakest component at 0.250. This combination couples inter-tool confusability with return-evidence competition, so errors no longer stay within a single stage: boundary instability in tool selection and corrupted evidence in observation recovery jointly surface as incorrect arguments. Its failure composition reflects this mechanism, with 88\% incorrect-argument failures.
+The strongest negative interactions occur for A3+C4 and B4+C4. A3+C4 combines inter-tool confusability with competing returned evidence, while B4+C4 combines intent conflict with evidence competition. Both pairs push failures toward incorrect arguments, showing that observation noise can amplify earlier selection or intent uncertainty. Detailed pair-level failure compositions are reported in Appendix Figures~\ref{fig:app-cross-failure} and~\ref{fig:app-cross-model-sheet}.
 
-B4+C4 is the second strong negative interaction. Its cross-family success is 0.357 under medium severity and 0.054 under heavy severity, compared with weakest-component baselines of 0.545 and 0.250. User-request conflict already requires the model to identify the primary target, while evidence competition adds conflicting returned evidence. The combined setting therefore amplifies intent ambiguity into observation-driven incorrect arguments: 73\% of failures are incorrect arguments, and 20\% are tool misselection.
+Not every pair incurs additional measured loss. A2+B3 at heavy severity and B2+D2 at medium severity yield positive deltas ($+0.114$ and $+0.077$). These are apparent reversals rather than robustness improvements: floor effects or more salient feedback can make a composed condition easier to classify.
 
-Not every composition creates additional loss. A2+B3 has a heavy cross-family average of 0.304, above the weakest single-family component at 0.190, and B2+D2 has a medium cross-family average of 0.455, above the weakest component at 0.378. We interpret these apparent reversals as floor effects or salience effects rather than true robustness gains: when one single-family component is already near the floor, additional perturbations may not produce much measurable loss, and some runtime failures can become more explicit under combined conditions.
-
-The main conclusion is that cross-family difficulty is not reducible to the weakest single-family component. Tool-output-centered combinations are especially damaging because they convert earlier interface or intent uncertainty into corrupted evidence selection. Full success matrices, failure attribution, and model diagnostic collages are reported in Appendix Figures~\ref{fig:app-cross-success}, \ref{fig:app-cross-failure}, \ref{fig:app-cross-model-sheet}, and \ref{fig:app-gpt-cross-matrix}.
+Taken together, these results show that mixed-family difficulty cannot be reduced to the weaker single-family component. Combinations involving tool-output/observation perturbations are particularly damaging because earlier interface or intent uncertainty is followed by unreliable evidence selection. Appendix Figures~\ref{fig:app-cross-success}, \ref{fig:app-cross-failure}, and \ref{fig:app-cross-model-sheet} report selected-pair success and failure diagnostics; Appendix Figure~\ref{fig:app-gpt-cross-matrix} reports the broader \texttt{gpt-5.4-mini} full mixed-family composition matrix.
 
 \section{Discussion}
 
-Two takeaways follow from the results. First, clean tool-calling ability cannot replace robustness evaluation. Multiple models are close to perfect under clean conditions, yet their perturbed macro averages and family profiles differ substantially. A single clean score therefore hides whether a model is fragile in schema grounding, argument binding, evidence recovery, or runtime-state judgment.
-
-Second, observation and runtime feedback are current bottlenecks. Tool-output / observation perturbation is the largest-drop family for every model, and runtime-environment perturbation exposes failures in deciding status, retryability, and final result. Agent systems should therefore treat tool returns as structured evidence with provenance, freshness, and machine-decidable status fields, rather than handing unverified logs or natural-language summaries directly to the model.
-
-Third, cascade-aware attribution changes how failures should be used for model and system improvement. If only the observed label is recorded, a downstream incorrect-argument symptom may lead developers to tune argument extraction, even when the primary source is tool-boundary confusion or schema grounding. By separating primary errors from observed symptoms, \ToolRobustBench{} makes failure analysis more actionable: interface designers can improve tool naming and descriptions when S1/S2 failures dominate, while runtime designers can harden status schemas and retry semantics when S4 failures dominate.
-
-Fourth, cross-family evaluation should be treated as a necessary complement to single-family diagnosis. Single-family perturbations identify where a model is fragile in isolation, but deployed agents often face simultaneous interface ambiguity, indirect user requests, noisy returned evidence, and unstable execution feedback. The strong negative interactions in A3+C4 and B4+C4 show that robustness risks can be amplified when earlier-stage uncertainty meets corrupted evidence. A practical evaluation suite should therefore include both stage-isolated tests for localization and a small set of mixed perturbations for interaction stress testing.
+These results suggest that tool-use evaluation should combine clean success, stage-localized perturbations, and cascade-aware attribution. Clean accuracy hides failures in observation recovery and runtime-state judgment, while observed failure labels alone may point to the wrong corrective action when their sources lie upstream. Mixed-family results further show that deployed agents should be tested under targeted cross-stage interactions rather than only isolated perturbations. Interfaces should expose provenance, freshness, and machine-decidable runtime status to reduce observation and feedback ambiguity.
 
 \section{Conclusion}
 
-\ToolRobustBench{} provides a stage-aligned, deterministic, and cascade-aware benchmark for tool-calling robustness. Across 15,456 single-family instances and representative mixed perturbations, clean success is near saturated but robustness drops sharply, especially under tool-output / observation perturbation. Cross-family results show that multi-source difficulty cannot be inferred from the weakest single-family component alone. The benchmark therefore supports not only model ranking, but also diagnosis of where failures begin, how they cascade, and which tool-interface or runtime designs are likely to improve robust agent behavior.
+\ToolRobustBench{} is a stage-aligned, deterministic, and cascade-aware benchmark for tool-calling agents. Across 15,456 single-family instances and representative mixed-family perturbations, robustness drops sharply despite nearly saturated clean success, especially under tool-output/observation perturbation. A stratified human audit of 140 records supports the automatic scorer. Mixed-family robustness cannot be inferred from the weaker constituent alone. The benchmark identifies where failures begin and which interface or runtime mechanisms merit improvement.
 
 \section{Limitations}
 
-The benchmark is intentionally controlled. The main single-family results cover 14 subtypes, but the main text reports only five representative cross-family combinations rather than an exhaustive ranking of all pairwise templates. The evaluated tools are deterministic local tools, which improve reproducibility but do not cover all live API ecosystems. Tasks are single-step and do not yet test long-horizon planning, persistent state, or cross-tool dependency. Model calls use different providers or OpenAI-compatible backends, so protocol compatibility remains a residual source of variation. Finally, the paper treats raw-record recomputation as the standard and documents scorer normalization, compatibility checks, and data-freezing issues in the appendix.
+The benchmark is intentionally controlled. Although the single-family results cover 14 subtypes, the main text reports five representative mixed-family combinations rather than an exhaustive ranking of pairwise templates: degenerate all-zero mixtures do not compare models, and some C--D mixtures lack a well-defined observation target once execution state is changed. Deterministic local tools improve reproducibility but cannot represent all behaviors of live API ecosystems. The single-step tasks do not test long-horizon planning, persistent state, or dependencies across tools. Models are accessed through different providers or OpenAI-compatible backends, leaving protocol compatibility as a residual source of variation. Our human-validation sample is stratified for subtype coverage and deliberately includes many heavy and failed cases; consequently, it is appropriate for validating label and scorer behavior, but should not be interpreted as an unbiased estimate of the prevalence of ambiguous or difficult cases in the full benchmark. The annotation protocol also permits conservative \texttt{unclear} judgments when visible evidence does not uniquely determine a label, reducing the effective sample size for some agreement measures. Finally, our primary results are recomputed from raw records; Appendix~\ref{app:validity} documents human auditing, scorer normalization, and compatibility checks.
 
 \bibliography{custom}
 
 \clearpage
 \appendix
-\setcounter{figure}{6}
+\setcounter{figure}{4}
 
 \section{Tool Environment}
+\label{app:tools}
 
 \begin{table*}[htbp]
 \centering
@@ -318,18 +413,151 @@ Tool group & \# tools & Tool IDs \\
 \texttt{weather\_env} & 3 & \texttt{get\_air\_quality}, \texttt{get\_temperature}, \texttt{get\_weather} \\
 \bottomrule
 \end{tabularx}
-\caption{Complete deterministic local-tool environment in \ToolRobustBench. The main experiments sample 16 tools from this 40-tool environment.}
+\caption{Complete deterministic local-tool environment in \ToolRobustBench. Each listed function has a structured schema, deterministic executor, and expected output format; the main single-family experiments sample 16 of these 40 tools with fixed seed 20260511.}
 \label{tab:tool-env}
 \end{table*}
+
+\section{Data Construction Details}
+\label{app:data-construction}
+
+\subsection{Clean Seed Anchor}
+
+Table~\ref{tab:clean-seed-example} presents an anchor taken from the deterministic task set. The request distinguishes a route computation from its neighboring travel-time function; the stored arguments are executed before perturbation to obtain the expected result. Perturbed variants derived from this anchor preserve these targets unless an observation or runtime template supplies a distinct post-execution judgment target.
+
+\begin{table*}[htbp]
+\centering
+\small
+\begin{tabularx}{\linewidth}{l Y}
+\toprule
+Field & Clean seed value \\
+\midrule
+User request & \texttt{I need to get from hotel to expo using metro; give me the way to go, not just the time.} \\
+Candidate schema summary & Relevant sampled siblings include \texttt{calculate\_route(origin, target, profile)} and \texttt{estimate\_travel\_time(origin, target, profile)}. \\
+Gold tool & \texttt{calculate\_route} \\
+Gold arguments & \texttt{\{"origin": "hotel", "target": "expo", "profile": "metro"\}} \\
+Deterministic output & \texttt{\{"origin": "hotel", "target": "expo", "profile": "metro", "distance\_km": 9, "duration\_min": 22\}} \\
+Expected result & The returned route record for a metro trip from \texttt{hotel} to \texttt{expo}, including distance 9 km and duration 22 min. \\
+\bottomrule
+\end{tabularx}
+\caption{A clean seed task used as a perturbation anchor. Values are taken from the deterministic generated task record \texttt{route\_01}.}
+\label{tab:clean-seed-example}
+\end{table*}
+
+\subsection{Subtype Template Operations}
+
+Table~\ref{tab:subtype-details} expands the main-text specification with the input field altered by each subtype and representative deterministic operations implemented by the template catalog. The expected failure modes are diagnostic hypotheses used for attribution; they do not require that every failed model output take that form.
+
+\begin{table*}[htbp]
+\centering
+\scriptsize
+\begin{tabularx}{\linewidth}{l l Y Y}
+\toprule
+ID & Modified field & Template operation in the construction catalog & Intended stage and expected failure mode \\
+\midrule
+A1 & Exposed tool name & Substitute a readable alias, semi-opaque identifier, or internal-looking name while retaining the canonical mapping. & S1; incorrect tool selection under surface shift. \\
+A2 & Tool description & Rewrite or abstract descriptions to remove directly matching phrases without changing the coarse function. & S2; wrong tool after weak schema grounding. \\
+A3 & Names/descriptions of siblings & Add sibling similarity cues or near-colliding family names/descriptions. & S1/S2; confusion between neighboring tools. \\
+B1 & User request wording & Paraphrase, indirect style transfer, reposition constraints, or scatter implied cues across sentences. & S2/S3; lost intended tool or argument cue. \\
+B2 & User request slots & Make quantities vague, omit modifiers, or render slots implicit while retaining a designated recovery path. & S3; missing or incorrect argument. \\
+B3 & User request context & Add redundant context, a semantically nearby distractor, or a secondary goal. & S1/S3; redirected tool or arguments. \\
+B4 & User request constraints & Introduce a contradictory constraint or late revision with a designated primary target. & S1/S3; unresolved intent conflict. \\
+C1 & Returned observation structure & Rename keys, reorder fields, or shift nesting of an executed return packet. & S4; invalid-format or incorrect-result recovery. \\
+C2 & Returned evidence fields & Drop metadata, sparsify results, omit a high-value field, or truncate supporting evidence. & S4; result unrecoverable or incorrectly recovered. \\
+C3 & Returned values & Insert stale values, conflicting supporting facts, unit mismatches, or an incorrect fact field. & S4; acceptance of corrupted evidence. \\
+C4 & Returned candidate evidence & Add redundant wrappers, alternative candidates, auxiliary evidence, or misleading notes. & S4; selection of a competing result. \\
+D1 & Execution availability state & Supply fallback evidence, service-unavailable state, or timeout-after-partial-stream feedback. & S4; incorrect status or retry judgment. \\
+D2 & Runtime attempt history & Add jitter metadata, stale-versus-fresh fragments, or conflicting attempts. & S4; incorrect final-state resolution. \\
+D3 & Failure feedback packet & Provide vague retry cues, unreliable failure labels, or hidden partial evidence with diagnostic decoys. & S4; incorrect failure-type, retryability, or retained-result decision. \\
+\bottomrule
+\end{tabularx}
+\caption{Template-level construction details for all A1--D3 subtypes. Subtype names match the implementation catalog; operations are deterministic transformations of an anchored instance or its returned/runtime packet.}
+\label{tab:subtype-details}
+\end{table*}
+
+\subsection{Severity Criteria}
+
+\begin{table*}[htbp]
+\centering
+\small
+\begin{tabularx}{\linewidth}{l Y Y}
+\toprule
+Severity & General construction criterion & Diagnostic interpretation \\
+\midrule
+Light & Introduce one weak or surface-level change, such as a readable alias, minor rephrasing, small structure change, or transparent runtime cue. & Target remains highly recoverable; tests sensitivity to small presentation shifts. \\
+Medium & Increase ambiguity, remove or compete with salient evidence, or expose an uncertain execution state. & Requires robust grounding or recovery rather than surface matching. \\
+Heavy & Apply the strongest controlled subtype operation, possibly with an amplifier operation, while retaining a defined target or runtime decision. & Tests behavior under substantial stress; it is not an assertion of monotonically lower model accuracy. \\
+\bottomrule
+\end{tabularx}
+\caption{General severity criteria for template expansion. Severity controls perturbation strength at construction time rather than imposing an empirical accuracy ordering.}
+\label{tab:severity-criteria}
+\end{table*}
+
+\subsection{Gold and Diagnostic Fields}
+
+\begin{table*}[htbp]
+\centering
+\scriptsize
+\begin{tabularx}{\linewidth}{l l Y}
+\toprule
+Paper field & Stored record field & Meaning in construction and scoring \\
+\midrule
+\texttt{gold\_tool} & \texttt{gold\_canonical\_tool\_id} & Canonical tool identity fixed by the clean seed anchor. \\
+\texttt{gold\_arguments} & \texttt{expected\_arguments} & Structured argument object executed on the clean tool. \\
+\texttt{expected\_result} & \texttt{expected\_result} & Deterministic clean result or target content to recover. \\
+\texttt{observed\_error} & \texttt{observed\_failure\_tag} & Failure symptom observed at the evaluated output. \\
+\texttt{primary\_error} & \texttt{primary\_failure\_tag} & Principal failure source assigned after cascade backtracking. \\
+\texttt{earliest\_failed\_stage} & \texttt{first\_failure\_stage} & Earliest S1--S4 diagnostic stage at which behavior fails. \\
+\texttt{error\_source\_stage} & \texttt{cascade\_from\_stage} & Source stage when a downstream symptom is attributed upstream. \\
+\texttt{cascade indicator} & \texttt{is\_cascade\_failure} & Whether observed and source-attributed failure differ. \\
+\texttt{boundary-violation indicator} & \texttt{boundary\_violation\_flag} & Whether the attributed source falls outside the intended family boundary. \\
+\texttt{runtime status} & \texttt{decision\_status}, \texttt{expected\_statuses} & Predicted and accepted runtime states for post-execution instances. \\
+\texttt{retryability} & \texttt{decision\_retryable}, \texttt{expected\_retryable} & Predicted and expected retry decision when runtime feedback applies. \\
+\texttt{failure type} & \texttt{decision\_failure\_type}, \texttt{expected\_failure\_types} & Predicted and accepted runtime-failure category when applicable. \\
+\bottomrule
+\end{tabularx}
+\caption{Construction and diagnostic label fields preserved in raw evaluation records. Runtime-decision fields apply to the post-execution portion of the benchmark.}
+\label{tab:construction-labels}
+\end{table*}
+
+\subsection{Deterministic Generation Artifacts}
+
+Construction is implemented with deterministic templates rather than generated task prose from an external language model. Implementation files are under \path{src/toolrobust/}: dataset builders create clean anchors and executor results, tool definitions define the registry, and perturbation modules specify subtype operators and severity-specific transformations. Serialized construction artifacts are stored under \path{data/generated/}, and raw model-output records used for the main count appear under \path{data/results/}.
 
 \section{Evaluation Validity Details}
 \label{app:validity}
 
-The main findings are robust to scorer normalization and protocol-compatibility adjustments. For runtime-environment perturbations, failure-type alias normalization prevents semantically equivalent labels from being marked wrong only because of surface-form mismatch. After normalization, the D-family scores remain differentiated: \texttt{deepseek-v4-pro} reaches 0.748, \texttt{claude-sonnet-4-6} reaches 0.745, \texttt{qwen-plus} reaches 0.713, and \texttt{gpt-5.4-mini} reaches 0.708. This indicates that normalization fixes a scorer artifact without eliminating model differences.
+We perform an integrated validation audit on 140 stratified single-family records, selecting ten records from each subtype A1--D3. The audit contains 140 records in total, but agreement is label-specific. We exclude \texttt{unclear} judgments from each label-level agreement computation and apply the prespecified \texttt{not\_applicable} convention to non-runtime decision fields; therefore, the valid comparison count differs across labels. The completed human annotation covers data-construction validity, task success, error attribution, boundary judgments, and runtime-decision labels. A blind LLM annotator is evaluated on the same visible record evidence; runtime-only fields are normalized to \texttt{not\_applicable} for A/B/C records before computing agreement. The audit yields human--scorer agreement of 0.895 ($\kappa=0.777$) for task success, 0.814 ($\kappa=0.755$) for primary error, 0.907 ($\kappa=0.734$) for status, 0.957 ($\kappa=0.873$) for retryability, and 0.921 ($\kappa=0.772$) for failure type. These values provide an external check on the scorer used for the full evaluation.
 
-For post-execution decisions in the tool-output and runtime-environment families, compatibility checks ensure that empty or invalid structured outputs are not caused by backend token-budget or protocol failures. Strict raw records remain the traceable main results; compatibility-adjusted estimates, when used, should be reported separately as sensitivity analysis. Perturbation calibration figures and scorer-ablation plots are provided in Appendix Figures~\ref{fig:app-alias}, \ref{fig:app-nonmonotonic}, and \ref{fig:app-gemini-profile}.
+\begin{table*}[htbp]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Validation comparison & Label & Valid $n$ & Agreement / $\kappa$ \\
+\midrule
+Human--scorer & Task success & 86 & 0.895 / 0.777 \\
+Human--scorer & Observed error & 86 & 0.837 / 0.790 \\
+Human--scorer & Primary error & 86 & 0.814 / 0.755 \\
+Human--scorer & Status & 140 & 0.907 / 0.734 \\
+Human--scorer & Retryability & 140 & 0.957 / 0.873 \\
+Human--scorer & Failure type & 139 & 0.921 / 0.772 \\
+\midrule
+Human--LLM & Task success & 86 & 0.802 / 0.565 \\
+Human--LLM & Status & 140 & 0.900 / 0.725 \\
+Human--LLM & Retryability & 140 & 0.971 / 0.917 \\
+Human--LLM & Failure type & 139 & 0.892 / 0.707 \\
+\bottomrule
+\end{tabular}
+\caption{Integrated validation on 140 stratified human-audited records. Valid $n$ denotes the number of comparable records for each label after excluding \texttt{unclear} judgments and applying the prespecified \texttt{not\_applicable} convention for non-runtime decision fields.}
+\label{tab:integrated-validation}
+\end{table*}
+
+The principal findings persist after scorer normalization and protocol-compatibility adjustments. For runtime-environment perturbations, failure-type alias normalization prevents semantically equivalent labels from being scored as incorrect solely because their surface forms differ. After normalization, family-D results remain differentiated: \texttt{deepseek-v4-pro} reaches 0.748, \texttt{claude-sonnet-4-6} reaches 0.745, \texttt{qwen-plus} reaches 0.713, and \texttt{gpt-5.4-mini} reaches 0.708. Normalization thus addresses a scoring artifact without erasing observed model differences.
+
+For post-execution decisions in the tool-output/observation and runtime-environment families, compatibility checks test whether empty or invalid structured outputs result from backend token-budget or protocol failures. Raw records remain the traceable basis of the primary results; any compatibility-adjusted estimates are reported separately as sensitivity analyses. Appendix Figures~\ref{fig:app-alias}, \ref{fig:app-nonmonotonic}, and \ref{fig:app-gemini-profile} provide perturbation-calibration and scorer-ablation diagnostics.
 
 \section{Evidence Table}
+\label{app:evidence}
 
 \begin{table*}[htbp]
 \centering
@@ -339,35 +567,37 @@ For post-execution decisions in the tool-output and runtime-environment families
 \toprule
 Data source & Citable metrics & Corresponding conclusion & Main text & Figure \\
 \midrule
-All-family raw records & sample count, success, failure tag, stage fields & Seven models complete full raw records, totaling 15,456 instances & Yes & Main Figures~\ref{fig:family-heatmap}--\ref{fig:failure-taxonomy}; appendix diagnostics \\
-Overall summaries & condition-level summary & Most summaries can be used as references, but Claude D has inconsistency & Cautiously & No \\
-Family summaries & family/severity success & Mostly consistent with raw records; main-text values use raw recomputation & Yes & Figure~\ref{fig:family-heatmap}, Appendix Figure~\ref{fig:app-severity} \\
-Subtype summaries & subtype success & C2, D2, and B3 are key difficult subtypes and support non-monotonic response analysis & Yes & Appendix Figures~\ref{fig:app-subtype}, \ref{fig:app-nonmonotonic}, \ref{fig:app-gemini-profile} \\
-Failure-taxonomy records & primary failure tag & The main failure mode of each family is highly concentrated & Yes & Figure~\ref{fig:failure-taxonomy} \\
-Boundary reports & cascade rate, boundary-violation rate & Cascade failure and boundary violation need separate explanations & Yes & Appendix Figure~\ref{fig:app-cascade-boundary} \\
-Cross-family raw records & cross-family success, failure tag, cascade fields & Medium/heavy interaction results for five representative pairwise combinations & Yes & Figure~\ref{fig:cross-vs-single}, Appendix Figures~\ref{fig:app-cross-success}--\ref{fig:app-cross-failure} \\
-Cross-vs-single summary & cross success, weakest single, delta vs. weakest & Comparison between cross-family and corresponding single-family components & Yes & Figure~\ref{fig:cross-vs-single} \\
-Cross-family plot manifest & retained plot type, source plot directory & Consistency of retained plot types for each model $\times$ combination & No & Appendix Figures~\ref{fig:app-cross-model-sheet}--\ref{fig:app-gpt-cross-matrix} \\
-Evaluation-validity notes & scorer correction and compatibility diagnosis & Evaluation-validity analysis and ablation design & Yes & Appendix Figure~\ref{fig:app-alias} \\
+All-family raw records & sample count, success, failure tag, stage fields & Complete raw records for seven models, totaling 15,456 instances & Yes & Figs.~\ref{fig:family-heatmap}--\ref{fig:failure-taxonomy}; Fig.~\ref{fig:app-cascade-boundary} \\
+Overall summaries & condition-level summary & Auxiliary sanity checks; main-text values are recomputed from raw data & No & No \\
+Family summaries & family/severity success & Agreement with raw records; main-text values are recomputed from raw data & Yes & Figure~\ref{fig:family-heatmap}, Appendix Figure~\ref{fig:app-severity} \\
+Subtype summaries & subtype success & Difficulty of C2, D2, and B3 and non-monotonic response analysis & Yes & Appendix Figures~\ref{fig:app-subtype}, \ref{fig:app-nonmonotonic}, \ref{fig:app-gemini-profile} \\
+Failure-taxonomy records & primary failure tag & Concentration of family-specific primary failure modes & Yes & Figure~\ref{fig:failure-taxonomy} \\
+Boundary reports & cascade rate, boundary-violation rate & Distinction between cascades and boundary violations & Yes & Appendix Figure~\ref{fig:app-cascade-boundary} \\
+Mixed-family raw records & mixed-family success, failure tag, cascade fields & Medium/heavy interactions for five representative pairwise combinations & Yes & Figure~\ref{fig:cross-vs-single}, Appendix Figures~\ref{fig:app-cross-success}--\ref{fig:app-cross-failure} \\
+Mixed-vs-single summary & mixed-family success, weaker constituent, delta & Comparison between mixed-family and constituent-family performance & Yes & Figure~\ref{fig:cross-vs-single} \\
+Mixed-family plot manifest & retained plot type, source plot directory & Retained plot types for each model $\times$ combination & No & Appendix Figures~\ref{fig:app-cross-model-sheet}--\ref{fig:app-gpt-cross-matrix} \\
+Evaluation-validity notes & scorer correction and compatibility diagnosis & Validity checks and ablation design & Yes & Appendix Figure~\ref{fig:app-alias} \\
+Integrated human audit & 140 stratified annotation records, LLM cross-check, agreement tables & Human--scorer and human--LLM validation of scorer-facing labels & Yes & Table~\ref{tab:integrated-validation}, Appendix~\ref{app:validity} \\
 Run manifests & sampled tools, dataset scope, family config & 16 sampled tools, complete environment of 40 tools/12 groups, single-step setting & Yes & Appendix Table~\ref{tab:tool-env} \\
-Figure assets & main figures & The main text keeps four core figures and moves secondary figures to the appendix & Yes & Main and appendix figures \\
+Figure assets & main figures & Four core main-text figures, with secondary diagnostics & Yes & Figs.~\ref{fig:pipeline}, \ref{fig:family-heatmap}, \ref{fig:failure-taxonomy}, \ref{fig:cross-vs-single}; Figs.~\ref{fig:app-stage2}--\ref{fig:app-gpt-cross-matrix} \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\caption{Evidence table linking data sources, citable metrics, conclusions, and figures.}
+\caption{Evidence table linking data sources to reported metrics, claims, and figures.}
 \label{tab:evidence}
 \end{table*}
 
 \section{Complete Model Result Tables}
+\label{app:model-results}
 
-Table~\ref{tab:family-overall} summarizes the perturbed macro-average results of each model over the four families.
+Table~\ref{tab:family-overall} summarizes each model's perturbed macro-average across the four families.
 
 \begin{table*}[htbp]
 \centering
 \small
 \begin{tabular}{lrrrrr}
 \toprule
-Model & Tool Interface & User Intent & Tool Output & Runtime Environment & Overall \\
+Model & Tool-interface & User-intent & Tool-output/observation & Runtime-environment & Overall \\
 \midrule
 \texttt{claude-sonnet-4-6} & 0.968 & 0.785 & 0.568 & 0.745 & 0.766 \\
 \texttt{deepseek-v4-pro} & 0.926 & 0.809 & 0.512 & 0.748 & 0.749 \\
@@ -382,7 +612,7 @@ Model & Tool Interface & User Intent & Tool Output & Runtime Environment & Overa
 \label{tab:family-overall}
 \end{table*}
 
-Tables~\ref{tab:claude-severity}--\ref{tab:qwen-severity} give the success rate of each model under family $\times$ severity. All values are recomputed directly from raw \texttt{records.csv}.
+Tables~\ref{tab:claude-severity}--\ref{tab:qwen-severity} report success rates for each family $\times$ severity condition. All values are recomputed directly from raw \texttt{records.csv}.
 
 \begin{table}[htbp]
 \centering
@@ -510,149 +740,150 @@ Runtime & 1.000 & 0.854 & 0.729 & 0.556 \\
 \toprule
 Family & Failures & Cascade rate & Expected-primary match & Spillover match & Boundary violation \\
 \midrule
-Tool Interface & 247 & 0.352 & 0.891 & 0.352 & 0.109 \\
-User Intent & 917 & 0.108 & 0.957 & 0.108 & 0.043 \\
-Tool Output & 2198 & 0.003 & 0.931 & 0.000 & 0.069 \\
-Runtime Environment & 944 & 0.638 & 0.994 & 0.638 & 0.006 \\
+Tool-interface & 247 & 0.352 & 0.891 & 0.352 & 0.109 \\
+User-intent & 917 & 0.108 & 0.957 & 0.108 & 0.043 \\
+Tool-output/observation & 2198 & 0.003 & 0.931 & 0.000 & 0.069 \\
+Runtime-environment & 944 & 0.638 & 0.994 & 0.638 & 0.006 \\
 \bottomrule
 \end{tabular}
-\caption{Family-level cascade and boundary diagnostic statistics.}
+\caption{Family-level attribution statistics over failed instances. Cascade rate measures observed/primary disagreement after backtracking; boundary violation measures attributed sources outside the intended family boundary.}
 \label{tab:boundary-stats}
 \end{table*}
 
 \FloatBarrier
-\section{Appendix Figure Index}
+\section{Additional Diagnostic Figures}
+\label{app:figures}
 
-For review and Overleaf upload, main-text figures are stored in \texttt{picture/} and ordered from \texttt{fig01\_} to \texttt{fig06\_}. The main text retains four core figures: Figure~\ref{fig:pipeline}, which explains the evaluation pipeline; Figure~\ref{fig:family-heatmap}, which shows family-level differences; Figure~\ref{fig:failure-taxonomy}, which supports failure attribution; and Figure~\ref{fig:cross-vs-single}, which supports the core comparison between cross-family and single-family baselines. The original leaderboard and cascade-boundary figures are retained as appendix figures.
+The appendix figures provide additional diagnostics for dataset coverage, clean-versus-robustness comparisons, severity effects, subtype difficulty, post-execution behavior, scorer normalization, cascade/boundary behavior, and mixed-family interactions. Figures~\ref{fig:app-leaderboard} and \ref{fig:app-cascade-boundary} retain the leaderboard and cascade-boundary diagnostics.
 
-Appendix figures are stored in \texttt{picture/} and \texttt{picture/appendix/}. The detailed figures moved down from the original main text cover dataset coverage, clean-vs-robustness, severity curves, subtype difficulty, post-execution diagnostics, alias ablation, non-monotonic cases, Gemini-Pro execution profile, cross-family success matrix, and cross-family failure diagnostics.
+Figures~\ref{fig:app-dataset-coverage}--\ref{fig:app-gemini-profile} report dataset coverage, clean-versus-robustness comparisons, severity curves, subtype difficulty, post-execution diagnostics, alias ablation, non-monotonic cases, and the Gemini-Pro execution profile. Figures~\ref{fig:app-cross-success}--\ref{fig:app-gpt-cross-matrix} report mixed-family success and attribution results.
 
-Figures \texttt{app\_fig13}--\texttt{app\_fig18} are appendix collages and complete cross-family diagnostic figures. They supplement family-level diagnostic sheets, cross-family model overviews, and the full pairwise composition space for \texttt{gpt-5.4-mini}.
+Figures~\ref{fig:app-interface-sheet}--\ref{fig:app-gpt-cross-matrix} provide diagnostic sheets and mixed-family summaries, including the full composition space available for \texttt{gpt-5.4-mini}.
 
 \ifincludeappendixfigures
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/fig02_overall_leaderboard.png}
-\caption{Overall robustness leaderboard with family decomposition.}
+\caption{Overall robustness leaderboard with clean success, macro-averaged perturbed performance, and the four family-level robustness components.}
 \label{fig:app-leaderboard}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig02_dataset_coverage.png}
-\caption{Dataset coverage.}
+\caption{Coverage of the deterministic evaluation data over models, sampled tools, perturbation families, subtypes, and severity conditions.}
 \label{fig:app-dataset-coverage}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig03_clean_vs_robustness.png}
-\caption{Clean capability versus robustness.}
+\caption{Clean-setting E2E success compared with overall perturbed robustness; the gap indicates that clean accuracy does not predict stage-wise robustness.}
 \label{fig:app-clean-robustness}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig04_severity_degradation.png}
-\caption{Severity response curves.}
+\caption{Success rates across clean, light, medium, and heavy conditions; severity is a calibrated input-side stress level and need not force monotonic model accuracy for every subtype.}
 \label{fig:app-severity}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig05_subtype_difficulty.png}
-\caption{Subtype difficulty.}
+\caption{Robustness by perturbation subtype A1--D3; family-C evidence loss and competition expose the most difficult observation-recovery behavior.}
 \label{fig:app-subtype}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig06_execution_stage2_diagnostics.png}
-\caption{Post-execution diagnostics.}
+\caption{Post-execution decision accuracy for status, retryability, failure type, and final result in tool-output/observation and runtime-environment evaluation.}
 \label{fig:app-stage2}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/fig05_cascade_boundary_diagnostics.png}
-\caption{Cascade and boundary diagnostics by perturbation family.}
+\caption{Cascade and boundary diagnostics by family. Cascade rate captures downstream symptoms whose primary source backtracks upstream; boundary-violation rate captures attributed sources beyond the intended family target.}
 \label{fig:app-cascade-boundary}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig08_alias_normalization_ablation.png}
-\caption{Failure-type alias normalization ablation.}
+\caption{Failure-type alias normalization ablation for runtime decisions, comparing equivalent-label handling before and after model-independent normalization.}
 \label{fig:app-alias}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig09_nonmonotonic_severity_cases.png}
-\caption{Non-monotonic severity-response cases.}
+\caption{Selected non-monotonic severity-response cases, in which more explicit failure or contamination cues can improve classification despite greater input-side stress.}
 \label{fig:app-nonmonotonic}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig10_gemini_pro_execution_profile.png}
-\caption{Gemini-Pro execution profile.}
+\caption{Post-execution diagnostic profile for \texttt{gemini-2.5-pro}, separating status, retryability, failure-type, and final-result matching.}
 \label{fig:app-gemini-profile}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig11_crossfamily_selected_success_matrix.png}
-\caption{Cross-family success matrix.}
+\caption{Selected mixed-family success matrix for the five main-text subtype pairs at medium and heavy severity across evaluated models.}
 \label{fig:app-cross-success}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig12_crossfamily_failure_diagnostics.png}
-\caption{Cross-family failure diagnostics.}
+\caption{Failure attribution for selected mixed-family pairs, reporting how interactions shift primary error types and cascade behavior.}
 \label{fig:app-cross-failure}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig13_interface_exposure_diagnostic_sheet.png}
-\caption{Tool-interface diagnostic sheet.}
+\caption{Tool-interface diagnostic sheet for family A, including name shift, description abstraction, and family similarity pressure results.}
 \label{fig:app-interface-sheet}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig14_user_intent_diagnostic_sheet.png}
-\caption{User-intent diagnostic sheet.}
+\caption{User-intent diagnostic sheet for family B, including indirectness, underspecification, distraction, and conflict results.}
 \label{fig:app-intent-sheet}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig15_observation_diagnostic_sheet.png}
-\caption{Tool-output / observation diagnostic sheet.}
+\caption{Tool-output/observation diagnostic sheet for family C, covering return structure noise, evidence loss, corruption, and competition.}
 \label{fig:app-observation-sheet}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig16_execution_environment_diagnostic_sheet.png}
-\caption{Runtime-environment diagnostic sheet.}
+\caption{Runtime-environment diagnostic sheet for family D, covering availability failure, runtime variability, and failure feedback quality.}
 \label{fig:app-execution-sheet}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig17_crossfamily_model_diagnostic_sheet.png}
-\caption{Cross-family model diagnostic sheet.}
+\caption{Model-level summary of selected mixed-family interactions and their success/failure profiles.}
 \label{fig:app-cross-model-sheet}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
 \safeincludegraphics[width=0.95\linewidth]{picture/appendix/app_fig18_gpt54mini_full_crossfamily_composition_matrix.png}
-\caption{Full cross-family composition matrix for \texttt{gpt-5.4-mini}.}
+\caption{Full mixed-family composition matrix for \texttt{gpt-5.4-mini}, retained to show the broader checked composition space beyond the five representative main-text pairs.}
 \label{fig:app-gpt-cross-matrix}
 \end{figure*}
 \fi
