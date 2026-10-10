@@ -1,0 +1,14 @@
+{
+  "seed": 20261002,
+  "bootstrap_replicates": 20000,
+  "n_matched_records": 1120,
+  "n_cells": 70,
+  "n_source_anchor_clusters": 16,
+  "join_keys": [
+    "model_name",
+    "source_sample_id",
+    "severity",
+    "constituent subtype"
+  ],
+  "interpretation": "descriptive matched contrasts, not causal interactions"
+}

@@ -21,3 +21,8 @@ main.pdf
 results/validation/*backup*
 results/validation/*provisional*
 results/validation/llm_validation_raw_responses.jsonl
+data/generated/_tmp_*/
+scripts/arr_revision/human_annotation/private/
+scripts/arr_revision/human_annotation/*gold_key*
+scripts/arr_revision/human_annotation/*all_144_private*
+scripts/arr_revision/human_annotation/to_annotator_*.zip

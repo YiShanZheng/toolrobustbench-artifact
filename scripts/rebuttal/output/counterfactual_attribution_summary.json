@@ -1,0 +1,99 @@
+{
+  "sample_size": 98,
+  "overall_recovery_rate": 72.4,
+  "by_tier": {
+    "Tier_1": {
+      "count": 48,
+      "would_succeed": 48,
+      "pct": 100.0
+    },
+    "Tier_2": {
+      "count": 28,
+      "would_succeed": 23,
+      "pct": 82.1
+    },
+    "Tier_3": {
+      "count": 22,
+      "would_succeed": 0,
+      "pct": 0.0
+    }
+  },
+  "by_family": {
+    "interface_exposure": {
+      "count": 5,
+      "would_succeed": 5,
+      "pct": 100.0
+    },
+    "user_intent": {
+      "count": 21,
+      "would_succeed": 17,
+      "pct": 81.0
+    },
+    "observation": {
+      "count": 51,
+      "would_succeed": 49,
+      "pct": 96.1
+    },
+    "execution_environment": {
+      "count": 21,
+      "would_succeed": 0,
+      "pct": 0.0
+    }
+  },
+  "by_primary_failure": {
+    "execution-fail": {
+      "count": 21,
+      "would_succeed": 0,
+      "pct": 0.0
+    },
+    "missing-parameter": {
+      "count": 2,
+      "would_succeed": 0,
+      "pct": 0.0
+    },
+    "no-call": {
+      "count": 4,
+      "would_succeed": 0,
+      "pct": 0.0
+    },
+    "wrong-parameter": {
+      "count": 48,
+      "would_succeed": 48,
+      "pct": 100.0
+    },
+    "wrong-tool": {
+      "count": 23,
+      "would_succeed": 23,
+      "pct": 100.0
+    }
+  },
+  "by_recorded_cascade": {
+    "recorded_cascade": {
+      "count": 20,
+      "would_succeed": 4,
+      "pct": 20.0
+    },
+    "not_recorded_cascade": {
+      "count": 78,
+      "would_succeed": 67,
+      "pct": 85.9
+    }
+  },
+  "by_severity": {
+    "light": {
+      "count": 12,
+      "would_succeed": 10,
+      "pct": 83.3
+    },
+    "medium": {
+      "count": 24,
+      "would_succeed": 14,
+      "pct": 58.3
+    },
+    "heavy": {
+      "count": 62,
+      "would_succeed": 47,
+      "pct": 75.8
+    }
+  }
+}

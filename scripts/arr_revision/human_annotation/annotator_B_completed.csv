@@ -1,0 +1,421 @@
+﻿annotation_order,item_id,severity,model_visible_prompt,recovered_answer_json,recoverability_label,confidence_1_to_5,evidence_citation,notes,minutes_spent
+1,currency_01__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_currency""}
+
+Runtime feedback:
+{""content"": {""converted_value_hint"": {""range"": [713, 715]}, ""evidence_status"": ""anchor_hint_only"", ""source_hint"": {""completeness"": ""minimal"", ""token"": ""u""}, ""target_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""value_hint"": {""range"": [99, 101]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": null,""source"": null,""target"": null,""value"": null}}",PARTIAL,2,"content.converted_value_hint.range=[713,715]; content.value_hint.range=[99,101]; content.source_hint.token='u'; content.target_hint.token='c'",Only numeric ranges and single-letter tokens; no exact values recoverable. converted_value ~714 and value ~100 but not exact.,1.0
+2,querytable_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""query_table""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""partial"", ""token"": ""own""}, ""entity"": ""beta"", ""evidence_status"": ""sparse_context"", ""result"": ""query_table:sales:beta:owner"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""sal""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""attribute"": ""owner"",""entity"": ""beta"",""scope"": ""sales"",""result"": ""query_table:sales:beta:owner""}}",FULL,4,content.result='query_table:sales:beta:owner'; content.entity='beta',result string fully encodes attribute/entity/scope; attribute_hint 'own' and scope_hint 'sal' confirmed by result.,0.7
+3,unit_01__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value_hint"": {""range"": [19, 21]}, ""evidence_status"": ""anchor_hint_only"", ""source_hint"": {""completeness"": ""minimal"", ""token"": ""f""}, ""target_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""value_hint"": {""range"": [67, 69]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": null,""source"": null,""target"": null,""value"": null}}",PARTIAL,2,"content.converted_value_hint.range=[19,21]; content.value_hint.range=[67,69]",Ranges only; converted_value ~20 and value ~68 not exact.,0.9
+4,createsupportticke_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""create_support_ticket""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""minimal"", ""token"": ""o""}, ""entity_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""evidence_status"": ""anchor_hint_only"", ""result_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""s""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.",null,NONE,4,content.attribute_hint.token='o'; content.entity_hint.token='b'; content.result_hint.token='c'; content.scope_hint.token='s',All fields reduced to single-letter tokens; no recoverable content.,0.6
+5,faq_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_faq""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""matches"": [""How do I update the router firmware?""], ""query"": ""firmware"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""rou""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": [""How do I update the router firmware?""],""query"": ""firmware"",""scope"": ""router""}}",FULL,5,content.matches=['How do I update the router firmware?']; content.query='firmware',matches and query exact; scope 'router' inferred from scope_hint 'rou' (router firmware context).,0.6
+6,querytable_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""query_table""}
+
+Runtime feedback:
+{""content"": {""attribute"": ""owner"", ""entity"": ""beta"", ""result"": ""query_table:sales:beta:owner""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""attribute"": ""owner"",""entity"": ""beta"",""scope"": ""sales"",""result"": ""query_table:sales:beta:owner""}}",FULL,5,content.attribute='owner'; content.entity='beta'; content.result='query_table:sales:beta:owner',All fields exact; scope parsed from result string.,0.3
+7,lookupproduct_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""lookup_product""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""partial"", ""token"": ""own""}, ""entity"": ""beta"", ""evidence_status"": ""sparse_context"", ""result"": ""lookup_product:sales:beta:owner"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""sal""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""attribute"": ""owner"",""entity"": ""beta"",""scope"": ""sales"",""result"": ""lookup_product:sales:beta:owner""}}",FULL,4,content.result='lookup_product:sales:beta:owner'; content.entity='beta',result string encodes everything; attribute_hint 'own' and scope_hint 'sal' confirmed by result.,0.7
+8,policy_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""matches"": [""Remote work eligibility policy""], ""query"": ""remote"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""hr""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": [""Remote work eligibility policy""],""query"": ""remote"",""scope"": ""hr""}}",FULL,5,content.matches=['Remote work eligibility policy']; content.query='remote',matches and query exact; scope_hint 'hr' is a complete token.,0.6
+9,air_01__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi_hint"": {""range"": [115, 119]}, ""category_hint"": {""completeness"": ""minimal"", ""token"": ""u""}, ""evidence_status"": ""anchor_hint_only"", ""place_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""slot_hint"": {""completeness"": ""minimal"", ""token"": ""t""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""aqi"": null,""category"": null,""place"": null,""slot"": null}}",PARTIAL,2,"content.aqi_hint.range=[115,119]; content.category_hint.token='u'; content.place_hint.token='b'; content.slot_hint.token='t'",AQI in range 115-119 but not exact; remaining fields single letters.,0.9
+10,searchdoc_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_document""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""matches_hint"": [{""preview"": ""Incident"", ""remaining"": 0}], ""query_hint"": {""completeness"": ""minimal"", ""token"": ""r""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""e""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": null,""query"": null,""scope"": null}}",PARTIAL,2,"content.matches_hint[0].preview='Incident', remaining=0",Single match whose title begins with 'Incident'; full title not recoverable.,0.8
+11,filter_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""filtered_items"": [""alpha"", ""alphabet""], ""rule"": ""alp""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""filtered_items"": [""alpha"",""alphabet""],""rule"": ""alp""}}",FULL,5,"content.filtered_items=['alpha','alphabet']; content.rule='alp'",All fields exact.,0.3
+12,createsupportticke_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""create_support_ticket""}
+
+Runtime feedback:
+{""content"": {""attribute"": ""owner"", ""entity"": ""beta"", ""result"": ""create_support_ticket:sales:beta:owner""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""attribute"": ""owner"",""entity"": ""beta"",""scope"": ""sales"",""result"": ""create_support_ticket:sales:beta:owner""}}",FULL,5,content.attribute='owner'; content.entity='beta'; content.result='create_support_ticket:sales:beta:owner',All exact; scope parsed from result string.,0.3
+13,eta_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""estimate_travel_time""}
+
+Runtime feedback:
+{""content"": {""duration_min"": 24, ""profile"": ""walk"", ""target"": ""museum""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""duration_min"": 24,""profile"": ""walk"",""target"": ""museum""}}",FULL,5,content.duration_min=24; content.profile='walk'; content.target='museum',All exact; origin field absent.,0.3
+14,air_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi"": 68, ""category"": ""moderate"", ""slot"": ""tomorrow""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""aqi"": 68,""category"": ""moderate"",""slot"": ""tomorrow""}}",FULL,5,content.aqi=68; content.category='moderate'; content.slot='tomorrow',All exact; place field absent.,0.3
+15,checkpermission_03__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""check_permission""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""partial"", ""token"": ""pri""}, ""entity"": ""gamma"", ""evidence_status"": ""sparse_context"", ""result"": ""check_permission:support:gamma:priority"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""sup""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""attribute"": ""priority"",""entity"": ""gamma"",""scope"": ""support"",""result"": ""check_permission:support:gamma:priority""}}",FULL,4,content.result='check_permission:support:gamma:priority'; content.entity='gamma',result string encodes everything; attribute_hint 'pri' and scope_hint 'sup' confirmed by result.,0.7
+16,unit_03__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 5000.0, ""evidence_status"": ""sparse_context"", ""source_hint"": {""completeness"": ""partial"", ""token"": ""km""}, ""target"": ""m"", ""value_hint"": {""approx"": 5.0}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": 5000.0,""source"": ""km"",""target"": ""m"",""value"": 5.0}}",FULL,4,content.converted_value=5000.0; content.target='m'; content.source_hint.token='km'; content.value_hint.approx=5.0,converted_value and target exact; source 'km' complete token; value approx 5.0.,0.6
+17,filter_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""filtered_items"": [""alpha"", ""alphabet""], ""rule"": ""alp""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""filtered_items"": [""alpha"",""alphabet""],""rule"": ""alp""}}",FULL,5,"content.filtered_items=['alpha','alphabet']; content.rule='alp'",All fields exact.,0.5
+18,air_01__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi"": 118, ""category_hint"": {""completeness"": ""partial"", ""token"": ""unh""}, ""evidence_status"": ""sparse_context"", ""place_hint"": {""completeness"": ""partial"", ""token"": ""bei""}, ""slot"": ""today""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""aqi"": 118,""category"": ""unhealthy_for_sensitive_groups"",""place"": ""beijing"",""slot"": ""today""}}",PARTIAL,3,content.aqi=118 (exact); content.slot='today'; content.category_hint.token='unh'; content.place_hint.token='bei',aqi exact; category 'unhealthy_for_sensitive_groups' and place 'beijing' inferred from partial tokens (not confirmed exact).,0.8
+19,policy_03__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""matches"": [""VPN access review procedure""], ""query"": ""vpn""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": [""VPN access review procedure""],""query"": ""vpn""}}",FULL,5,content.matches=['VPN access review procedure']; content.query='vpn',All exact; scope field absent.,0.3
+20,checkpermission_03__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""check_permission""}
+
+Runtime feedback:
+{""content"": {""attribute"": ""priority"", ""entity"": ""gamma"", ""result"": ""check_permission:support:gamma:priority""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""attribute"": ""priority"",""entity"": ""gamma"",""scope"": ""support"",""result"": ""check_permission:support:gamma:priority""}}",FULL,5,content.attribute='priority'; content.entity='gamma'; content.result='check_permission:support:gamma:priority',All exact; scope parsed from result string.,0.3
+21,temp_01__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""place"", ""scale"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_temperature""}
+
+Runtime feedback:
+{""content"": {""scale"": ""c"", ""slot"": ""today"", ""temperature"": 26}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""scale"": ""c"",""slot"": ""today"",""temperature"": 26}}",FULL,5,content.scale='c'; content.slot='today'; content.temperature=26,All exact; place field absent.,0.3
+22,air_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi"": 68, ""category_hint"": {""completeness"": ""partial"", ""token"": ""mod""}, ""evidence_status"": ""sparse_context"", ""place_hint"": {""completeness"": ""partial"", ""token"": ""sha""}, ""slot"": ""tomorrow""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""aqi"": 68,""category"": ""moderate"",""place"": ""shanghai"",""slot"": ""tomorrow""}}",PARTIAL,3,content.aqi=68 (exact); content.slot='tomorrow'; content.category_hint.token='mod'; content.place_hint.token='sha',aqi exact; category 'moderate' and place 'shanghai' inferred from partial tokens.,0.8
+23,searchdoc_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_document""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""matches"": [""Incident review for routing latency regression""], ""query"": ""routing"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""eng""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": [""Incident review for routing latency regression""],""query"": ""routing"",""scope"": ""eng""}}",FULL,5,content.matches=['Incident review for routing latency regression']; content.query='routing',matches and query exact; scope_hint 'eng' complete token.,0.6
+24,createsupportticke_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""create_support_ticket""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""partial"", ""token"": ""own""}, ""entity"": ""beta"", ""evidence_status"": ""sparse_context"", ""result"": ""create_support_ticket:sales:beta:owner"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""sal""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""attribute"": ""owner"",""entity"": ""beta"",""scope"": ""sales"",""result"": ""create_support_ticket:sales:beta:owner""}}",FULL,4,content.result='create_support_ticket:sales:beta:owner'; content.entity='beta',result string encodes everything; attribute_hint 'own' and scope_hint 'sal' confirmed by result.,0.7
+25,sort_03__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""sort_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""rule_hint"": {""completeness"": ""minimal"", ""token"": ""a""}, ""sorted_items_hint"": [{""preview"": ""{'approx"", ""remaining"": 2}]}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.",null,NONE,4,"content.sorted_items_hint[0].preview=""{'approx""; content.rule_hint.token='a'",sorted_items preview is a non-informative fragment; rule 'a'->asc plausible but the sorted_items answer is unrecoverable.,0.8
+26,eta_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""estimate_travel_time""}
+
+Runtime feedback:
+{""content"": {""duration_min_hint"": {""range"": [20, 24]}, ""evidence_status"": ""anchor_hint_only"", ""origin"": ""station"", ""profile_hint"": {""completeness"": ""minimal"", ""token"": ""w""}, ""target"": ""museum""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""duration_min"": null,""origin"": ""station"",""profile"": null,""target"": ""museum""}}",PARTIAL,2,"content.origin='station' (exact); content.target='museum' (exact); content.duration_min_hint.range=[20,24]; content.profile_hint.token='w'",origin/target exact; duration ~20-24 and profile 'w' (walk?) not exact.,0.9
+27,unit_01__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 20.0, ""source"": ""f"", ""value"": 68.0}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": 20.0,""source"": ""f"",""value"": 68.0}}",FULL,5,content.converted_value=20.0; content.source='f'; content.value=68.0,All exact; target field absent.,0.3
+28,unit_01__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 20.0, ""evidence_status"": ""sparse_context"", ""source_hint"": {""completeness"": ""partial"", ""token"": ""f""}, ""target"": ""c"", ""value_hint"": {""approx"": 68.0}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": 20.0,""source"": ""f"",""target"": ""c"",""value"": 68.0}}",FULL,4,content.converted_value=20.0; content.target='c'; content.source_hint.token='f'; content.value_hint.approx=68.0,converted_value and target exact; source 'f' (Fahrenheit) complete; value approx 68.0.,0.6
+29,eta_02__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""estimate_travel_time""}
+
+Runtime feedback:
+{""content"": {""duration_min"": 24, ""evidence_status"": ""sparse_context"", ""origin"": ""station"", ""profile"": ""walk"", ""target"": ""museum""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""duration_min"": 24,""origin"": ""station"",""profile"": ""walk"",""target"": ""museum""}}",FULL,5,content.duration_min=24; content.origin='station'; content.profile='walk'; content.target='museum',All fields exact.,0.5
+30,weather_03__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_weather""}
+
+Runtime feedback:
+{""content"": {""condition"": ""drizzle"", ""evidence_status"": ""sparse_context"", ""place_hint"": {""completeness"": ""partial"", ""token"": ""lon""}, ""slot"": ""today"", ""temperature_c_hint"": {""approx"": 13}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""condition"": ""drizzle"",""place"": ""london"",""slot"": ""today"",""temperature_c"": 13}}",PARTIAL,3,content.condition='drizzle' (exact); content.slot='today'; content.temperature_c_hint.approx=13; content.place_hint.token='lon',condition exact; temperature_c approx 13; place 'london' inferred from 'lon'.,0.8
+31,policy_03__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""matches"": [""VPN access review procedure""], ""query"": ""vpn"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""it""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": [""VPN access review procedure""],""query"": ""vpn"",""scope"": ""it""}}",FULL,5,content.matches=['VPN access review procedure']; content.query='vpn',matches and query exact; scope_hint 'it' complete token.,0.6
+32,air_01__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi"": 118, ""category"": ""unhealthy_for_sensitive_groups"", ""slot"": ""today""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""aqi"": 118,""category"": ""unhealthy_for_sensitive_groups"",""slot"": ""today""}}",FULL,5,content.aqi=118; content.category='unhealthy_for_sensitive_groups'; content.slot='today',All exact; place field absent.,0.3
+33,temp_01__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""place"", ""scale"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_temperature""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""place_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""scale_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""slot_hint"": {""completeness"": ""minimal"", ""token"": ""t""}, ""temperature_hint"": {""range"": [25, 29]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""place"": null,""scale"": null,""slot"": null,""temperature"": null}}",PARTIAL,2,"content.temperature_hint.range=[25,29]; content.place_hint.token='b'; content.scale_hint.token='c'; content.slot_hint.token='t'",temperature ~25-29 not exact; other fields single letters.,0.9
+34,air_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi_hint"": {""range"": [65, 69]}, ""category_hint"": {""completeness"": ""minimal"", ""token"": ""m""}, ""evidence_status"": ""anchor_hint_only"", ""place_hint"": {""completeness"": ""minimal"", ""token"": ""s""}, ""slot_hint"": {""completeness"": ""minimal"", ""token"": ""t""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""aqi"": null,""category"": null,""place"": null,""slot"": null}}",PARTIAL,2,"content.aqi_hint.range=[65,69]; content.category_hint.token='m'; content.place_hint.token='s'; content.slot_hint.token='t'",aqi ~65-69 not exact; other fields single letters.,0.9
+35,route_01__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""calculate_route""}
+
+Runtime feedback:
+{""content"": {""distance_km"": 9, ""duration_min_hint"": {""approx"": 22}, ""evidence_status"": ""sparse_context"", ""origin"": ""hotel"", ""profile"": ""metro"", ""target"": ""expo""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""distance_km"": 9,""duration_min"": 22,""origin"": ""hotel"",""profile"": ""metro"",""target"": ""expo""}}",PARTIAL,3,content.distance_km=9 (exact); content.duration_min_hint.approx=22; content.origin='hotel'; content.profile='metro'; content.target='expo',distance exact; duration approx 22.,0.8
+36,filter_03__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""filtered_items_hint"": [{""preview"": ""budget"", ""remaining"": 1}], ""rule_hint"": {""completeness"": ""minimal"", ""token"": ""b""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""filtered_items"": null,""rule"": null}}",PARTIAL,2,"content.filtered_items_hint[0].preview='budget', remaining=1; content.rule_hint.token='b'",First filtered item 'budget' recoverable but one more item unknown; rule single letter.,0.8
+37,weather_03__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_weather""}
+
+Runtime feedback:
+{""content"": {""condition_hint"": {""completeness"": ""minimal"", ""token"": ""d""}, ""evidence_status"": ""anchor_hint_only"", ""place_hint"": {""completeness"": ""minimal"", ""token"": ""l""}, ""slot_hint"": {""completeness"": ""minimal"", ""token"": ""t""}, ""temperature_c_hint"": {""range"": [10, 14]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""condition"": null,""place"": null,""slot"": null,""temperature_c"": null}}",PARTIAL,2,"content.temperature_c_hint.range=[10,14]; content.condition_hint.token='d'; content.place_hint.token='l'; content.slot_hint.token='t'",temperature_c ~10-14 not exact; other fields single letters.,0.9
+38,faq_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_faq""}
+
+Runtime feedback:
+{""content"": {""matches"": [""How do I update the router firmware?""], ""query"": ""firmware""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": [""How do I update the router firmware?""],""query"": ""firmware""}}",FULL,5,content.matches=['How do I update the router firmware?']; content.query='firmware',All exact; scope field absent.,0.3
+39,lookupproduct_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""lookup_product""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""minimal"", ""token"": ""o""}, ""entity_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""evidence_status"": ""anchor_hint_only"", ""result_hint"": {""completeness"": ""minimal"", ""token"": ""l""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""s""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.",null,NONE,4,content.attribute_hint.token='o'; content.entity_hint.token='b'; content.result_hint.token='l'; content.scope_hint.token='s',All single-letter tokens; no recoverable content.,0.6
+40,checkpermission_03__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""check_permission""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""minimal"", ""token"": ""p""}, ""entity_hint"": {""completeness"": ""minimal"", ""token"": ""g""}, ""evidence_status"": ""anchor_hint_only"", ""result_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""s""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.",null,NONE,4,content.attribute_hint.token='p'; content.entity_hint.token='g'; content.result_hint.token='c'; content.scope_hint.token='s',All single-letter tokens; no recoverable content.,0.6
+41,querytable_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""query_table""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""minimal"", ""token"": ""o""}, ""entity_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""evidence_status"": ""anchor_hint_only"", ""result_hint"": {""completeness"": ""minimal"", ""token"": ""q""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""s""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.",null,NONE,4,content.attribute_hint.token='o'; content.entity_hint.token='b'; content.result_hint.token='q'; content.scope_hint.token='s',All single-letter tokens; no recoverable content.,0.6
+42,policy_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""matches"": [""Remote work eligibility policy""], ""query"": ""remote""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": [""Remote work eligibility policy""],""query"": ""remote""}}",FULL,5,content.matches=['Remote work eligibility policy']; content.query='remote',All exact; scope field absent.,0.3
+43,route_01__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""calculate_route""}
+
+Runtime feedback:
+{""content"": {""distance_km_hint"": {""range"": [5, 9]}, ""duration_min_hint"": {""range"": [20, 24]}, ""evidence_status"": ""anchor_hint_only"", ""origin"": ""hotel"", ""profile_hint"": {""completeness"": ""minimal"", ""token"": ""m""}, ""target"": ""expo""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""distance_km"": null,""duration_min"": null,""origin"": ""hotel"",""profile"": null,""target"": ""expo""}}",PARTIAL,2,"content.origin='hotel' (exact); content.target='expo' (exact); content.distance_km_hint.range=[5,9]; content.duration_min_hint.range=[20,24]",origin/target exact; distance and duration ranges only.,0.9
+44,filter_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""filtered_items_hint"": [{""preview"": ""alpha"", ""remaining"": 1}], ""rule_hint"": {""completeness"": ""minimal"", ""token"": ""a""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""filtered_items"": null,""rule"": null}}",PARTIAL,2,"content.filtered_items_hint[0].preview='alpha', remaining=1; content.rule_hint.token='a'",First filtered item 'alpha' recoverable but one more item unknown; rule single letter.,0.8
+45,searchdoc_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_document""}
+
+Runtime feedback:
+{""content"": {""matches"": [""Incident review for routing latency regression""], ""query"": ""routing""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": [""Incident review for routing latency regression""],""query"": ""routing""}}",FULL,5,content.matches=['Incident review for routing latency regression']; content.query='routing',All exact; scope field absent.,0.3
+46,sort_03__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""sort_items""}
+
+Runtime feedback:
+{""content"": {""rule"": ""asc"", ""sorted_items"": [1, 2, 3]}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""rule"": ""asc"",""sorted_items"": [1,2,3]}}",FULL,5,"content.rule='asc'; content.sorted_items=[1,2,3]",All fields exact.,0.3
+47,policy_03__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""matches_hint"": [{""preview"": ""VPN acce"", ""remaining"": 0}], ""query_hint"": {""completeness"": ""minimal"", ""token"": ""v""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""i""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": null,""query"": null,""scope"": null}}",PARTIAL,2,"content.matches_hint[0].preview='VPN acce', remaining=0",Single match whose title begins 'VPN acce...'; full title not recoverable.,0.8
+48,filter_03__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""filtered_items"": [""budget"", ""bud""], ""rule"": ""bud""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""filtered_items"": [""budget"",""bud""],""rule"": ""bud""}}",FULL,5,"content.filtered_items=['budget','bud']; content.rule='bud'",All fields exact.,0.5
+49,sort_03__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""sort_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""rule"": ""asc"", ""sorted_items"": [1, 2, 3]}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""rule"": ""asc"",""sorted_items"": [1,2,3]}}",FULL,5,"content.rule='asc'; content.sorted_items=[1,2,3]",All fields exact.,0.5
+50,lookupproduct_02__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""lookup_product""}
+
+Runtime feedback:
+{""content"": {""attribute"": ""owner"", ""entity"": ""beta"", ""result"": ""lookup_product:sales:beta:owner""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""attribute"": ""owner"",""entity"": ""beta"",""scope"": ""sales"",""result"": ""lookup_product:sales:beta:owner""}}",FULL,5,content.attribute='owner'; content.entity='beta'; content.result='lookup_product:sales:beta:owner',All exact; scope parsed from result string.,0.3
+51,weather_03__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_weather""}
+
+Runtime feedback:
+{""content"": {""condition"": ""drizzle"", ""slot"": ""today"", ""temperature_c"": 13}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""condition"": ""drizzle"",""slot"": ""today"",""temperature_c"": 13}}",FULL,5,content.condition='drizzle'; content.slot='today'; content.temperature_c=13,All exact; place field absent.,0.3
+52,currency_01__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_currency""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 714.2857, ""evidence_status"": ""sparse_context"", ""source_hint"": {""completeness"": ""partial"", ""token"": ""usd""}, ""target"": ""cny"", ""value_hint"": {""approx"": 100.0}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": 714.2857,""source"": ""usd"",""target"": ""cny"",""value"": 100.0}}",FULL,4,content.converted_value=714.2857; content.target='cny'; content.source_hint.token='usd'; content.value_hint.approx=100.0,converted_value and target exact; source 'usd' complete token; value approx 100.0.,0.6
+53,unit_03__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 5000.0, ""source"": ""km"", ""value"": 5.0}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": 5000.0,""source"": ""km"",""value"": 5.0}}",FULL,5,content.converted_value=5000.0; content.source='km'; content.value=5.0,All exact; target field absent.,0.3
+54,policy_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""matches_hint"": [{""preview"": ""Remote w"", ""remaining"": 0}], ""query_hint"": {""completeness"": ""minimal"", ""token"": ""r""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""h""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": null,""query"": null,""scope"": null}}",PARTIAL,2,"content.matches_hint[0].preview='Remote w', remaining=0",Single match whose title begins 'Remote w...'; full title not recoverable.,0.8
+55,unit_03__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value_hint"": {""range"": [4999, 5001]}, ""evidence_status"": ""anchor_hint_only"", ""source_hint"": {""completeness"": ""minimal"", ""token"": ""k""}, ""target_hint"": {""completeness"": ""minimal"", ""token"": ""m""}, ""value_hint"": {""range"": [4, 6]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": null,""source"": null,""target"": null,""value"": null}}",PARTIAL,2,"content.converted_value_hint.range=[4999,5001]; content.value_hint.range=[4,6]; content.source_hint.token='k'; content.target_hint.token='m'",converted_value ~5000 and value ~5 not exact; source/target single letters.,0.9
+56,currency_01__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_currency""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 714.2857, ""source"": ""usd"", ""value"": 100.0}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""converted_value"": 714.2857,""source"": ""usd"",""value"": 100.0}}",FULL,5,content.converted_value=714.2857; content.source='usd'; content.value=100.0,All exact; target field absent.,0.3
+57,filter_03__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""filtered_items"": [""budget"", ""bud""], ""rule"": ""bud""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""filtered_items"": [""budget"",""bud""],""rule"": ""bud""}}",FULL,5,"content.filtered_items=['budget','bud']; content.rule='bud'",All fields exact.,0.3
+58,route_01__c2_return_evidence_loss__light__1,light,"Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""calculate_route""}
+
+Runtime feedback:
+{""content"": {""distance_km"": 9, ""duration_min"": 22, ""profile"": ""metro"", ""target"": ""expo""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""distance_km"": 9,""duration_min"": 22,""profile"": ""metro"",""target"": ""expo""}}",FULL,5,content.distance_km=9; content.duration_min=22; content.profile='metro'; content.target='expo',All exact; origin field absent.,0.3
+59,temp_01__c2_return_evidence_loss__medium__1,medium,"Initial invocation context:
+{""argument_keys"": [""place"", ""scale"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_temperature""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""place_hint"": {""completeness"": ""partial"", ""token"": ""bei""}, ""scale"": ""c"", ""slot_hint"": {""completeness"": ""partial"", ""token"": ""tod""}, ""temperature"": 26}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""place"": ""beijing"",""scale"": ""c"",""slot"": ""today"",""temperature"": 26}}",FULL,4,content.temperature=26 (exact); content.scale='c'; content.place_hint.token='bei'; content.slot_hint.token='tod',temperature exact; place 'beijing' and slot 'today' inferred from partial tokens.,0.7
+60,faq_02__c2_return_evidence_loss__heavy__1,heavy,"Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_faq""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""matches_hint"": [{""preview"": ""How do I"", ""remaining"": 0}], ""query_hint"": {""completeness"": ""minimal"", ""token"": ""f""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""r""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"": {""matches"": null,""query"": null,""scope"": null}}",PARTIAL,2,"content.matches_hint[0].preview='How do I', remaining=0",Single match whose title begins 'How do I...'; full title not recoverable.,0.8

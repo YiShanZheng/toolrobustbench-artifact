@@ -1,0 +1,15 @@
+condition,model_name,composition_id,severity,n,mixed,constituent_1,constituent_2,weaker_index,weaker,constituent_mean,mixed_minus_weaker,mixed_minus_mean
+A2+B3 heavy,claude-sonnet-4-6,a+b:a2_description_abstraction__b3_distraction,heavy,16,0.125,1.0,0.125,2,0.125,0.5625,0.0,-0.4375
+A2+B3 heavy,deepseek-v4-flash,a+b:a2_description_abstraction__b3_distraction,heavy,16,0.4375,1.0,0.3125,2,0.3125,0.65625,0.125,-0.21875
+A2+B3 heavy,deepseek-v4-pro,a+b:a2_description_abstraction__b3_distraction,heavy,16,0.375,1.0,0.1875,2,0.1875,0.59375,0.1875,-0.21875
+A2+B3 heavy,gemini-2.5-flash,a+b:a2_description_abstraction__b3_distraction,heavy,16,0.1875,0.875,0.1875,2,0.1875,0.53125,0.0,-0.34375
+A2+B3 heavy,gemini-2.5-pro,a+b:a2_description_abstraction__b3_distraction,heavy,16,0.3125,1.0,0.3125,2,0.3125,0.65625,0.0,-0.34375
+A2+B3 heavy,gpt-5.4-mini,a+b:a2_description_abstraction__b3_distraction,heavy,16,0.125,0.875,0.125,2,0.125,0.5,0.0,-0.375
+A2+B3 heavy,qwen-plus,a+b:a2_description_abstraction__b3_distraction,heavy,16,0.5625,0.9375,0.25,2,0.25,0.59375,0.3125,-0.03125
+B2+D2 medium,claude-sonnet-4-6,b+d:b2_underspecification__d2_runtime_variability,medium,16,0.5625,1.0,0.5,2,0.5,0.75,0.0625,-0.1875
+B2+D2 medium,deepseek-v4-flash,b+d:b2_underspecification__d2_runtime_variability,medium,16,0.8125,0.9375,0.3125,2,0.3125,0.625,0.5,0.1875
+B2+D2 medium,deepseek-v4-pro,b+d:b2_underspecification__d2_runtime_variability,medium,16,0.625,0.9375,0.75,2,0.75,0.84375,-0.125,-0.21875
+B2+D2 medium,gemini-2.5-flash,b+d:b2_underspecification__d2_runtime_variability,medium,16,0.1875,0.875,0.1875,2,0.1875,0.53125,0.0,-0.34375
+B2+D2 medium,gemini-2.5-pro,b+d:b2_underspecification__d2_runtime_variability,medium,16,0.0,0.9375,0.0625,2,0.0625,0.5,-0.0625,-0.5
+B2+D2 medium,gpt-5.4-mini,b+d:b2_underspecification__d2_runtime_variability,medium,16,0.1875,0.9375,0.3125,2,0.3125,0.625,-0.125,-0.4375
+B2+D2 medium,qwen-plus,b+d:b2_underspecification__d2_runtime_variability,medium,16,0.8125,0.875,0.875,1,0.875,0.875,-0.0625,-0.0625

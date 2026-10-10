@@ -1,0 +1,17 @@
+{
+  "commitment_algorithm": "sha256",
+  "created_from_frozen_files": true,
+  "files": {
+    "gold_key_private.csv": {
+      "bytes": 25329,
+      "rows_excluding_header": 60,
+      "sha256": "3ef1156e277d2ed7dc21fd220c679b314d438f56eb0a73bf60889ee3976ec416"
+    },
+    "all_144_private.jsonl": {
+      "bytes": 248150,
+      "rows": 144,
+      "sha256": "46d2af9a23e1abcc8f44f3a520b7c4a9d0fbfeb8521c517fad019536121e51c8"
+    }
+  },
+  "note": "The committed private gold files are withheld from the anonymous review artifact and are not required to inspect the completed sheets or released aggregate outputs."
+}

@@ -1,0 +1,421 @@
+"annotation_order","item_id","severity","model_visible_prompt","recovered_answer_json","recoverability_label","confidence_1_to_5","evidence_citation","notes","minutes_spent"
+"1","filter_03__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""filtered_items_hint"": [{""preview"": ""budget"", ""remaining"": 1}], ""rule_hint"": {""completeness"": ""minimal"", ""token"": ""b""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""filtered_items"":{""preview"":[""budget""],""remaining"":1},""rule"":{""prefix"":""b""}}}","PARTIAL","3","content.filtered_items_hint[0].preview=""budget""；remaining=1；content.rule_hint.token=""b""","仅有列表预览及规则首字符，无法确认完整列表和规则。","0.8"
+"2","weather_03__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_weather""}
+
+Runtime feedback:
+{""content"": {""condition_hint"": {""completeness"": ""minimal"", ""token"": ""d""}, ""evidence_status"": ""anchor_hint_only"", ""place_hint"": {""completeness"": ""minimal"", ""token"": ""l""}, ""slot_hint"": {""completeness"": ""minimal"", ""token"": ""t""}, ""temperature_c_hint"": {""range"": [10, 14]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""condition"":{""prefix"":""d""},""place"":{""prefix"":""l""},""slot"":{""prefix"":""t""},""temperature_c"":{""range"":[10,14]}}}","PARTIAL","3","content.condition_hint.token=""d""；place_hint.token=""l""；slot_hint.token=""t""；temperature_c_hint.range=[10,14]","全部字段仅为前缀或范围，不能恢复精确值。","0.8"
+"3","eta_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""estimate_travel_time""}
+
+Runtime feedback:
+{""content"": {""duration_min"": 24, ""evidence_status"": ""sparse_context"", ""origin"": ""station"", ""profile"": ""walk"", ""target"": ""museum""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""duration_min"":24,""origin"":""station"",""profile"":""walk"",""target"":""museum""}}","FULL","5","content.duration_min=24；origin=""station""；profile=""walk""；target=""museum""","除 evidence_status 外，目标字段均以完整值出现。","0.5"
+"4","eta_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""estimate_travel_time""}
+
+Runtime feedback:
+{""content"": {""duration_min"": 24, ""profile"": ""walk"", ""target"": ""museum""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""duration_min"":24,""profile"":""walk"",""target"":""museum""}}","PARTIAL","4","content.duration_min=24；profile=""walk""；target=""museum""","origin 未出现在运行反馈中。","0.5"
+"5","createsupportticke_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""create_support_ticket""}
+
+Runtime feedback:
+{""content"": {""attribute"": ""owner"", ""entity"": ""beta"", ""result"": ""create_support_ticket:sales:beta:owner""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":""owner"",""entity"":""beta"",""scope"":""sales"",""result"":""create_support_ticket:sales:beta:owner""}}","FULL","5","content.attribute=""owner""；entity=""beta""；result=""create_support_ticket:sales:beta:owner""（其中明确编码 scope=sales）","scope 可由完整 result 的分隔字段直接恢复。","0.6"
+"6","policy_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""matches"": [""Remote work eligibility policy""], ""query"": ""remote""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":[""Remote work eligibility policy""],""query"":""remote""}}","PARTIAL","4","content.matches=[""Remote work eligibility policy""]；content.query=""remote""","scope 缺失。","0.5"
+"7","policy_03__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""matches"": [""VPN access review procedure""], ""query"": ""vpn"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""it""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":[""VPN access review procedure""],""query"":""vpn"",""scope"":{""prefix"":""it""}}}","PARTIAL","4","content.matches[0]=""VPN access review procedure""；query=""vpn""；scope_hint.token=""it""","scope 只有部分前缀。","0.6"
+"8","air_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi"": 68, ""category"": ""moderate"", ""slot"": ""tomorrow""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""aqi"":68,""category"":""moderate"",""slot"":""tomorrow""}}","PARTIAL","4","content.aqi=68；category=""moderate""；slot=""tomorrow""","place 缺失。","0.5"
+"9","air_01__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi_hint"": {""range"": [115, 119]}, ""category_hint"": {""completeness"": ""minimal"", ""token"": ""u""}, ""evidence_status"": ""anchor_hint_only"", ""place_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""slot_hint"": {""completeness"": ""minimal"", ""token"": ""t""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""aqi"":{""range"":[115,119]},""category"":{""prefix"":""u""},""place"":{""prefix"":""b""},""slot"":{""prefix"":""t""}}}","PARTIAL","3","content.aqi_hint.range=[115,119]；category_hint.token=""u""；place_hint.token=""b""；slot_hint.token=""t""","只有范围与首字符，无法精确恢复。","0.8"
+"10","checkpermission_03__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""check_permission""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""minimal"", ""token"": ""p""}, ""entity_hint"": {""completeness"": ""minimal"", ""token"": ""g""}, ""evidence_status"": ""anchor_hint_only"", ""result_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""s""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":{""prefix"":""p""},""entity"":{""prefix"":""g""},""result"":{""prefix"":""c""},""scope"":{""prefix"":""s""}}}","PARTIAL","3","content.attribute_hint.token=""p""；entity_hint.token=""g""；result_hint.token=""c""；scope_hint.token=""s""","各字段仅有最小前缀提示。","0.8"
+"11","air_01__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi"": 118, ""category"": ""unhealthy_for_sensitive_groups"", ""slot"": ""today""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""aqi"":118,""category"":""unhealthy_for_sensitive_groups"",""slot"":""today""}}","PARTIAL","4","content.aqi=118；category=""unhealthy_for_sensitive_groups""；slot=""today""","place 缺失。","0.5"
+"12","lookupproduct_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""lookup_product""}
+
+Runtime feedback:
+{""content"": {""attribute"": ""owner"", ""entity"": ""beta"", ""result"": ""lookup_product:sales:beta:owner""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":""owner"",""entity"":""beta"",""scope"":""sales"",""result"":""lookup_product:sales:beta:owner""}}","FULL","5","content.attribute=""owner""；entity=""beta""；result=""lookup_product:sales:beta:owner""（明确编码 scope=sales）","scope 可由完整 result 直接恢复。","0.6"
+"13","filter_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""filtered_items"": [""alpha"", ""alphabet""], ""rule"": ""alp""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""filtered_items"":[""alpha"",""alphabet""],""rule"":""alp""}}","FULL","5","content.filtered_items=[""alpha"",""alphabet""]；content.rule=""alp""","两个目标字段均完整。","0.4"
+"14","temp_01__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""place"", ""scale"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_temperature""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""place_hint"": {""completeness"": ""partial"", ""token"": ""bei""}, ""scale"": ""c"", ""slot_hint"": {""completeness"": ""partial"", ""token"": ""tod""}, ""temperature"": 26}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""place"":{""prefix"":""bei""},""scale"":""c"",""slot"":{""prefix"":""tod""},""temperature"":26}}","PARTIAL","4","content.place_hint.token=""bei""；scale=""c""；slot_hint.token=""tod""；temperature=26","place 和 slot 仅有部分前缀。","0.6"
+"15","filter_03__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""filtered_items"": [""budget"", ""bud""], ""rule"": ""bud""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""filtered_items"":[""budget"",""bud""],""rule"":""bud""}}","FULL","5","content.filtered_items=[""budget"",""bud""]；content.rule=""bud""","evidence_status 为噪声元数据，其余目标字段完整。","0.4"
+"16","filter_03__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""filtered_items"": [""budget"", ""bud""], ""rule"": ""bud""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""filtered_items"":[""budget"",""bud""],""rule"":""bud""}}","FULL","5","content.filtered_items=[""budget"",""bud""]；content.rule=""bud""","两个目标字段均完整。","0.4"
+"17","air_01__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi"": 118, ""category_hint"": {""completeness"": ""partial"", ""token"": ""unh""}, ""evidence_status"": ""sparse_context"", ""place_hint"": {""completeness"": ""partial"", ""token"": ""bei""}, ""slot"": ""today""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""aqi"":118,""category"":{""prefix"":""unh""},""place"":{""prefix"":""bei""},""slot"":""today""}}","PARTIAL","4","content.aqi=118；category_hint.token=""unh""；place_hint.token=""bei""；slot=""today""","category 与 place 只有部分前缀。","0.6"
+"18","route_01__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""calculate_route""}
+
+Runtime feedback:
+{""content"": {""distance_km_hint"": {""range"": [5, 9]}, ""duration_min_hint"": {""range"": [20, 24]}, ""evidence_status"": ""anchor_hint_only"", ""origin"": ""hotel"", ""profile_hint"": {""completeness"": ""minimal"", ""token"": ""m""}, ""target"": ""expo""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""distance_km"":{""range"":[5,9]},""duration_min"":{""range"":[20,24]},""origin"":""hotel"",""profile"":{""prefix"":""m""},""target"":""expo""}}","PARTIAL","3","content.distance_km_hint.range=[5,9]；duration_min_hint.range=[20,24]；origin=""hotel""；profile_hint.token=""m""；target=""expo""","距离、时长和出行方式均非精确值。","0.8"
+"19","lookupproduct_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""lookup_product""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""minimal"", ""token"": ""o""}, ""entity_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""evidence_status"": ""anchor_hint_only"", ""result_hint"": {""completeness"": ""minimal"", ""token"": ""l""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""s""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":{""prefix"":""o""},""entity"":{""prefix"":""b""},""result"":{""prefix"":""l""},""scope"":{""prefix"":""s""}}}","PARTIAL","3","content.attribute_hint.token=""o""；entity_hint.token=""b""；result_hint.token=""l""；scope_hint.token=""s""","各字段仅有最小前缀提示。","0.8"
+"20","querytable_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""query_table""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""minimal"", ""token"": ""o""}, ""entity_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""evidence_status"": ""anchor_hint_only"", ""result_hint"": {""completeness"": ""minimal"", ""token"": ""q""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""s""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":{""prefix"":""o""},""entity"":{""prefix"":""b""},""result"":{""prefix"":""q""},""scope"":{""prefix"":""s""}}}","PARTIAL","3","content.attribute_hint.token=""o""；entity_hint.token=""b""；result_hint.token=""q""；scope_hint.token=""s""","各字段仅有最小前缀提示。","0.8"
+"21","searchdoc_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_document""}
+
+Runtime feedback:
+{""content"": {""matches"": [""Incident review for routing latency regression""], ""query"": ""routing""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":[""Incident review for routing latency regression""],""query"":""routing""}}","PARTIAL","4","content.matches[0]=""Incident review for routing latency regression""；content.query=""routing""","scope 缺失。","0.5"
+"22","temp_01__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""place"", ""scale"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_temperature""}
+
+Runtime feedback:
+{""content"": {""scale"": ""c"", ""slot"": ""today"", ""temperature"": 26}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""scale"":""c"",""slot"":""today"",""temperature"":26}}","PARTIAL","4","content.scale=""c""；slot=""today""；temperature=26","place 缺失。","0.5"
+"23","createsupportticke_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""create_support_ticket""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""partial"", ""token"": ""own""}, ""entity"": ""beta"", ""evidence_status"": ""sparse_context"", ""result"": ""create_support_ticket:sales:beta:owner"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""sal""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":""owner"",""entity"":""beta"",""scope"":""sales"",""result"":""create_support_ticket:sales:beta:owner""}}","FULL","5","content.entity=""beta""；result=""create_support_ticket:sales:beta:owner""（明确编码 scope=sales、attribute=owner）","虽然两个独立字段为部分提示，但完整 result 足以恢复它们。","0.7"
+"24","querytable_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""query_table""}
+
+Runtime feedback:
+{""content"": {""attribute"": ""owner"", ""entity"": ""beta"", ""result"": ""query_table:sales:beta:owner""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":""owner"",""entity"":""beta"",""scope"":""sales"",""result"":""query_table:sales:beta:owner""}}","FULL","5","content.attribute=""owner""；entity=""beta""；result=""query_table:sales:beta:owner""（明确编码 scope=sales）","scope 可由完整 result 直接恢复。","0.6"
+"25","currency_01__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_currency""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 714.2857, ""evidence_status"": ""sparse_context"", ""source_hint"": {""completeness"": ""partial"", ""token"": ""usd""}, ""target"": ""cny"", ""value_hint"": {""approx"": 100.0}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":714.2857,""source"":{""prefix"":""usd""},""target"":""cny"",""value"":{""approx"":100.0}}}","PARTIAL","4","content.converted_value=714.2857；source_hint.token=""usd""；target=""cny""；value_hint.approx=100.0","source 被标为 partial，value 仅为近似值。","0.6"
+"26","eta_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""estimate_travel_time""}
+
+Runtime feedback:
+{""content"": {""duration_min_hint"": {""range"": [20, 24]}, ""evidence_status"": ""anchor_hint_only"", ""origin"": ""station"", ""profile_hint"": {""completeness"": ""minimal"", ""token"": ""w""}, ""target"": ""museum""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""duration_min"":{""range"":[20,24]},""origin"":""station"",""profile"":{""prefix"":""w""},""target"":""museum""}}","PARTIAL","3","content.duration_min_hint.range=[20,24]；origin=""station""；profile_hint.token=""w""；target=""museum""","时长为范围，profile 仅有首字符。","0.7"
+"27","checkpermission_03__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""check_permission""}
+
+Runtime feedback:
+{""content"": {""attribute"": ""priority"", ""entity"": ""gamma"", ""result"": ""check_permission:support:gamma:priority""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":""priority"",""entity"":""gamma"",""scope"":""support"",""result"":""check_permission:support:gamma:priority""}}","FULL","5","content.attribute=""priority""；entity=""gamma""；result=""check_permission:support:gamma:priority""（明确编码 scope=support）","scope 可由完整 result 直接恢复。","0.6"
+"28","route_01__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""calculate_route""}
+
+Runtime feedback:
+{""content"": {""distance_km"": 9, ""duration_min"": 22, ""profile"": ""metro"", ""target"": ""expo""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""distance_km"":9,""duration_min"":22,""profile"":""metro"",""target"":""expo""}}","PARTIAL","4","content.distance_km=9；duration_min=22；profile=""metro""；target=""expo""","origin 缺失。","0.5"
+"29","policy_03__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""matches"": [""VPN access review procedure""], ""query"": ""vpn""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":[""VPN access review procedure""],""query"":""vpn""}}","PARTIAL","4","content.matches[0]=""VPN access review procedure""；content.query=""vpn""","scope 缺失。","0.5"
+"30","policy_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""matches"": [""Remote work eligibility policy""], ""query"": ""remote"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""hr""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":[""Remote work eligibility policy""],""query"":""remote"",""scope"":{""prefix"":""hr""}}}","PARTIAL","4","content.matches[0]=""Remote work eligibility policy""；query=""remote""；scope_hint.token=""hr""","scope 仅有部分提示。","0.6"
+"31","faq_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_faq""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""matches_hint"": [{""preview"": ""How do I"", ""remaining"": 0}], ""query_hint"": {""completeness"": ""minimal"", ""token"": ""f""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""r""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":{""preview"":[""How do I""],""remaining"":0},""query"":{""prefix"":""f""},""scope"":{""prefix"":""r""}}}","PARTIAL","3","content.matches_hint[0].preview=""How do I""；remaining=0；query_hint.token=""f""；scope_hint.token=""r""","匹配文本为预览，query 与 scope 仅有首字符。","0.8"
+"32","unit_03__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value_hint"": {""range"": [4999, 5001]}, ""evidence_status"": ""anchor_hint_only"", ""source_hint"": {""completeness"": ""minimal"", ""token"": ""k""}, ""target_hint"": {""completeness"": ""minimal"", ""token"": ""m""}, ""value_hint"": {""range"": [4, 6]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":{""range"":[4999,5001]},""source"":{""prefix"":""k""},""target"":{""prefix"":""m""},""value"":{""range"":[4,6]}}}","PARTIAL","3","content.converted_value_hint.range=[4999,5001]；source_hint.token=""k""；target_hint.token=""m""；value_hint.range=[4,6]","全部字段为范围或首字符提示。","0.8"
+"33","weather_03__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_weather""}
+
+Runtime feedback:
+{""content"": {""condition"": ""drizzle"", ""evidence_status"": ""sparse_context"", ""place_hint"": {""completeness"": ""partial"", ""token"": ""lon""}, ""slot"": ""today"", ""temperature_c_hint"": {""approx"": 13}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""condition"":""drizzle"",""place"":{""prefix"":""lon""},""slot"":""today"",""temperature_c"":{""approx"":13}}}","PARTIAL","4","content.condition=""drizzle""；place_hint.token=""lon""；slot=""today""；temperature_c_hint.approx=13","place 仅有部分前缀，温度为近似值。","0.6"
+"34","filter_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""filtered_items_hint"": [{""preview"": ""alpha"", ""remaining"": 1}], ""rule_hint"": {""completeness"": ""minimal"", ""token"": ""a""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""filtered_items"":{""preview"":[""alpha""],""remaining"":1},""rule"":{""prefix"":""a""}}}","PARTIAL","3","content.filtered_items_hint[0].preview=""alpha""；remaining=1；rule_hint.token=""a""","仅有列表预览和规则首字符。","0.8"
+"35","air_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi_hint"": {""range"": [65, 69]}, ""category_hint"": {""completeness"": ""minimal"", ""token"": ""m""}, ""evidence_status"": ""anchor_hint_only"", ""place_hint"": {""completeness"": ""minimal"", ""token"": ""s""}, ""slot_hint"": {""completeness"": ""minimal"", ""token"": ""t""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""aqi"":{""range"":[65,69]},""category"":{""prefix"":""m""},""place"":{""prefix"":""s""},""slot"":{""prefix"":""t""}}}","PARTIAL","3","content.aqi_hint.range=[65,69]；category_hint.token=""m""；place_hint.token=""s""；slot_hint.token=""t""","全部字段仅为范围或首字符提示。","0.8"
+"36","lookupproduct_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""lookup_product""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""partial"", ""token"": ""own""}, ""entity"": ""beta"", ""evidence_status"": ""sparse_context"", ""result"": ""lookup_product:sales:beta:owner"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""sal""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":""owner"",""entity"":""beta"",""scope"":""sales"",""result"":""lookup_product:sales:beta:owner""}}","FULL","5","content.entity=""beta""；result=""lookup_product:sales:beta:owner""（明确编码 scope=sales、attribute=owner）","完整 result 足以恢复两个提示字段。","0.7"
+"37","sort_03__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""sort_items""}
+
+Runtime feedback:
+{""content"": {""rule"": ""asc"", ""sorted_items"": [1, 2, 3]}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""rule"":""asc"",""sorted_items"":[1,2,3]}}","FULL","5","content.rule=""asc""；content.sorted_items=[1,2,3]","两个目标字段均完整。","0.4"
+"38","searchdoc_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_document""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""matches"": [""Incident review for routing latency regression""], ""query"": ""routing"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""eng""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":[""Incident review for routing latency regression""],""query"":""routing"",""scope"":{""prefix"":""eng""}}}","PARTIAL","4","content.matches[0]=""Incident review for routing latency regression""；query=""routing""；scope_hint.token=""eng""","scope 只有部分前缀。","0.6"
+"39","faq_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_faq""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""matches"": [""How do I update the router firmware?""], ""query"": ""firmware"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""rou""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":[""How do I update the router firmware?""],""query"":""firmware"",""scope"":{""prefix"":""rou""}}}","PARTIAL","4","content.matches[0]=""How do I update the router firmware?""；query=""firmware""；scope_hint.token=""rou""","scope 只有部分前缀。","0.6"
+"40","filter_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""filter_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""filtered_items"": [""alpha"", ""alphabet""], ""rule"": ""alp""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""filtered_items"":[""alpha"",""alphabet""],""rule"":""alp""}}","FULL","5","content.filtered_items=[""alpha"",""alphabet""]；content.rule=""alp""","evidence_status 为噪声元数据，其余目标字段完整。","0.4"
+"41","sort_03__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""sort_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""rule_hint"": {""completeness"": ""minimal"", ""token"": ""a""}, ""sorted_items_hint"": [{""preview"": ""{'approx"", ""remaining"": 2}]}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""rule"":{""prefix"":""a""},""sorted_items"":{""preview"":[""{'approx""],""remaining"":2}}}","PARTIAL","3","content.rule_hint.token=""a""；sorted_items_hint[0].preview=""{'approx""；remaining=2","规则仅有首字符，排序列表仅有截断预览且还有两个元素。","0.8"
+"42","air_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_air_quality""}
+
+Runtime feedback:
+{""content"": {""aqi"": 68, ""category_hint"": {""completeness"": ""partial"", ""token"": ""mod""}, ""evidence_status"": ""sparse_context"", ""place_hint"": {""completeness"": ""partial"", ""token"": ""sha""}, ""slot"": ""tomorrow""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""aqi"":68,""category"":{""prefix"":""mod""},""place"":{""prefix"":""sha""},""slot"":""tomorrow""}}","PARTIAL","4","content.aqi=68；category_hint.token=""mod""；place_hint.token=""sha""；slot=""tomorrow""","category 与 place 只有部分前缀。","0.6"
+"43","unit_03__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 5000.0, ""source"": ""km"", ""value"": 5.0}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":5000.0,""source"":""km"",""value"":5.0}}","PARTIAL","4","content.converted_value=5000.0；source=""km""；value=5.0","target 缺失。","0.5"
+"44","currency_01__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_currency""}
+
+Runtime feedback:
+{""content"": {""converted_value_hint"": {""range"": [713, 715]}, ""evidence_status"": ""anchor_hint_only"", ""source_hint"": {""completeness"": ""minimal"", ""token"": ""u""}, ""target_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""value_hint"": {""range"": [99, 101]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":{""range"":[713,715]},""source"":{""prefix"":""u""},""target"":{""prefix"":""c""},""value"":{""range"":[99,101]}}}","PARTIAL","3","content.converted_value_hint.range=[713,715]；source_hint.token=""u""；target_hint.token=""c""；value_hint.range=[99,101]","全部字段为范围或首字符提示。","0.8"
+"45","temp_01__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""place"", ""scale"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_temperature""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""place_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""scale_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""slot_hint"": {""completeness"": ""minimal"", ""token"": ""t""}, ""temperature_hint"": {""range"": [25, 29]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""place"":{""prefix"":""b""},""scale"":{""prefix"":""c""},""slot"":{""prefix"":""t""},""temperature"":{""range"":[25,29]}}}","PARTIAL","3","content.place_hint.token=""b""；scale_hint.token=""c""；slot_hint.token=""t""；temperature_hint.range=[25,29]","全部字段为范围或首字符提示。","0.8"
+"46","faq_02__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_faq""}
+
+Runtime feedback:
+{""content"": {""matches"": [""How do I update the router firmware?""], ""query"": ""firmware""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":[""How do I update the router firmware?""],""query"":""firmware""}}","PARTIAL","4","content.matches[0]=""How do I update the router firmware?""；content.query=""firmware""","scope 缺失。","0.5"
+"47","searchdoc_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_document""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""matches_hint"": [{""preview"": ""Incident"", ""remaining"": 0}], ""query_hint"": {""completeness"": ""minimal"", ""token"": ""r""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""e""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":{""preview"":[""Incident""],""remaining"":0},""query"":{""prefix"":""r""},""scope"":{""prefix"":""e""}}}","PARTIAL","3","content.matches_hint[0].preview=""Incident""；remaining=0；query_hint.token=""r""；scope_hint.token=""e""","匹配文本为截断预览，query 与 scope 仅有首字符。","0.8"
+"48","policy_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""matches_hint"": [{""preview"": ""Remote w"", ""remaining"": 0}], ""query_hint"": {""completeness"": ""minimal"", ""token"": ""r""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""h""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":{""preview"":[""Remote w""],""remaining"":0},""query"":{""prefix"":""r""},""scope"":{""prefix"":""h""}}}","PARTIAL","3","content.matches_hint[0].preview=""Remote w""；remaining=0；query_hint.token=""r""；scope_hint.token=""h""","匹配文本为截断预览，query 与 scope 仅有首字符。","0.8"
+"49","createsupportticke_02__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""create_support_ticket""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""minimal"", ""token"": ""o""}, ""entity_hint"": {""completeness"": ""minimal"", ""token"": ""b""}, ""evidence_status"": ""anchor_hint_only"", ""result_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""s""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":{""prefix"":""o""},""entity"":{""prefix"":""b""},""result"":{""prefix"":""c""},""scope"":{""prefix"":""s""}}}","PARTIAL","3","content.attribute_hint.token=""o""；entity_hint.token=""b""；result_hint.token=""c""；scope_hint.token=""s""","各字段仅有最小前缀提示。","0.8"
+"50","weather_03__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""place"", ""slot""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""get_weather""}
+
+Runtime feedback:
+{""content"": {""condition"": ""drizzle"", ""slot"": ""today"", ""temperature_c"": 13}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""condition"":""drizzle"",""slot"":""today"",""temperature_c"":13}}","PARTIAL","4","content.condition=""drizzle""；slot=""today""；temperature_c=13","place 缺失。","0.5"
+"51","checkpermission_03__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""check_permission""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""partial"", ""token"": ""pri""}, ""entity"": ""gamma"", ""evidence_status"": ""sparse_context"", ""result"": ""check_permission:support:gamma:priority"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""sup""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":""priority"",""entity"":""gamma"",""scope"":""support"",""result"":""check_permission:support:gamma:priority""}}","FULL","5","content.entity=""gamma""；result=""check_permission:support:gamma:priority""（明确编码 scope=support、attribute=priority）","完整 result 足以恢复两个提示字段。","0.7"
+"52","unit_01__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 20.0, ""source"": ""f"", ""value"": 68.0}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":20.0,""source"":""f"",""value"":68.0}}","PARTIAL","4","content.converted_value=20.0；source=""f""；value=68.0","target 缺失。","0.5"
+"53","policy_03__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""query"", ""scope""], ""target_complexity"": {""contains_list"": true, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""search_policy""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""anchor_hint_only"", ""matches_hint"": [{""preview"": ""VPN acce"", ""remaining"": 0}], ""query_hint"": {""completeness"": ""minimal"", ""token"": ""v""}, ""scope_hint"": {""completeness"": ""minimal"", ""token"": ""i""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""matches"":{""preview"":[""VPN acce""],""remaining"":0},""query"":{""prefix"":""v""},""scope"":{""prefix"":""i""}}}","PARTIAL","3","content.matches_hint[0].preview=""VPN acce""；remaining=0；query_hint.token=""v""；scope_hint.token=""i""","匹配文本为截断预览，query 与 scope 仅有首字符。","0.8"
+"54","sort_03__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""items"", ""rule""], ""target_complexity"": {""contains_list"": true, ""field_count"": 2, ""kind"": ""object""}, ""tool_name"": ""sort_items""}
+
+Runtime feedback:
+{""content"": {""evidence_status"": ""sparse_context"", ""rule"": ""asc"", ""sorted_items"": [1, 2, 3]}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""rule"":""asc"",""sorted_items"":[1,2,3]}}","FULL","5","content.rule=""asc""；content.sorted_items=[1,2,3]","evidence_status 为噪声元数据，其余目标字段完整。","0.4"
+"55","querytable_02__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""attribute"", ""entity"", ""scope""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""query_table""}
+
+Runtime feedback:
+{""content"": {""attribute_hint"": {""completeness"": ""partial"", ""token"": ""own""}, ""entity"": ""beta"", ""evidence_status"": ""sparse_context"", ""result"": ""query_table:sales:beta:owner"", ""scope_hint"": {""completeness"": ""partial"", ""token"": ""sal""}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""attribute"":""owner"",""entity"":""beta"",""scope"":""sales"",""result"":""query_table:sales:beta:owner""}}","FULL","5","content.entity=""beta""；result=""query_table:sales:beta:owner""（明确编码 scope=sales、attribute=owner）","完整 result 足以恢复两个提示字段。","0.7"
+"56","unit_03__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 5000.0, ""evidence_status"": ""sparse_context"", ""source_hint"": {""completeness"": ""partial"", ""token"": ""km""}, ""target"": ""m"", ""value_hint"": {""approx"": 5.0}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":5000.0,""source"":{""prefix"":""km""},""target"":""m"",""value"":{""approx"":5.0}}}","PARTIAL","4","content.converted_value=5000.0；source_hint.token=""km""；target=""m""；value_hint.approx=5.0","source 被标为 partial，value 仅为近似值。","0.6"
+"57","route_01__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""origin"", ""profile"", ""target""], ""target_complexity"": {""contains_list"": false, ""field_count"": 3, ""kind"": ""object""}, ""tool_name"": ""calculate_route""}
+
+Runtime feedback:
+{""content"": {""distance_km"": 9, ""duration_min_hint"": {""approx"": 22}, ""evidence_status"": ""sparse_context"", ""origin"": ""hotel"", ""profile"": ""metro"", ""target"": ""expo""}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""distance_km"":9,""duration_min"":{""approx"":22},""origin"":""hotel"",""profile"":""metro"",""target"":""expo""}}","PARTIAL","4","content.distance_km=9；duration_min_hint.approx=22；origin=""hotel""；profile=""metro""；target=""expo""","duration_min 仅为近似值。","0.6"
+"58","unit_01__c2_return_evidence_loss__heavy__1","heavy","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value_hint"": {""range"": [19, 21]}, ""evidence_status"": ""anchor_hint_only"", ""source_hint"": {""completeness"": ""minimal"", ""token"": ""f""}, ""target_hint"": {""completeness"": ""minimal"", ""token"": ""c""}, ""value_hint"": {""range"": [67, 69]}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":{""range"":[19,21]},""source"":{""prefix"":""f""},""target"":{""prefix"":""c""},""value"":{""range"":[67,69]}}}","PARTIAL","3","content.converted_value_hint.range=[19,21]；source_hint.token=""f""；target_hint.token=""c""；value_hint.range=[67,69]","全部字段为范围或首字符提示。","0.8"
+"59","unit_01__c2_return_evidence_loss__medium__1","medium","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_unit""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 20.0, ""evidence_status"": ""sparse_context"", ""source_hint"": {""completeness"": ""partial"", ""token"": ""f""}, ""target"": ""c"", ""value_hint"": {""approx"": 68.0}}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":20.0,""source"":{""prefix"":""f""},""target"":""c"",""value"":{""approx"":68.0}}}","PARTIAL","4","content.converted_value=20.0；source_hint.token=""f""；target=""c""；value_hint.approx=68.0","source 仅有部分提示，value 为近似值。","0.6"
+"60","currency_01__c2_return_evidence_loss__light__1","light","Initial invocation context:
+{""argument_keys"": [""source"", ""target"", ""value""], ""target_complexity"": {""contains_list"": false, ""field_count"": 4, ""kind"": ""object""}, ""tool_name"": ""convert_currency""}
+
+Runtime feedback:
+{""content"": {""converted_value"": 714.2857, ""source"": ""usd"", ""value"": 100.0}, ""execution_success"": 1, ""status"": ""success""}
+
+Recover only the clean observation target from the noisy runtime feedback. Use the invocation context only to understand the tool family. Do not reconstruct missing values from the original arguments unless the runtime feedback itself supports them. Return only JSON and prefer the wrapper {""final_result"": ...}. Do not emit tool_name or arguments.","{""final_result"":{""converted_value"":714.2857,""source"":""usd"",""value"":100.0}}","PARTIAL","4","content.converted_value=714.2857；source=""usd""；value=100.0","target 缺失。","0.5"

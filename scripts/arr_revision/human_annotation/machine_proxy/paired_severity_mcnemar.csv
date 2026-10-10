@@ -1,0 +1,4 @@
+﻿contrast,left_only_success,right_only_success,discordant,exact_mcnemar_p
+light_vs_medium,3,5,8,0.7265625
+light_vs_heavy,23,1,24,2.9802322387695312e-06
+medium_vs_heavy,24,0,24,1.1920928955078125e-07

@@ -14,6 +14,9 @@ This anonymous artifact contains the code, configurations, deterministic task da
 - `data/results/all-family/`: raw records and summaries for the paper's single-family experiments.
 - `data/results/cross-family/`: raw records and summaries for the representative cross-family experiments.
 - `results/validation/`: released integrated validation audit, blind LLM consistency check, and agreement outputs reported in the appendix.
+- `scripts/arr_revision/statistics/`: clustered-bootstrap, leave-one-tool-out, exactly matched mixed-family, and positive-contrast analyses with their released outputs.
+- `scripts/arr_revision/human_annotation/`: completed blinded C2 reconstruction sheets, public prompts, derived exact-recovery tables, and machine recoverability analyses.
+- `scripts/rebuttal/output/`: released structural source-stage repair audit used by the paper.
 - `picture/`: paper figures and appendix diagnostics.
 - `docs/`: selected paper and benchmark documentation.
 
@@ -120,6 +123,32 @@ The label-specific valid sample size excludes `unclear` judgments and applies th
 python scripts/run_llm_validation.py --input results/validation/integrated_validation_llm_input.jsonl --output-dir results/validation/llm_rerun
 ```
 
+## Resubmission Statistical Audits
+
+The resubmission adds uncertainty and sensitivity analyses over the released raw records:
+
+- 20,000-replicate paired anchor and tool-cluster bootstraps for single-family results;
+- leave-one-tool-out sensitivity analysis;
+- exactly matched mixed-versus-single comparisons with source-anchor bootstrap intervals;
+- leave-one-anchor-out mixed-family sensitivity analysis; and
+- record-level audits of the two positive weaker-constituent contrasts.
+
+The scripts, fixed seeds, manifests, and generated tables are in `scripts/arr_revision/statistics/`. From the repository root, the main analyses can be rerun with:
+
+```powershell
+python scripts/arr_revision/statistics/bootstrap_single_family.py
+python scripts/arr_revision/statistics/matched_mixed_bootstrap.py
+python scripts/arr_revision/statistics/analyze_positive_mixed_reversals.py
+```
+
+## C2 Recoverability Audit
+
+`scripts/arr_revision/human_annotation/` contains the completed independent reconstruction sheets from two blinded domain annotators, the 60 public prompts, the public sampling manifest, deterministic scoring outputs, and the machine existence-witness analysis. Both annotators had two years of experience in LLM tool-use evaluation and data annotation.
+
+Private gold targets are intentionally not exposed in the anonymous review artifact. `private_gold_commitment.json` records SHA-256 commitments, sizes, and row counts for the frozen private files. This prevents post-hoc replacement while keeping the blinded targets separate from the public sheets. The released aggregate tables contain all paper-reported rates, confidence intervals, and agreement statistics.
+
+The structural source-stage repair audit is released in `scripts/rebuttal/experiment_counterfactual_attribution.py` and `scripts/rebuttal/output/`. Its Tier 2 means that, after replacing the attributed source flag, only later-stage failure flags remain; it is not identical to the raw `is_cascade_failure` field. The output therefore reports Tier membership and recorded-cascade status separately.
+
 ## Result Files
 
 Each result directory may contain:
@@ -140,7 +169,7 @@ The paper source is available in:
 
 ```text
 docs/main.tex
-docs/custom.bib
+docs/main.bib
 ```
 
 Figures referenced by the paper are stored in `picture/`.

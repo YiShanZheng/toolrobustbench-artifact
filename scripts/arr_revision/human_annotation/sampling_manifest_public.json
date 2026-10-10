@@ -1,0 +1,29 @@
+{
+  "seed": 20261002,
+  "design": "20 paired source anchors x 3 severities",
+  "n_tools": 16,
+  "n_primary": 60,
+  "n_extension": 84,
+  "selected_source_sample_ids": [
+    "route_01",
+    "checkpermission_03",
+    "currency_01",
+    "unit_03",
+    "createsupportticke_02",
+    "eta_02",
+    "filter_03",
+    "air_02",
+    "temp_01",
+    "weather_03",
+    "lookupproduct_02",
+    "querytable_02",
+    "searchdoc_02",
+    "faq_02",
+    "policy_03",
+    "sort_03",
+    "policy_02",
+    "air_01",
+    "unit_01",
+    "filter_02"
+  ]
+}

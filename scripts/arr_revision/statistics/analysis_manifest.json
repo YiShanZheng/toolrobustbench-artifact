@@ -1,0 +1,13 @@
+{
+  "script": "scripts/arr_revision/statistics/bootstrap_single_family.py",
+  "seed": 20261002,
+  "bootstrap_replicates": 20000,
+  "ci": "two-sided 95% percentile",
+  "primary_sampling_unit": "source_sample_id (clean anchor), paired",
+  "sensitivity_sampling_unit": "gold_canonical_tool_id, carrying all nested anchors",
+  "family_robustness": "unweighted mean of light, medium, heavy success",
+  "overall_robustness": "unweighted mean of four family robustness values",
+  "python": "3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]",
+  "numpy": "2.2.4",
+  "pandas": "3.0.1"
+}

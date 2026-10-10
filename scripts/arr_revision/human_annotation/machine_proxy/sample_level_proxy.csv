@@ -1,0 +1,145 @@
+﻿sample_id,source_sample_id,severity,tool,operator,n_models_success,any_model_success,at_least_2,at_least_3,majority_4,all_7
+air_01__c2_return_evidence_loss__heavy__1,air_01,heavy,get_air_quality,missing_field + partial_truncation,0,0,0,0,0,0
+air_01__c2_return_evidence_loss__light__1,air_01,light,get_air_quality,dropped_metadata,0,0,0,0,0,0
+air_01__c2_return_evidence_loss__medium__1,air_01,medium,get_air_quality,sparse_result,0,0,0,0,0,0
+air_02__c2_return_evidence_loss__heavy__1,air_02,heavy,get_air_quality,missing_field + partial_truncation,0,0,0,0,0,0
+air_02__c2_return_evidence_loss__light__1,air_02,light,get_air_quality,dropped_metadata,0,0,0,0,0,0
+air_02__c2_return_evidence_loss__medium__1,air_02,medium,get_air_quality,sparse_result,0,0,0,0,0,0
+air_03__c2_return_evidence_loss__heavy__1,air_03,heavy,get_air_quality,missing_field + partial_truncation,0,0,0,0,0,0
+air_03__c2_return_evidence_loss__light__1,air_03,light,get_air_quality,dropped_metadata,0,0,0,0,0,0
+air_03__c2_return_evidence_loss__medium__1,air_03,medium,get_air_quality,sparse_result,0,0,0,0,0,0
+checkpermission_01__c2_return_evidence_loss__heavy__1,checkpermission_01,heavy,check_permission,missing_field + partial_truncation,0,0,0,0,0,0
+checkpermission_01__c2_return_evidence_loss__light__1,checkpermission_01,light,check_permission,dropped_metadata,1,1,0,0,0,0
+checkpermission_01__c2_return_evidence_loss__medium__1,checkpermission_01,medium,check_permission,sparse_result,3,1,1,1,0,0
+checkpermission_02__c2_return_evidence_loss__heavy__1,checkpermission_02,heavy,check_permission,missing_field + partial_truncation,0,0,0,0,0,0
+checkpermission_02__c2_return_evidence_loss__light__1,checkpermission_02,light,check_permission,dropped_metadata,1,1,0,0,0,0
+checkpermission_02__c2_return_evidence_loss__medium__1,checkpermission_02,medium,check_permission,sparse_result,2,1,1,0,0,0
+checkpermission_03__c2_return_evidence_loss__heavy__1,checkpermission_03,heavy,check_permission,missing_field + partial_truncation,0,0,0,0,0,0
+checkpermission_03__c2_return_evidence_loss__light__1,checkpermission_03,light,check_permission,dropped_metadata,1,1,0,0,0,0
+checkpermission_03__c2_return_evidence_loss__medium__1,checkpermission_03,medium,check_permission,sparse_result,2,1,1,0,0,0
+createsupportticke_01__c2_return_evidence_loss__heavy__1,createsupportticke_01,heavy,create_support_ticket,missing_field + partial_truncation,0,0,0,0,0,0
+createsupportticke_01__c2_return_evidence_loss__light__1,createsupportticke_01,light,create_support_ticket,dropped_metadata,1,1,0,0,0,0
+createsupportticke_01__c2_return_evidence_loss__medium__1,createsupportticke_01,medium,create_support_ticket,sparse_result,1,1,0,0,0,0
+createsupportticke_02__c2_return_evidence_loss__heavy__1,createsupportticke_02,heavy,create_support_ticket,missing_field + partial_truncation,0,0,0,0,0,0
+createsupportticke_02__c2_return_evidence_loss__light__1,createsupportticke_02,light,create_support_ticket,dropped_metadata,1,1,0,0,0,0
+createsupportticke_02__c2_return_evidence_loss__medium__1,createsupportticke_02,medium,create_support_ticket,sparse_result,2,1,1,0,0,0
+createsupportticke_03__c2_return_evidence_loss__heavy__1,createsupportticke_03,heavy,create_support_ticket,missing_field + partial_truncation,0,0,0,0,0,0
+createsupportticke_03__c2_return_evidence_loss__light__1,createsupportticke_03,light,create_support_ticket,dropped_metadata,1,1,0,0,0,0
+createsupportticke_03__c2_return_evidence_loss__medium__1,createsupportticke_03,medium,create_support_ticket,sparse_result,2,1,1,0,0,0
+currency_01__c2_return_evidence_loss__heavy__1,currency_01,heavy,convert_currency,missing_field + partial_truncation,0,0,0,0,0,0
+currency_01__c2_return_evidence_loss__light__1,currency_01,light,convert_currency,dropped_metadata,0,0,0,0,0,0
+currency_01__c2_return_evidence_loss__medium__1,currency_01,medium,convert_currency,sparse_result,2,1,1,0,0,0
+currency_02__c2_return_evidence_loss__heavy__1,currency_02,heavy,convert_currency,missing_field + partial_truncation,0,0,0,0,0,0
+currency_02__c2_return_evidence_loss__light__1,currency_02,light,convert_currency,dropped_metadata,0,0,0,0,0,0
+currency_02__c2_return_evidence_loss__medium__1,currency_02,medium,convert_currency,sparse_result,1,1,0,0,0,0
+currency_03__c2_return_evidence_loss__heavy__1,currency_03,heavy,convert_currency,missing_field + partial_truncation,0,0,0,0,0,0
+currency_03__c2_return_evidence_loss__light__1,currency_03,light,convert_currency,dropped_metadata,0,0,0,0,0,0
+currency_03__c2_return_evidence_loss__medium__1,currency_03,medium,convert_currency,sparse_result,1,1,0,0,0,0
+eta_01__c2_return_evidence_loss__heavy__1,eta_01,heavy,estimate_travel_time,missing_field + partial_truncation,0,0,0,0,0,0
+eta_01__c2_return_evidence_loss__light__1,eta_01,light,estimate_travel_time,dropped_metadata,7,1,1,1,1,1
+eta_01__c2_return_evidence_loss__medium__1,eta_01,medium,estimate_travel_time,sparse_result,5,1,1,1,1,0
+eta_02__c2_return_evidence_loss__heavy__1,eta_02,heavy,estimate_travel_time,missing_field + partial_truncation,0,0,0,0,0,0
+eta_02__c2_return_evidence_loss__light__1,eta_02,light,estimate_travel_time,dropped_metadata,4,1,1,1,1,0
+eta_02__c2_return_evidence_loss__medium__1,eta_02,medium,estimate_travel_time,sparse_result,4,1,1,1,1,0
+eta_03__c2_return_evidence_loss__heavy__1,eta_03,heavy,estimate_travel_time,missing_field + partial_truncation,0,0,0,0,0,0
+eta_03__c2_return_evidence_loss__light__1,eta_03,light,estimate_travel_time,dropped_metadata,7,1,1,1,1,1
+eta_03__c2_return_evidence_loss__medium__1,eta_03,medium,estimate_travel_time,sparse_result,4,1,1,1,1,0
+faq_01__c2_return_evidence_loss__heavy__1,faq_01,heavy,search_faq,missing_field + partial_truncation,0,0,0,0,0,0
+faq_01__c2_return_evidence_loss__light__1,faq_01,light,search_faq,dropped_metadata,0,0,0,0,0,0
+faq_01__c2_return_evidence_loss__medium__1,faq_01,medium,search_faq,sparse_result,0,0,0,0,0,0
+faq_02__c2_return_evidence_loss__heavy__1,faq_02,heavy,search_faq,missing_field + partial_truncation,0,0,0,0,0,0
+faq_02__c2_return_evidence_loss__light__1,faq_02,light,search_faq,dropped_metadata,0,0,0,0,0,0
+faq_02__c2_return_evidence_loss__medium__1,faq_02,medium,search_faq,sparse_result,0,0,0,0,0,0
+faq_03__c2_return_evidence_loss__heavy__1,faq_03,heavy,search_faq,missing_field + partial_truncation,0,0,0,0,0,0
+faq_03__c2_return_evidence_loss__light__1,faq_03,light,search_faq,dropped_metadata,0,0,0,0,0,0
+faq_03__c2_return_evidence_loss__medium__1,faq_03,medium,search_faq,sparse_result,0,0,0,0,0,0
+filter_01__c2_return_evidence_loss__heavy__1,filter_01,heavy,filter_items,missing_field + partial_truncation,0,0,0,0,0,0
+filter_01__c2_return_evidence_loss__light__1,filter_01,light,filter_items,dropped_metadata,6,1,1,1,1,0
+filter_01__c2_return_evidence_loss__medium__1,filter_01,medium,filter_items,sparse_result,5,1,1,1,1,0
+filter_02__c2_return_evidence_loss__heavy__1,filter_02,heavy,filter_items,missing_field + partial_truncation,0,0,0,0,0,0
+filter_02__c2_return_evidence_loss__light__1,filter_02,light,filter_items,dropped_metadata,4,1,1,1,1,0
+filter_02__c2_return_evidence_loss__medium__1,filter_02,medium,filter_items,sparse_result,5,1,1,1,1,0
+filter_03__c2_return_evidence_loss__heavy__1,filter_03,heavy,filter_items,missing_field + partial_truncation,0,0,0,0,0,0
+filter_03__c2_return_evidence_loss__light__1,filter_03,light,filter_items,dropped_metadata,6,1,1,1,1,0
+filter_03__c2_return_evidence_loss__medium__1,filter_03,medium,filter_items,sparse_result,3,1,1,1,0,0
+lookupproduct_01__c2_return_evidence_loss__heavy__1,lookupproduct_01,heavy,lookup_product,missing_field + partial_truncation,0,0,0,0,0,0
+lookupproduct_01__c2_return_evidence_loss__light__1,lookupproduct_01,light,lookup_product,dropped_metadata,1,1,0,0,0,0
+lookupproduct_01__c2_return_evidence_loss__medium__1,lookupproduct_01,medium,lookup_product,sparse_result,1,1,0,0,0,0
+lookupproduct_02__c2_return_evidence_loss__heavy__1,lookupproduct_02,heavy,lookup_product,missing_field + partial_truncation,0,0,0,0,0,0
+lookupproduct_02__c2_return_evidence_loss__light__1,lookupproduct_02,light,lookup_product,dropped_metadata,1,1,0,0,0,0
+lookupproduct_02__c2_return_evidence_loss__medium__1,lookupproduct_02,medium,lookup_product,sparse_result,1,1,0,0,0,0
+lookupproduct_03__c2_return_evidence_loss__heavy__1,lookupproduct_03,heavy,lookup_product,missing_field + partial_truncation,0,0,0,0,0,0
+lookupproduct_03__c2_return_evidence_loss__light__1,lookupproduct_03,light,lookup_product,dropped_metadata,1,1,0,0,0,0
+lookupproduct_03__c2_return_evidence_loss__medium__1,lookupproduct_03,medium,lookup_product,sparse_result,2,1,1,0,0,0
+policy_01__c2_return_evidence_loss__heavy__1,policy_01,heavy,search_policy,missing_field + partial_truncation,0,0,0,0,0,0
+policy_01__c2_return_evidence_loss__light__1,policy_01,light,search_policy,dropped_metadata,0,0,0,0,0,0
+policy_01__c2_return_evidence_loss__medium__1,policy_01,medium,search_policy,sparse_result,0,0,0,0,0,0
+policy_02__c2_return_evidence_loss__heavy__1,policy_02,heavy,search_policy,missing_field + partial_truncation,0,0,0,0,0,0
+policy_02__c2_return_evidence_loss__light__1,policy_02,light,search_policy,dropped_metadata,0,0,0,0,0,0
+policy_02__c2_return_evidence_loss__medium__1,policy_02,medium,search_policy,sparse_result,0,0,0,0,0,0
+policy_03__c2_return_evidence_loss__heavy__1,policy_03,heavy,search_policy,missing_field + partial_truncation,0,0,0,0,0,0
+policy_03__c2_return_evidence_loss__light__1,policy_03,light,search_policy,dropped_metadata,0,0,0,0,0,0
+policy_03__c2_return_evidence_loss__medium__1,policy_03,medium,search_policy,sparse_result,0,0,0,0,0,0
+querytable_01__c2_return_evidence_loss__heavy__1,querytable_01,heavy,query_table,missing_field + partial_truncation,0,0,0,0,0,0
+querytable_01__c2_return_evidence_loss__light__1,querytable_01,light,query_table,dropped_metadata,0,0,0,0,0,0
+querytable_01__c2_return_evidence_loss__medium__1,querytable_01,medium,query_table,sparse_result,0,0,0,0,0,0
+querytable_02__c2_return_evidence_loss__heavy__1,querytable_02,heavy,query_table,missing_field + partial_truncation,0,0,0,0,0,0
+querytable_02__c2_return_evidence_loss__light__1,querytable_02,light,query_table,dropped_metadata,1,1,0,0,0,0
+querytable_02__c2_return_evidence_loss__medium__1,querytable_02,medium,query_table,sparse_result,1,1,0,0,0,0
+querytable_03__c2_return_evidence_loss__heavy__1,querytable_03,heavy,query_table,missing_field + partial_truncation,0,0,0,0,0,0
+querytable_03__c2_return_evidence_loss__light__1,querytable_03,light,query_table,dropped_metadata,1,1,0,0,0,0
+querytable_03__c2_return_evidence_loss__medium__1,querytable_03,medium,query_table,sparse_result,1,1,0,0,0,0
+route_01__c2_return_evidence_loss__heavy__1,route_01,heavy,calculate_route,missing_field + partial_truncation,0,0,0,0,0,0
+route_01__c2_return_evidence_loss__light__1,route_01,light,calculate_route,dropped_metadata,5,1,1,1,1,0
+route_01__c2_return_evidence_loss__medium__1,route_01,medium,calculate_route,sparse_result,0,0,0,0,0,0
+route_02__c2_return_evidence_loss__heavy__1,route_02,heavy,calculate_route,missing_field + partial_truncation,0,0,0,0,0,0
+route_02__c2_return_evidence_loss__light__1,route_02,light,calculate_route,dropped_metadata,6,1,1,1,1,0
+route_02__c2_return_evidence_loss__medium__1,route_02,medium,calculate_route,sparse_result,0,0,0,0,0,0
+route_03__c2_return_evidence_loss__heavy__1,route_03,heavy,calculate_route,missing_field + partial_truncation,0,0,0,0,0,0
+route_03__c2_return_evidence_loss__light__1,route_03,light,calculate_route,dropped_metadata,6,1,1,1,1,0
+route_03__c2_return_evidence_loss__medium__1,route_03,medium,calculate_route,sparse_result,0,0,0,0,0,0
+searchdoc_01__c2_return_evidence_loss__heavy__1,searchdoc_01,heavy,search_document,missing_field + partial_truncation,0,0,0,0,0,0
+searchdoc_01__c2_return_evidence_loss__light__1,searchdoc_01,light,search_document,dropped_metadata,0,0,0,0,0,0
+searchdoc_01__c2_return_evidence_loss__medium__1,searchdoc_01,medium,search_document,sparse_result,0,0,0,0,0,0
+searchdoc_02__c2_return_evidence_loss__heavy__1,searchdoc_02,heavy,search_document,missing_field + partial_truncation,0,0,0,0,0,0
+searchdoc_02__c2_return_evidence_loss__light__1,searchdoc_02,light,search_document,dropped_metadata,0,0,0,0,0,0
+searchdoc_02__c2_return_evidence_loss__medium__1,searchdoc_02,medium,search_document,sparse_result,0,0,0,0,0,0
+searchdoc_03__c2_return_evidence_loss__heavy__1,searchdoc_03,heavy,search_document,missing_field + partial_truncation,0,0,0,0,0,0
+searchdoc_03__c2_return_evidence_loss__light__1,searchdoc_03,light,search_document,dropped_metadata,0,0,0,0,0,0
+searchdoc_03__c2_return_evidence_loss__medium__1,searchdoc_03,medium,search_document,sparse_result,0,0,0,0,0,0
+sort_01__c2_return_evidence_loss__heavy__1,sort_01,heavy,sort_items,missing_field + partial_truncation,0,0,0,0,0,0
+sort_01__c2_return_evidence_loss__light__1,sort_01,light,sort_items,dropped_metadata,6,1,1,1,1,0
+sort_01__c2_return_evidence_loss__medium__1,sort_01,medium,sort_items,sparse_result,4,1,1,1,1,0
+sort_02__c2_return_evidence_loss__heavy__1,sort_02,heavy,sort_items,missing_field + partial_truncation,0,0,0,0,0,0
+sort_02__c2_return_evidence_loss__light__1,sort_02,light,sort_items,dropped_metadata,6,1,1,1,1,0
+sort_02__c2_return_evidence_loss__medium__1,sort_02,medium,sort_items,sparse_result,4,1,1,1,1,0
+sort_03__c2_return_evidence_loss__heavy__1,sort_03,heavy,sort_items,missing_field + partial_truncation,0,0,0,0,0,0
+sort_03__c2_return_evidence_loss__light__1,sort_03,light,sort_items,dropped_metadata,6,1,1,1,1,0
+sort_03__c2_return_evidence_loss__medium__1,sort_03,medium,sort_items,sparse_result,4,1,1,1,1,0
+temp_01__c2_return_evidence_loss__heavy__1,temp_01,heavy,get_temperature,missing_field + partial_truncation,0,0,0,0,0,0
+temp_01__c2_return_evidence_loss__light__1,temp_01,light,get_temperature,dropped_metadata,0,0,0,0,0,0
+temp_01__c2_return_evidence_loss__medium__1,temp_01,medium,get_temperature,sparse_result,0,0,0,0,0,0
+temp_02__c2_return_evidence_loss__heavy__1,temp_02,heavy,get_temperature,missing_field + partial_truncation,0,0,0,0,0,0
+temp_02__c2_return_evidence_loss__light__1,temp_02,light,get_temperature,dropped_metadata,0,0,0,0,0,0
+temp_02__c2_return_evidence_loss__medium__1,temp_02,medium,get_temperature,sparse_result,0,0,0,0,0,0
+temp_03__c2_return_evidence_loss__heavy__1,temp_03,heavy,get_temperature,missing_field + partial_truncation,0,0,0,0,0,0
+temp_03__c2_return_evidence_loss__light__1,temp_03,light,get_temperature,dropped_metadata,0,0,0,0,0,0
+temp_03__c2_return_evidence_loss__medium__1,temp_03,medium,get_temperature,sparse_result,0,0,0,0,0,0
+unit_01__c2_return_evidence_loss__heavy__1,unit_01,heavy,convert_unit,missing_field + partial_truncation,0,0,0,0,0,0
+unit_01__c2_return_evidence_loss__light__1,unit_01,light,convert_unit,dropped_metadata,0,0,0,0,0,0
+unit_01__c2_return_evidence_loss__medium__1,unit_01,medium,convert_unit,sparse_result,0,0,0,0,0,0
+unit_02__c2_return_evidence_loss__heavy__1,unit_02,heavy,convert_unit,missing_field + partial_truncation,1,1,0,0,0,0
+unit_02__c2_return_evidence_loss__light__1,unit_02,light,convert_unit,dropped_metadata,0,0,0,0,0,0
+unit_02__c2_return_evidence_loss__medium__1,unit_02,medium,convert_unit,sparse_result,1,1,0,0,0,0
+unit_03__c2_return_evidence_loss__heavy__1,unit_03,heavy,convert_unit,missing_field + partial_truncation,0,0,0,0,0,0
+unit_03__c2_return_evidence_loss__light__1,unit_03,light,convert_unit,dropped_metadata,0,0,0,0,0,0
+unit_03__c2_return_evidence_loss__medium__1,unit_03,medium,convert_unit,sparse_result,1,1,0,0,0,0
+weather_01__c2_return_evidence_loss__heavy__1,weather_01,heavy,get_weather,missing_field + partial_truncation,0,0,0,0,0,0
+weather_01__c2_return_evidence_loss__light__1,weather_01,light,get_weather,dropped_metadata,0,0,0,0,0,0
+weather_01__c2_return_evidence_loss__medium__1,weather_01,medium,get_weather,sparse_result,0,0,0,0,0,0
+weather_02__c2_return_evidence_loss__heavy__1,weather_02,heavy,get_weather,missing_field + partial_truncation,0,0,0,0,0,0
+weather_02__c2_return_evidence_loss__light__1,weather_02,light,get_weather,dropped_metadata,0,0,0,0,0,0
+weather_02__c2_return_evidence_loss__medium__1,weather_02,medium,get_weather,sparse_result,0,0,0,0,0,0
+weather_03__c2_return_evidence_loss__heavy__1,weather_03,heavy,get_weather,missing_field + partial_truncation,0,0,0,0,0,0
+weather_03__c2_return_evidence_loss__light__1,weather_03,light,get_weather,dropped_metadata,0,0,0,0,0,0
+weather_03__c2_return_evidence_loss__medium__1,weather_03,medium,get_weather,sparse_result,0,0,0,0,0,0
