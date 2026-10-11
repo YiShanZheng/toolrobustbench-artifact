@@ -15,5 +15,3 @@ For each row, read only `model_visible_prompt`:
 6. In `minutes_spent`, record the time spent on the row; decimal values are allowed.
 
 Do not modify `annotation_order`, `item_id`, `severity`, or `model_visible_prompt`. When finished, save the original CSV as a UTF-8 CSV and return it to the coordinator. During annotation, do not open any file whose name or contents expose `gold`, `private`, `target`, model success rates, or aggregate results.
-
-The Chinese file `ANNOTATOR_BRIEF_CN.md` is the original instruction sheet provided to the annotators. This English file is a faithful translation released for reviewer accessibility.

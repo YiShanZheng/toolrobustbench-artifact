@@ -4,8 +4,7 @@ This directory contains the public and completed materials for the C2 returned-e
 
 ## Released files
 
-- `ANNOTATOR_BRIEF_CN.md`: full original instruction sheet provided to both annotators.
-- `ANNOTATION_INSTRUCTIONS.md`: faithful English translation of the complete instruction sheet.
+- `ANNOTATION_INSTRUCTIONS.md`: complete English instruction sheet for the blinded annotation task.
 - `primary_items_public.jsonl`: 60 model-visible prompts, covering 20 paired source anchors at light, medium, and heavy severity.
 - `sampling_manifest_public.json`: fixed seed and selected source-anchor identifiers.
 - `annotator_A_completed.csv` and `annotator_B_completed.csv`: independently completed sheets. Neither sheet contains the gold target.
